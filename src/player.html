@@ -1,0 +1,32 @@
+<!doctype html>
+<html><head><meta charset="utf-8">
+<style>
+  html,body{margin:0;background:#000}
+  #stage{position:relative;width:1080px;height:1920px;overflow:hidden;color:#F4F7FB;
+    font-family:'Inter',sans-serif;background:radial-gradient(120% 80% at 50% 45%,#16223B 0%,#0B1220 70%)}
+  #stage svg{position:absolute;inset:0}
+  #stage > div{position:absolute;left:70px;right:70px;text-align:center;opacity:0;will-change:transform,opacity}
+  .hook{font-size:104px;font-weight:900;line-height:1.02;letter-spacing:-2px;text-transform:uppercase}
+  .cap{font-size:70px;font-weight:800;line-height:1.1;letter-spacing:-1px}
+  .sub{font-size:50px;font-weight:600;line-height:1.2;color:#C9D3E3}
+  .foot{font-size:28px;font-weight:500;color:#8A97AD;line-height:1.3}
+  .hl{color:#C6F432}.bad{color:#FF5A4F}.warn{color:#FFC233}
+  .end{top:640px}
+  .endline{font-size:76px;font-weight:800;line-height:1.12;letter-spacing:-1px;margin-bottom:70px}
+  .brand{font-size:92px;font-weight:900;letter-spacing:-2px}
+  .panel{background:#111B30;border:3px solid #24314D;border-radius:36px;padding:34px 40px;box-sizing:border-box}
+</style></head>
+<body><div id="stage"></div>
+<script src="lib/kit.js"></script>
+<script>
+  const id = new URLSearchParams(location.search).get('v');
+  const s = document.createElement('script');
+  s.src = `videos/${id}.js`;
+  s.onload = () => {
+    const render = window.VIDEO.build(document.getElementById('stage'));
+    window.__render = t => render(t);
+    window.__render(0);
+    document.fonts.ready.then(() => (window.__ready = true));
+  };
+  document.body.appendChild(s);
+</script></body></html>

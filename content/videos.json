@@ -1,0 +1,42 @@
+[
+  {
+    "id": "001-cadence",
+    "format": "character-comparison",
+    "hook": "Knee pain when you run?",
+    "topic": "Raise step rate 5-10%",
+    "claim": "+10% step rate lowers peak patellofemoral joint force by about 14%",
+    "source": "Lenhart et al. 2014, Med Sci Sports Exerc 46(3):557-564 (30 healthy adults)",
+    "source_verified": true,
+    "duration_s": 19,
+    "status": "awaiting_review",
+    "feedback": null,
+    "metrics": null
+  },
+  {
+    "id": "002-hips",
+    "format": "exercise-demo",
+    "hook": "Runner's knee? Don't just train the knee.",
+    "topic": "Hip + knee exercise, glute bridge",
+    "claim": "Combined hip and knee exercise is recommended in preference to knee exercise alone",
+    "source": "Collins et al. 2018 consensus statement, Br J Sports Med 52(18):1170 (checked via abstract and secondary summaries, not full text)",
+    "source_verified": true,
+    "notes": "Dosage (2-3 sets of 10-15, every other day) is a generic starting point, not from the source.",
+    "duration_s": 20,
+    "status": "awaiting_review",
+    "feedback": null,
+    "metrics": null
+  },
+  {
+    "id": "003-painlight",
+    "format": "infographic",
+    "hook": "Should you run through knee pain?",
+    "topic": "Pain traffic light for load management",
+    "claim": "General pain-monitoring guidance; no numeric thresholds stated",
+    "source": "None verified. Exact thresholds from Esculier et al. 2018 could not be confirmed, so wording is kept general.",
+    "source_verified": false,
+    "duration_s": 19,
+    "status": "awaiting_review",
+    "feedback": null,
+    "metrics": null
+  }
+]
