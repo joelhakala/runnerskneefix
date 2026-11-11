@@ -138,3 +138,14 @@ Aineisto: 14 Slowtwitch-ketjua (ID:t 534221, 526303, 592212, 724898, 418987, 813
 Kuviot: (1) lepo-paluu-takaisku on yleisin tarina [M4]; (2) alku on kuormahyppy, usein toisen vamman tauon jälkeen [M1, M7]; (3) parannuskeinot ovat keskenään ristiriidassa [M5]; (4) vahvat juoksijat oireilevat silti [M5]; (5) "korjaa biomekaniikka" on arvostetuin neuvo [M1]; (6) hankaus- ja tulehdusmielikuva hallitsee [ehdokas M8, varmentamatta]; (7) lääkärin pessimistinen lause jää mieleen [M3]; (8) kesto vuosia; (9) puolieroa ei selitä kukaan.
 
 LetsRun ja Juoksufoorumi: Cloudflare-esto. Reddit: hakuesto. Facebook: kirjautuminen.
+
+## 11. Kireys, helpotus ja summa (2026-11-11)
+
+Omistajan hypoteesit: (H1) kipu -> suojajännitys; (H2) valmiiksi kireä tai kompensoiva kudos -> heikoin lenkki; (H3) vaiva on usean tekijän summa, ei yhtä juurisyytä.
+
+- Helpotus on aito: rullaus lisää liikelaajuutta akuutisti (Wilke 2020); vaikutus näkyy myös käsittelemättömässä jalassa -> hermostollinen (2023). Venyttely nostaa sietoa enemmän kuin pituutta (Weppler & Magnusson 2010; meta-analyysi 2025). Kohtalainen.
+- H1 osin tuettu: kipu muuttaa lihasten työnjakoa suojaavasti, suunta vaihtelee (Hodges & Tucker 2011); jäykkyyden tunne voi olla suojaava havainto (Stanton 2017, selkä).
+- H2 kohtalainen-heikko: lyhentynyt etureisi ennusti etupolven kipua (Witvrouw 2000, 24/282); heikko liikkuvuus ennusti patellajänteen kipua, 86 vs 132 astetta (Witvrouw 2001, 19/138). Opiskelijoita, ei juoksijoita. Kompensaatio muusta kehon ongelmasta: testaamatta.
+- H3: Bittencourt 2016 (käsitteellinen), Peterson 2022, Hott 2019, foorumien ristiriitaiset parannuskeinot.
+
+Mallit: M8 "kireä lihas on syy" -> "helpotus on aito, kireys on viesti; käytä ikkuna kuormaan". M9 (kattomalli, tuotelupaus) "yksi juurisyy" -> "usean tekijän summa; pienennä pinoa". Riski: M9 ei saa jäädä epämääräiseksi, tekijät on nimettävä ja jokaisella oltava säädin.
