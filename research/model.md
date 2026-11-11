@@ -130,3 +130,11 @@ Ristiriita: mekaniikka siirtää kuormaa laboratoriossa, mutta mitattu mekaniikk
 **D7 (hypoteesi):** kudos mukautuu tottuneeseen jakaumaan. Vamma syntyy, kun kokonaiskuorma hyppää (eniten kuormittunut lenkki pettää ensin) tai jakauma muuttuu (kengät, maasto, väsymys, vanhan vamman varominen). Epäsymmetria ja liikkuvuus selittävät paikan, kuorman muutos ajankohdan.
 
 Uskomuspäivitys M7: "kehoni on vino ja se pitää korjata" → "tapani liikkua päättää, minne kuorma osuu; kuorma ei katoa, se siirtyy".
+
+## 10. Anekdootit, toinen otos (2026-11-11)
+
+Aineisto: 14 Slowtwitch-ketjua (ID:t 534221, 526303, 592212, 724898, 418987, 813368, 634341, 778254, 755411, 570318, 812837, 313878, 793688, 281868), 12 ensimmäistä viestiä kustakin. Vinoumat: yksi foorumi, triathlonistit, pitkittyneet tapaukset.
+
+Kuviot: (1) lepo-paluu-takaisku on yleisin tarina [M4]; (2) alku on kuormahyppy, usein toisen vamman tauon jälkeen [M1, M7]; (3) parannuskeinot ovat keskenään ristiriidassa [M5]; (4) vahvat juoksijat oireilevat silti [M5]; (5) "korjaa biomekaniikka" on arvostetuin neuvo [M1]; (6) hankaus- ja tulehdusmielikuva hallitsee [ehdokas M8, varmentamatta]; (7) lääkärin pessimistinen lause jää mieleen [M3]; (8) kesto vuosia; (9) puolieroa ei selitä kukaan.
+
+LetsRun ja Juoksufoorumi: Cloudflare-esto. Reddit: hakuesto. Facebook: kirjautuminen.
