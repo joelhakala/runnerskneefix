@@ -60,7 +60,7 @@ figure{margin:0;display:flex;flex-direction:column;gap:8px;align-items:center}
 
 <main>
 <header style="display:flex;flex-direction:column;gap:14px">
-  <div class="eyebrow">RunnersKneeFix · versio 6 · 11.11.2026 · uutta: keinokartta, M10 selitysmallit, K10, tarkennetut tulkinnat</div>
+  <div class="eyebrow">RunnersKneeFix · versio 7 · 11.11.2026 · uutta: suomalainen Facebook-aineisto keinokartassa</div>
   <h1>Sisältömalli: mitä juoksija uskoo polvestaan ja mihin me sen päivitämme</h1>
   <p class="lede">Jokainen animaatio palvelee yhtä uskomusmallia. Samasta mallista tehdään monta versiota, ja data kertoo, mikä versio muuttaa katsojan käsitystä. Tässä ovat mallit, käsikirjoitukset ja visuaalien demot kommentoitavaksi ennen kuin mitään renderöidään.</p>
   <p><strong>Palaute:</strong> maalaa mikä tahansa kohta ja jätä kommentti. Luen kommentit ja päivitän tämän sivun.</p>
@@ -161,6 +161,49 @@ figure{margin:0;display:flex;flex-direction:column;gap:8px;align-items:center}
     <li><strong>Hieronta: 7 vastaan 7</strong>, ja viisi seitsemästä onnistumisesta oli yhdistelmiä. Sopii M8:aan: helpotus on ikkuna.</li>
   </ul>
   <p><strong>Mitä tästä ei voi sanoa:</strong> mikä keino toimii. Foorumille kirjoittavat pitkittyneet tapaukset, onnistujat kiittävät viimeisintä kokeilemaansa keinoa, ja osa olisi parantunut ajan kanssa joka tapauksessa. Kartta kertoo, mitä ihmiset kokevat ja uskovat. Se on silti juuri se, mitä sisältö tarvitsee.</p>
+  <h3>Toinen aineisto: suomalainen Facebook-ryhmä</h3>
+  <p><strong>Aineisto:</strong> yksityinen juoksuryhmä (noin 32 000 jäsentä), 17 ketjua vuosilta 2016–2026, 128 omakohtaista kokemusta. Keräsit sen Claude in Chromella; lainaukset ovat mukaelmia eikä nimiä ole. Jätin pois jalkapallovammaketjun, joten käytössä on 118 riviä. Tallennan vain yhteenlasketut luvut, en rivejä.</p>
+  <div class="tbl"><table>
+    <tr><th>Keino</th><th>Suomi: auttoi</th><th>joista yhdistelmänä</th><th>ei auttanut</th><th>Slowtwitch: auttoi / ei</th></tr>
+    <tr><td>Vahvistus (jumppa, lihaskunto, pakara)</td><td class="t">14</td><td class="t">10</td><td class="t">2</td><td class="t">19 / 7</td></tr>
+    <tr><td>Venyttely</td><td class="t">11</td><td class="t">6</td><td class="t">1</td><td class="t">7 / 5</td></tr>
+    <tr><td>Lepo, juoksutauko</td><td class="t">10</td><td class="t">8</td><td class="t">4</td><td class="t">9 / 10</td></tr>
+    <tr><td>Kengät, pohjalliset</td><td class="t">9</td><td class="t">8</td><td class="t">2</td><td class="t">9 / 3</td></tr>
+    <tr><td>Hieronta, faskiakäsittely</td><td class="t">7</td><td class="t">3</td><td class="t">3</td><td class="t">7 / 7</td></tr>
+    <tr><td>Teippi, tuki</td><td class="t">7</td><td class="t">5</td><td class="t">0</td><td class="t">6 / 5</td></tr>
+    <tr><td>Kuorman kevennys, pehmeä alusta</td><td class="t">6</td><td class="t">6</td><td class="t">0</td><td class="t">ei laskettu</td></tr>
+    <tr><td>Rullaus</td><td class="t">5</td><td class="t">5</td><td class="t">1</td><td class="t">8 / 3</td></tr>
+    <tr><td>Juoksutekniikka</td><td class="t">5</td><td class="t">4</td><td class="t">1</td><td class="t">7 / 0</td></tr>
+    <tr><td>Leikkaus</td><td class="t">5</td><td class="t">2</td><td class="t">1</td><td class="t">2 / 2</td></tr>
+    <tr><td>Kipulääke, kylmä</td><td class="t">4</td><td class="t">3</td><td class="t">2</td><td class="t">3 / 5</td></tr>
+    <tr><td>Pistos (kortisoni, hyaluroni)</td><td class="t">3</td><td class="t">1</td><td class="t">3</td><td class="t">5 / 4</td></tr>
+    <tr><td>Nilkan liikkuvuus</td><td class="t">2</td><td class="t">1</td><td class="t">0</td><td class="t">ei laskettu</td></tr>
+    <tr><td>Ravintolisät</td><td class="t">2</td><td class="t">0</td><td class="t">1</td><td class="t">ei laskettu</td></tr>
+    <tr><td>Asteittainen paluu</td><td class="t">1</td><td class="t">1</td><td class="t">1</td><td class="t">5 / 0</td></tr>
+  </table></div>
+  <p><strong>Mikä toistuu molemmissa aineistoissa</strong> (tämä on kartan luotettavin osa):</p>
+  <ul>
+    <li><strong>Yhdistelmät hallitsevat.</strong> Suomessa 63 onnistumisesta 91:stä oli yhdistelmiä (69 %), Slowtwitchissä 46/93. Hypoteesisi sai toisen aineiston tuen.</li>
+    <li><strong>Asteittaista paluuta ei juuri mainita.</strong> Suomessa kaksi mainintaa 118 rivissä.</li>
+    <li><strong>Kengissä suunta jakautuu.</strong> Noin neljä luopui tuesta, kolme lisäsi kenkää, ja kaikki raportoivat hyötyä.</li>
+    <li><strong>Lepo pettää paluussa.</strong> Kolme neljästä epäonnistumisesta on muotoa "tauon jälkeen lenkki meni kävelyksi".</li>
+    <li><strong>Hieronta on tilapäinen.</strong> Yksi kuvaa tarkasti M8:n kehän: auttoi ensin, vaiva palasi pahempana.</li>
+  </ul>
+  <p><strong>Mikä on Suomessa erilaista:</strong></p>
+  <ul>
+    <li><strong>Kuluma ja nivelrikko on hallitseva tarina.</strong> Kuusi kertoo lääkärin kieltäneen juoksun tai neuvoneen lajinvaihtoa. Yhdeksän kertoo juoksevansa nivelrikosta tai puuttuvasta rustosta huolimatta, yksi yli sata maratonia ja toinen vuoriultran. M2 ja M3 ovat suomalaiselle yleisölle vahvimmat mallit.</li>
+    <li><strong>Venyttely on suosituin yksittäinen keino</strong> (11 vastaan 1, viisi teki vain sitä). Slowtwitchissä jakauma oli 7 vastaan 5.</li>
+    <li><strong>Kivun paikkaa ei yleensä kerrota.</strong> Useimmat sanovat vain "polvi". Tämä tukee päätöstäsi kattaa koko polvi.</li>
+    <li><strong>Puoli jakautuu tasan:</strong> oikea 7, vasen 7, molemmat 15. Kukaan ei selitä puolta.</li>
+  </ul>
+  <p><strong>Kolme riviä, jotka ovat valmiita koukkuja:</strong></p>
+  <ul>
+    <li>Ketjun otsikko "Pomminvarma keino juoksijan polveen?" ja sen aloittaja: kymmenen vuotta, kaikki kokeiltu, vaiva alkaa vuosi vuodelta helpommin. Tämä on M9 suomeksi.</li>
+    <li>"Olin varma, että kierukka oli mennyt, mutta syy oli lukossa ollut nilkka." Tämä on M10 ja M7 yhdessä lauseessa.</li>
+    <li>"Ortopedin mukaan nivelrikko on toisille kivulias, toisille lähes oireeton." Tämä on M2.</li>
+  </ul>
+  <p class="cap" style="text-align:left">Varaukset: en voi tarkistaa poimintaa, ketjut on valittu vastausmäärän mukaan, ja ainakin yksi henkilö näkyy neljässä ketjussa (teippauksen 7 mainintaa on noin 4 ihmistä).</p>
+
   <h3>Sarja: "Does X fix runner's knee?"</h3>
   <p>Jokainen jakso puretaan samalla kaavalla: (1) mitä juoksijat raportoivat, (2) mitä tutkimus sanoo, (3) mitä säädintä keino kääntää: kuormaa, valmiutta, herkkyyttä vai jakaumaa, (4) milloin se kannattaa. Ehdokkaat kysynnän mukaan: hieronta, rullaus, venyttely, lepo, kengät, pakaraliikkeet, teippi, kortisoni. Ensimmäinen käsikirjoitus on K10 alempana.</p>
   <p class="cap" style="text-align:left">Luvut ovat tiedostossa <code>research/remedies.json</code>, ja haun voi toistaa ja laajentaa (<code>tools/forum/</code>). Jokainen uusi foorumi tai ketju lisää datapisteitä samaan taulukkoon.</p>
@@ -455,6 +498,7 @@ figure{margin:0;display:flex;flex-direction:column;gap:8px;align-items:center}
   <h2>Päätökset sinulle</h2>
   <div class="ask"><ol>
     <li><strong>Minne-kerros:</strong> vastaako M7 sitä, mitä tarkoitit? Näyttö puolierolle on heikko. Haluatko, että tutkin sitä syvemmin (lantio, lonkan kierto, nilkka, aiemmat vammat) ennen kuin siitä tehdään sisältöä?</li>
+    <li><strong>Kieli ja yleisö:</strong> suomalainen aineisto on rikas, ja nivelrikkotarina on siellä vahva. Pysytäänkö englannissa, vai tehdäänkö suomenkielinen rinnakkaisversio? En ole olettanut kumpaakaan.</li>
     <li><strong>Sarja:</strong> aloitetaanko "Does X fix runner's knee?" hieronnalla (K10)? Mikä keino seuraavaksi: rullaus, lepo vai kengät?</li>
     <li><strong>Keinokartan laajennus:</strong> jatkanko samaa foorumia syvemmälle (490 ketjua löytyi, 48 luettu), vai tuotko suomalaista aineistoa tekstinä?</li>
     <li><strong>Kattomalli:</strong> teenkö M9:stä ("ei graalin maljaa, vaan summa") tilin pääviestin, jonka alle muut mallit asettuvat? Suosittelen. Silloin aloitus olisi K9, sitten K4 ja K1.</li>
@@ -469,7 +513,7 @@ figure{margin:0;display:flex;flex-direction:column;gap:8px;align-items:center}
 <section id="aukot">
   <h2>Aukot</h2>
   <ul>
-    <li><strong>Anekdootit ovat yhdeltä foorumilta.</strong> 48 ketjua Slowtwitchistä, otos luettu. Suomalainen aineisto puuttuu.</li>
+    <li><strong>Anekdootit ovat kahdesta lähteestä:</strong> Slowtwitch (48 ketjua) ja suomalainen Facebook-ryhmä (17 ketjua). Reddit, LetsRun ja Juoksufoorumi puuttuvat.</li>
     <li><strong>Keinokartan luvut ovat karkeita:</strong> yksi lukija, noin 280 mainintaa 1 084:stä, ei toista koodaajaa.</li>
     <li><strong>Kokotekstejä ei luettu.</strong> Luvut ovat tiivistelmistä ja toissijaisista yhteenvedoista.</li>
     <li><strong>Varmentamatta:</strong> rullauksen vaikutus IT-jänteeseen, tähystys vs. lumeleikkaus kierukassa (FIDELITY), jänteen "lepo heikentää" -väite.</li>

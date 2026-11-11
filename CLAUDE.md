@@ -22,7 +22,8 @@ videos helping runners get rid of knee pain) and collect data on what works.
   whose script the owner has not seen. Scope is the whole knee (front, outside, below, inside, noise/wear).
 
 - `research/remedies.json`: coded forum data points per remedy (helped / in combination / not helped / worse).
-  Extend it with `tools/forum/` scripts; never commit raw forum posts. Series format "Does X fix runner's knee?":
+  Extend it with `tools/forum/` scripts; never commit raw forum posts or rows from private groups, only aggregated counts.
+  Logged-in sources (Facebook groups, Juoksufoorumi) come from the owner via Claude in Chrome; the extraction prompt is in `tools/forum/chrome-prompt.md`. Series format "Does X fix runner's knee?":
   what runners report -> what studies say -> which dial it turns (load, readiness, sensitivity, distribution) -> when it is worth it.
 - Humility rule: show the confidence level, present explanations as models, correct publicly when the model changes.
 
