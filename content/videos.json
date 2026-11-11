@@ -10,7 +10,8 @@
     "duration_s": 19,
     "status": "awaiting_review",
     "feedback": null,
-    "metrics": null
+    "metrics": null,
+    "model_check": "Claim holds, but framing implies a fix. Reframe cadence as a load dial (research/model.md D6)."
   },
   {
     "id": "002-hips",
@@ -24,7 +25,8 @@
     "duration_s": 20,
     "status": "awaiting_review",
     "feedback": null,
-    "metrics": null
+    "metrics": null,
+    "model_check": "Conflicts with Hott 2019 (hip = knee = free activity). Reframe or replace (research/model.md O4, D2)."
   },
   {
     "id": "003-painlight",
@@ -37,6 +39,7 @@
     "duration_s": 19,
     "status": "awaiting_review",
     "feedback": null,
-    "metrics": null
+    "metrics": null,
+    "model_check": "Consistent with the mismatch model."
   }
 ]

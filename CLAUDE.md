@@ -9,6 +9,11 @@ videos helping runners get rid of knee pain) and collect data on what works.
 - `node src/render.cjs <id> [...]`: renders `videos/<id>.mp4` (1080x1920, 30 fps, silent audio track).
 - `content/videos.json`: one record per video (format, hook, claim, source, status, feedback, metrics).
 
+## Content model
+- `research/model.md` is the source of truth: zeitgeist map, evidence table, the mismatch model and the
+  belief-update list. Each video delivers exactly one belief update (from -> to) from that list and states
+  nothing stronger than the confidence level recorded there. Update the model when new evidence comes in.
+
 ## Rules
 - Health content: every factual claim needs a source recorded in `content/videos.json`. Unverified = soften or drop.
   Always end with "Education only, not medical advice."
