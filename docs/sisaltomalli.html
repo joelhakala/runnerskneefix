@@ -60,11 +60,11 @@ figure{margin:0;display:flex;flex-direction:column;gap:8px;align-items:center}
 
 <main>
 <header style="display:flex;flex-direction:column;gap:14px">
-  <div class="eyebrow">RunnersKneeFix · versio 2 · 11.11.2026</div>
+  <div class="eyebrow">RunnersKneeFix · versio 3 · 11.11.2026 · uutta: minne-kerros, M7, K7</div>
   <h1>Sisältömalli: mitä juoksija uskoo polvestaan ja mihin me sen päivitämme</h1>
   <p class="lede">Jokainen animaatio palvelee yhtä uskomusmallia. Samasta mallista tehdään monta versiota, ja data kertoo, mikä versio muuttaa katsojan käsitystä. Tässä ovat mallit, käsikirjoitukset ja visuaalien demot kommentoitavaksi ennen kuin mitään renderöidään.</p>
   <p><strong>Palaute:</strong> maalaa mikä tahansa kohta ja jätä kommentti. Luen kommentit ja päivitän tämän sivun.</p>
-  <nav><a href="#kartta">Polvikartta</a><a href="#mallit">Uskomusmallit</a><a href="#kasikirjoitukset">Käsikirjoitukset</a><a href="#kieli">Visuaalinen kieli</a><a href="#paatokset">Päätökset sinulle</a><a href="#aukot">Aukot ja lähteet</a></nav>
+  <nav><a href="#kartta">Polvikartta</a><a href="#kerrokset">Milloin ja minne</a><a href="#mallit">Uskomusmallit</a><a href="#kasikirjoitukset">Käsikirjoitukset</a><a href="#kieli">Visuaalinen kieli</a><a href="#paatokset">Päätökset sinulle</a><a href="#aukot">Aukot ja lähteet</a></nav>
 </header>
 
 <section>
@@ -91,8 +91,22 @@ figure{margin:0;display:flex;flex-direction:column;gap:8px;align-items:center}
   <p>Havainto, joka ohjaa koko mallia: viidessä eri kohdassa on viisi eri tarinaa, mutta kaikissa sama rakenne. <em>Kehossa on vika, ja siihen on korjaus.</em> Siksi uskomusmallit eivät ole diagnoosikohtaisia vaan kulkevat kaikkien alueiden läpi.</p>
 </section>
 
+<section id="kerrokset">
+  <h2>Kaksi kerrosta: milloin ja minne</h2>
+  <p>Versio 2 vastasi vain kysymykseen <em>milloin</em> kipu syntyy (kuorma ylittää valmiuden). Se ei selittänyt, <em>minne</em> kuorma osuu: miksi polvi eikä nilkka, miksi oikea eikä vasen, miksi patellajänne eikä IT-jänteen alue. Tämä on toinen kerros.</p>
+  <div class="tbl"><table>
+    <tr><th>Kysymys</th><th>Mitä näyttö sanoo</th><th>Varmuus</th></tr>
+    <tr><td><strong>Miksi polvi</strong> eikä nilkka tai lonkka?</td><td>Tapa juosta jakaa kuorman nivelten kesken. Kantaisku: lumpion nivelvoima 5,1 × kehonpaino, päkiäisku 4,3. Päkiäiskulla akillesjänteen voima taas 6,3 vs. 5,1 (Kulmala 2013, n=38). Alamäki nostaa lumpion kuormaa. Hidas vauhti kasvattaa polven kertymäkuormaa kilometriä kohden. Matala askeltiheys lisää polven kuormaa.</td><td><span class="chip k">kohtalainen</span><br>mekaniikka, ei vammaseuranta</td></tr>
+    <tr><td><strong>Miksi juuri tämä kudos?</strong></td><td>IT-jänteen alue: kapea askelleveys lisää jänteen venytystä (Meardon 2012, mallinnus, n=15). Patellajänne: nilkan heikko koukistus ennusti jännekipua (Backman 2011, koripalloilijat, ei juoksijat). Etupolvi: nilkan liikkuvuus <em>ei</em> eroa kivuttomista (katsaus 2025).</td><td><span class="chip k">kohtalainen</span><br>kudoskohtaisesti vaihteleva</td></tr>
+    <tr><td><strong>Miksi tämä puoli?</strong></td><td>Vahvin tunnettu ennustaja on aiempi vamma (Saragiotto 2014). Jalkojen pituusero ei ennusta polvivammaa (Rauh 2018). Puoliero voimassa tai liikkeessä: näyttö ristiriitaista ja heikkolaatuista (Tee 2021). Tien kallistus ja hallitseva jalka: ei suoraa näyttöä.</td><td><span class="chip h">pääosin tuntematon</span></td></tr>
+  </table></div>
+  <p><strong>Ristiriita, joka pitää sanoa ääneen:</strong> laboratoriossa mekaniikka siirtää kuormaa selvästi, mutta seurantatutkimuksissa mitattu mekaniikka ei yleisesti ennusta, kuka loukkaantuu (Peterson 2022, meta-analyysi).</p>
+  <p><strong>Päättely, joka sovittaa nämä yhteen</strong> <span class="chip h">hypoteesi</span>: kudos mukautuu siihen jakaumaan, jolla juokset. Tottunut jakauma ei siis ole vika. Ongelma syntyy, kun kokonaiskuorma hyppää (silloin eniten kuormittunut lenkki pettää ensin) tai kun jakauma <em>muuttuu</em>: uudet kengät, alamäet, väsymys, vanhan vamman varominen. Epäsymmetria ja liikkuvuus selittäisivät siis <em>paikan</em>, kuorman muutos <em>ajankohdan</em>.</p>
+  <p>Ehdotuksesi (epäsymmetria, liikkuvuus) sopii tähän paikan selittäjäksi. Suoraa näyttöä siitä on vähän: liikkuvuudesta yksi hyvä osuma (nilkka → patellajänne), epäsymmetriasta ei selvää. Se on tutkimaton alue, ei kumottu.</p>
+</section>
+
 <section id="mallit">
-  <h2>Kuusi uskomusmallia</h2>
+  <h2>Seitsemän uskomusmallia</h2>
 
   <article class="model" id="m1">
     <div class="eyebrow">M1 · Kaikki alueet · <span class="chip k">kohtalainen</span></div>
@@ -166,6 +180,20 @@ figure{margin:0;display:flex;flex-direction:column;gap:8px;align-items:center}
       <tr><td>Etupuoli</td><td>Lumpio kulkee väärin</td><td>Katso M1</td><td><span class="chip k">kohtalainen</span></td></tr>
     </table></div>
     <p><strong>Ydinvisuaali:</strong> polvikartta (demo ylempänä). Alue syttyy, vanha selitys ilmestyy ja vaihtuu uuteen.</p>
+  </article>
+
+  <article class="model" id="m7">
+    <div class="eyebrow">M7 · Minne-kerros, kaikki alueet · <span class="chip k">kohtalainen</span> mekaniikka, <span class="chip h">hypoteesi</span> vammayhteys</div>
+    <div class="shift"><div class="f">Kehoni on vino tai jäykkä, ja se pitää korjata suoraksi.</div><div class="ar">→</div><div class="to">Tapani liikkua päättää, minne kuorma osuu. Se on säädin: kuorma ei katoa, se siirtyy.</div></div>
+    <div class="cols"><div>
+      <p><strong>Miksi vanha uskomus pitää:</strong> puoliero näkyy peilissä ja videolla, ja toispuoleinen kipu vaatii selityksen. "Olet vino" on selitys, jonka jokainen ymmärtää.</p>
+      <p><strong>Näyttö:</strong> katso taulukko kohdassa <a href="#kerrokset">Kaksi kerrosta</a>. Vahvin yksittäinen havainto on vaihtokauppa: polven kuorman keventäminen päkiäiskulla lisää akillesjänteen kuormaa (Kulmala 2013).</p>
+      <p><strong>Mitä tämä malli ei väitä:</strong> ei sitä, että epäsymmetria aiheuttaa vamman, eikä sitä, että se on merkityksetön. Se väittää, että jakauma selittää paikan ja että jakaumaa voi säätää.</p>
+      <p><strong>Ydinvisuaali:</strong> jalka, jossa kolme rengasta (lonkka, polvi, nilkka). Renkaan koko on kuorma. Säädin siirtää kuormaa renkaasta toiseen, summa pysyy.</p>
+      <p><strong>Lisäideoita:</strong></p>
+      <ul><li>"Miksi aina oikea polvi?": rehellinen video siitä, mitä tiedetään (aiempi vamma) ja mitä ei.</li><li>Alamäki, hidas hölkkä ja pitkä askel: kolme tilannetta, joissa polvi saa isoimman osuuden.</li><li>"Uudet kengät, uusi kipu": jakauma muuttui, kudos ei ehtinyt mukaan.</li><li>Askelleveys ja ulkosivun kipu (Meardon 2012).</li><li>Nilkan liikkuvuus ja lumpion alapuolen kipu (Backman 2011).</li></ul>
+    </div>
+    <figure class="demo"><svg id="d-dist" viewBox="0 0 270 480" role="img" aria-label="Kuorma siirtyy polven ja nilkan välillä, kun askellus muuttuu"></svg><figcaption>Demo: kuorma siirtyy, ei katoa.</figcaption></figure></div>
   </article>
 </section>
 
@@ -258,6 +286,21 @@ figure{margin:0;display:flex;flex-direction:column;gap:8px;align-items:center}
       <tr><td class="t">16,5–19</td><td><q>Comment your spot. We'll make that one next.</q></td><td>Loppukortti, neljä aluetta numeroituna 1–4.</td></tr>
     </table></div>
   </article>
+
+  <article class="script" id="k7">
+    <h3>K7 · "Load has to land somewhere" <span class="chip k">M7</span></h3>
+    <div class="meta"><span>19 s</span><span>Formaatti: hahmo + säädin</span><span>Lähteet: Kulmala 2013, Lenhart 2014</span></div>
+    <p><strong>Tavoite:</strong> katsoja ymmärtää, miksi kuorma osuu juuri polveen, ja että "korjaus" on aina vaihtokauppa.</p>
+    <div class="tbl"><table>
+      <tr><th>Aika</th><th>Ruututeksti</th><th>Kuva</th></tr>
+      <tr><td class="t">0–3</td><td><q>Why your knee, and not your ankle or hip?</q></td><td>Juokseva hahmo sivulta. Lonkan, polven ja nilkan kohdalle syttyy rengas, polven rengas on suurin ja punainen.</td></tr>
+      <tr><td class="t">3–7,5</td><td><q>Every step, load is shared between joints. How you run sets the split.</q></td><td>Hidastus yhteen askeleeseen. Kolme rengasta sykkii iskun hetkellä, koot näkyvät lukuina.</td></tr>
+      <tr><td class="t">7,5–12</td><td><q>Heel-first, long stride: more to the knee.</q></td><td>Säädin vasemmalla. Hahmon askel pitenee, polven rengas kasvaa, nilkan pienenee.</td></tr>
+      <tr><td class="t">12–16</td><td><q>Forefoot, quick steps: less knee, more Achilles.</q></td><td>Säädin liukuu oikealle. Polven rengas kutistuu ja vihertyy, nilkan rengas kasvaa ja muuttuu keltaiseksi.</td></tr>
+      <tr><td class="t">16–19</td><td><q>Load doesn't vanish. It moves. Change it slowly.</q></td><td>Loppukortti. Alarivi: "Kulmala et al. 2013."</td></tr>
+    </table></div>
+    <p class="cap" style="text-align:left">Huom: video ei suosittele päkiäiskua. Viesti on vaihtokauppa, ja loppurivi "slowly" on pakollinen.</p>
+  </article>
 </section>
 
 <section id="kieli">
@@ -275,7 +318,8 @@ figure{margin:0;display:flex;flex-direction:column;gap:8px;align-items:center}
 <section id="paatokset">
   <h2>Päätökset sinulle</h2>
   <div class="ask"><ol>
-    <li><strong>Mallit:</strong> ovatko nämä kuusi oikeat? Puuttuuko jokin uskomus, jonka kohtaat itse juoksijoiden puheessa?</li>
+    <li><strong>Minne-kerros:</strong> vastaako M7 sitä, mitä tarkoitit? Näyttö puolierolle on heikko. Haluatko, että tutkin sitä syvemmin (lantio, lonkan kierto, nilkka, aiemmat vammat) ennen kuin siitä tehdään sisältöä?</li>
+    <li><strong>Mallit:</strong> ovatko nämä seitsemän oikeat? Puuttuuko jokin uskomus, jonka kohtaat itse juoksijoiden puheessa?</li>
     <li><strong>Järjestys:</strong> ehdotan aloitusta K1:llä ja K4:llä, koska ne jakavat saman kaksi viivaa -visuaalin ja opettavat tilin peruskielen.</li>
     <li><strong>Sävy:</strong> käsikirjoitukset ovat nyt suoria mutta eivät hyökkääviä. Haluatko terävämmän ("You've been lied to") vai tämän?</li>
     <li><strong>Varmuusraja:</strong> julkaistaanko hypoteesitason malli (M4), kun sanamuoto on varovainen, vai vasta kun lähde löytyy?</li>
@@ -290,6 +334,8 @@ figure{margin:0;display:flex;flex-direction:column;gap:8px;align-items:center}
     <li><strong>Kokotekstejä ei luettu.</strong> Luvut ovat tiivistelmistä ja toissijaisista yhteenvedoista.</li>
     <li><strong>Varmentamatta:</strong> rullauksen vaikutus IT-jänteeseen, tähystys vs. lumeleikkaus kierukassa (FIDELITY), jänteen "lepo heikentää" -väite.</li>
     <li><strong>Osuudet</strong> ovat yhdeltä klinikalta vuodelta 2002. Kierukan 5 % on oma laskuni tapausmäärästä.</li>
+    <li><strong>Miksi tämä puoli</strong> on pääosin vastaamatta. Tutkimus ei ole kumonnut epäsymmetriaa, se ei vain ole mitannut sitä hyvin: seurannat mittaavat kerran, levossa tai laboratoriossa.</li>
+    <li><strong>Minne-kerroksen luvut</strong> ovat pienistä mekaniikkatutkimuksista (n=15–38) tai muista lajeista. Yhteys vammoihin on päättelyä.</li>
     <li><strong>Takapolven kipu</strong> puuttuu kartasta kokonaan, koska en hakenut siitä näyttöä.</li>
   </ul>
   <h3>Lähteet</h3>
@@ -297,6 +343,7 @@ figure{margin:0;display:flex;flex-direction:column;gap:8px;align-items:center}
     <li><a href="https://pubmed.ncbi.nlm.nih.gov/11916889/">Taunton 2002</a> · <a href="https://pubmed.ncbi.nlm.nih.gov/30242107/">Neal 2019</a> · <a href="https://pubmed.ncbi.nlm.nih.gov/24687010/">Rathleff 2014</a> · <a href="https://pubmed.ncbi.nlm.nih.gov/30958707/">Hott 2019</a> · <a href="https://bjsm.bmj.com/content/early/2017/09/22/bjsports-2017-098296.full.pdf">Esculier 2018 (RCT)</a> · <a href="https://blogs.bmj.com/bjsm/?p=11751">Frandsen 2025</a> · <a href="https://www.pubmed.gov/26463119/">Lankhorst 2016</a></li>
     <li><a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC7237395/">Horga 2020</a> · <a href="https://www.pubmed.gov/29886437/">Culvenor 2019</a> · <a href="https://www.aafp.org/afp/2011/0515/p1160">Englund 2008 (AAFP-yhteenveto)</a> · <a href="https://repositorio.unesp.br/items/8880ec00-6fca-4d8f-8147-79d20132de73/full">de Oliveira Silva 2018</a></li>
     <li><a href="https://read.qxmd.com/read/28504066/the-association-of-recreational-and-competitive-running-with-hip-and-knee-osteoarthritis-a-systematic-review-and-meta-analysis">Alentorn-Geli 2017</a> · <a href="https://pubmed.ncbi.nlm.nih.gov/29728929/">Lo 2018</a> · <a href="https://doaj.org/article/e84fd4cf26274dc3b82160c9b2d03278">Esculier 2018 (kysely)</a></li>
+    <li>Minne-kerros: <a href="https://pubmed.ncbi.nlm.nih.gov/23748735/">Kulmala 2013</a> · <a href="https://www.ncbi.nlm.nih.gov/pubmed/23259236">Meardon 2012</a> · <a href="https://pubmed.ncbi.nlm.nih.gov/21917610/">Backman 2011</a> · <a href="https://www.scielo.br/j/fm/a/tnGG9RcQFDJBRD6d5N4P96h/?lang=en">Nilkka ja etupolvi, katsaus 2025</a> · <a href="https://pubmed.ncbi.nlm.nih.gov/24809248/">Saragiotto 2014</a> · <a href="https://pubmed.ncbi.nlm.nih.gov/35254562/">Peterson 2022</a> · <a href="https://shura.shu.ac.uk/28290">Tee 2021</a> · <a href="https://www.running-physio.com/lld/">Rauh 2018 (toissijainen)</a> · <a href="https://informahealthcare.com/doi/full/10.1080/14763141.2023.2226111">Vauhti ja lumpion kuorma 2023</a> · <a href="https://pubmed.ncbi.nlm.nih.gov/23917470/">Lenhart 2014</a></li>
     <li><a href="https://now.aapmr.org/iliotibial-band-syndrome/">IT-jänne, AAPMR</a> · <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4647699/">Aderem &amp; Louw 2015</a> · <a href="https://frontiersin.org/articles/10.3389/fspor.2024.1386456/full">IT-jänteen hoito, katsaus 2024</a> · <a href="https://link.springer.com/article/10.1186/s40814-021-00792-5">Patellajänne, pilottitutkimus 2021</a> · <a href="https://bjsm.bmj.com/content/52/18/1170.abstract">Collins 2018</a> · <a href="https://repository.essex.ac.uk/39411/">Neal 2024</a></li>
   </ul>
 </section>
@@ -385,6 +432,26 @@ figure{margin:0;display:flex;flex-direction:column;gap:8px;align-items:center}
       const i = Math.floor(t / 1.6) % 4, q = (t / 1.6) % 1;
       z.forEach((o, j) => { o.e.setAttribute('fill', j === i ? C.coral : C.line); o.e.setAttribute('opacity', j === i ? .65 + .35 * Math.sin(q * Math.PI) : .8); });
       l1.textContent = z[i].n; l2.textContent = z[i].sub;
+    });
+  })();
+
+  // Distribution: load shifts between knee and ankle as running style changes; the total stays.
+  (() => {
+    const s = document.getElementById('d-dist'); if (!s) return;
+    text(s, 135, 80, 'Load has to land'); text(s, 135, 104, 'somewhere.', { fill: C.amber });
+    const J = { hip: [120, 160], knee: [150, 250], ankle: [125, 345] };
+    el(s, 'path', { d: `M${J.hip} L${J.knee} L${J.ankle} l34 6`, fill: 'none', stroke: C.dim, 'stroke-width': 14, 'stroke-linecap': 'round', 'stroke-linejoin': 'round' });
+    const ring = k => el(s, 'circle', { cx: J[k][0], cy: J[k][1], fill: 'none', 'stroke-width': 6 });
+    const rh = ring('hip'), rk = ring('knee'), ra = ring('ankle');
+    rh.setAttribute('r', 20); rh.setAttribute('stroke', C.dim);
+    el(s, 'line', { x1: 50, x2: 220, y1: 420, y2: 420, stroke: C.line, 'stroke-width': 8, 'stroke-linecap': 'round' });
+    const knob = el(s, 'circle', { cy: 420, r: 12, fill: C.ink });
+    text(s, 50, 450, 'heel', { fill: C.dim, 'font-size': 12, 'font-weight': 700 }); text(s, 220, 450, 'forefoot', { fill: C.dim, 'font-size': 12, 'font-weight': 700 });
+    demos.push(t => {
+      const k = .5 - .5 * Math.cos(t * .9);
+      knob.setAttribute('cx', 50 + 170 * k);
+      rk.setAttribute('r', 40 - 18 * k); rk.setAttribute('stroke', k < .5 ? C.coral : C.lime);
+      ra.setAttribute('r', 20 + 18 * k); ra.setAttribute('stroke', k < .5 ? C.dim : C.amber);
     });
   })();
 

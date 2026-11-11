@@ -114,3 +114,19 @@ Malli on lähellä Dyen "envelope of function" -teoriaa. Se on yhä teoria, ja s
 - [YouTuben PFP-videoiden laatu](https://www.pubmed.gov/37092212/)
 - [Knees over toes, asiantuntijakommentti](https://dailymaverick.co.za/article/2026-09-01-can-knees-over-toes-exercises-help-bullet-proof-your-knees-two-experts-explain)
 - Anekdootit: [The Mother Runners](https://www.themotherrunners.com/my-experience-with-runners-knee-bursitis/), [Running with Rock](https://runningwithrock.com/getting-back-into-running-after-an-injury/), [clare.run](https://www.clare.run/injury-storytime), [Emily Halnon](https://emilyhalnon.substack.com/p/what-can-i-get-away-with), [Strength Running](https://strengthrunning.com/2015/12/alex-knee-injury-fast-5k)
+
+## 9. Minne-kerros (lisätty 2026-11-11)
+
+Osio 5 selittää *milloin* kipu syntyy. Se ei selitä *minne* kuorma osuu. Kolme kysymystä:
+
+| Kysymys | Näyttö | Varmuus |
+|---|---|---|
+| Miksi polvi eikä nilkka tai lonkka | Askellus jakaa kuorman: kantaisku lumpion nivelvoima 5,1 × kehonpaino vs. päkiäisku 4,3; akillesjänne 5,1 vs. 6,3 (Kulmala 2013). Alamäki, hidas vauhti ja matala askeltiheys lisäävät polven osuutta. | kohtalainen (mekaniikka) |
+| Miksi juuri tämä kudos | IT-jänne: kapea askelleveys (Meardon 2012, mallinnus). Patellajänne: nilkan heikko koukistus (Backman 2011, koripallo). Etupolvi: nilkan liikkuvuus ei eroa (katsaus 2025). | kohtalainen, vaihteleva |
+| Miksi tämä puoli | Aiempi vamma on vahvin ennustaja (Saragiotto 2014). Pituusero ei ennusta (Rauh 2018). Epäsymmetria: ristiriitainen, heikko näyttö (Tee 2021). | pääosin tuntematon |
+
+Ristiriita: mekaniikka siirtää kuormaa laboratoriossa, mutta mitattu mekaniikka ei yleisesti ennusta vammoja seurannassa (Peterson 2022).
+
+**D7 (hypoteesi):** kudos mukautuu tottuneeseen jakaumaan. Vamma syntyy, kun kokonaiskuorma hyppää (eniten kuormittunut lenkki pettää ensin) tai jakauma muuttuu (kengät, maasto, väsymys, vanhan vamman varominen). Epäsymmetria ja liikkuvuus selittävät paikan, kuorman muutos ajankohdan.
+
+Uskomuspäivitys M7: "kehoni on vino ja se pitää korjata" → "tapani liikkua päättää, minne kuorma osuu; kuorma ei katoa, se siirtyy".
