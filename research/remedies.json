@@ -1,0 +1,25 @@
+{
+  "sample": {
+    "source": "forum.slowtwitch.com (public threads, 2003-2024)",
+    "threads": 48, "posts": 882, "remedy_snippets": 1084,
+    "coded": "random 20 snippets per remedy (about 280), first-person outcome reports only",
+    "coder": "single pass by Claude, 2026-11-11",
+    "caveats": ["one forum, triathletes", "truncated snippets", "same person may appear under several remedies", "success-story and last-thing-tried bias", "no natural-course control"]
+  },
+  "remedies": [
+    {"id": "rest", "helped": 9, "helped_in_combination": 4, "not_helped": 9, "worse": 1, "note": "most polarised; relapse on return is the typical failure"},
+    {"id": "gradual_return", "helped": 5, "helped_in_combination": 5, "not_helped": 0, "worse": 0, "note": "least mentioned of all (22 of 1084 snippets)"},
+    {"id": "hip_strength", "helped": 10, "helped_in_combination": 5, "not_helped": 6, "worse": 0, "note": "several strong athletes still symptomatic"},
+    {"id": "quad_strength", "helped": 9, "helped_in_combination": 4, "not_helped": 1, "worse": 0, "note": "mostly squats, wall sits, eccentric squats"},
+    {"id": "massage_art", "helped": 7, "helped_in_combination": 5, "not_helped": 7, "worse": 0, "note": "even split; successes mostly with exercises or rest"},
+    {"id": "foam_rolling", "helped": 8, "helped_in_combination": 5, "not_helped": 3, "worse": 0, "note": "often described as maintenance"},
+    {"id": "stretching", "helped": 7, "helped_in_combination": 4, "not_helped": 4, "worse": 1, "note": ""},
+    {"id": "shoes_orthotics", "helped": 9, "helped_in_combination": 2, "not_helped": 3, "worse": 0, "note": "4 moved toward support, 4 away from it"},
+    {"id": "running_form", "helped": 7, "helped_in_combination": 5, "not_helped": 0, "worse": 0, "note": "posture, overstride, step width, cadence"},
+    {"id": "strap_tape_brace", "helped": 6, "helped_in_combination": 1, "not_helped": 3, "worse": 2, "note": "described as symptom relief"},
+    {"id": "ice_nsaid", "helped": 3, "helped_in_combination": 1, "not_helped": 5, "worse": 0, "note": "relief often temporary"},
+    {"id": "injection", "helped": 5, "helped_in_combination": 3, "not_helped": 4, "worse": 0, "note": "cortisone, prolotherapy, gel"},
+    {"id": "bike_fit", "helped": 6, "helped_in_combination": 2, "not_helped": 1, "worse": 0, "note": "triathlon-specific load source"},
+    {"id": "surgery", "helped": 2, "helped_in_combination": 0, "not_helped": 2, "worse": 0, "note": "small n; ITB release after 1.5-5 years"}
+  ]
+}
