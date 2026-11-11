@@ -14,6 +14,11 @@ videos helping runners get rid of knee pain) and collect data on what works.
   belief-update list. Each video delivers exactly one belief update (from -> to) from that list and states
   nothing stronger than the confidence level recorded there. Update the model when new evidence comes in.
 
+- `docs/sisaltomalli.html` is the owner-facing page (published artifact https://claude.ai/artifact/V5CiMbL2aCRb7WQ7FRadoE):
+  knee map, six belief models (M1-M6), scripts (K1-K6) and visual demos. Workflow: belief model -> script ->
+  owner comments -> animation -> publish -> data -> next version of the same model. Never render an animation
+  whose script the owner has not seen. Scope is the whole knee (front, outside, below, inside, noise/wear).
+
 ## Rules
 - Health content: every factual claim needs a source recorded in `content/videos.json`. Unverified = soften or drop.
   Always end with "Education only, not medical advice."

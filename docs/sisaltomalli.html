@@ -1,0 +1,395 @@
+<title>RunnersKneeFix Sisältömalli</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;700&display=swap">
+<style>
+/* Layout: one reading column; each belief model is a from→to pair with its evidence, visual and script. */
+:root{
+  --bg:#F5F7FA; --surface:#FFFFFF; --ink:#101B2E; --muted:#56647C; --line:#D8DFEA;
+  --from:#B93A28; --to:#1C7443; --accent:#2749C4; --chip:#E9EEF6;
+  --screen:#0B1220; --screen-ink:#F4F7FB; --screen-dim:#7C8AA3; --lime:#C6F432; --coral:#FF5A4F; --amber:#FFC233; --screen-line:#2A3650;
+  --display:'Space Grotesk','Inter',system-ui,sans-serif; --body:'Inter',system-ui,-apple-system,'Segoe UI',sans-serif;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --bg:#0D1422; --surface:#151F33; --ink:#EDF1F8; --muted:#9AA8BF; --line:#293650;
+  --from:#FF8672; --to:#7BD691; --accent:#93AAFF; --chip:#1F2B44; color-scheme:dark } }
+:root[data-theme="dark"]{
+  --bg:#0D1422; --surface:#151F33; --ink:#EDF1F8; --muted:#9AA8BF; --line:#293650;
+  --from:#FF8672; --to:#7BD691; --accent:#93AAFF; --chip:#1F2B44; color-scheme:dark }
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.55;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:32px 80px}
+main{max-width:820px;margin:0 auto;display:flex;flex-direction:column;gap:56px}
+section{display:flex;flex-direction:column;gap:18px;min-width:0}
+h1,h2,h3{font-family:var(--display);text-wrap:balance;margin:0;line-height:1.15}
+h1{font-size:clamp(30px,6vw,44px);letter-spacing:-.5px}
+h2{font-size:26px;padding-top:20px;border-top:2px solid var(--ink)}
+h3{font-size:20px}
+p,ul,ol{margin:0;max-width:68ch}
+ul,ol{padding-left:20px;display:flex;flex-direction:column;gap:6px}
+a{color:var(--accent)}
+a:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.lede{font-size:18px;color:var(--muted)}
+.eyebrow{font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+nav{display:flex;flex-wrap:wrap;gap:8px 16px;font-weight:600}
+.loop{display:flex;flex-wrap:wrap;gap:8px;align-items:center;font-weight:600}
+.loop span{background:var(--chip);padding:6px 12px;border-radius:999px}
+.loop i{color:var(--muted);font-style:normal}
+.tbl{overflow-x:auto}
+table{border-collapse:collapse;width:100%;font-size:15px}
+th,td{text-align:left;vertical-align:top;padding:9px 12px 9px 0;border-bottom:1px solid var(--line)}
+th{font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);font-weight:700}
+td.t{white-space:nowrap;font-variant-numeric:tabular-nums;color:var(--muted)}
+.chip{display:inline-block;font-size:12px;font-weight:700;padding:2px 8px;border-radius:999px;background:var(--chip);white-space:nowrap}
+.chip.k{color:var(--to)} .chip.h{color:var(--from)} .chip.v{color:var(--muted)}
+.model{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:24px;display:flex;flex-direction:column;gap:16px}
+.shift{display:grid;grid-template-columns:1fr auto 1fr;gap:12px;align-items:center;font-family:var(--display);font-weight:700;font-size:19px;line-height:1.25}
+.shift .f{color:var(--from)} .shift .to{color:var(--to)} .shift .ar{color:var(--muted)}
+.cols{display:flex;gap:24px;flex-wrap:wrap}
+.cols > div{flex:1 1 300px;min-width:0;display:flex;flex-direction:column;gap:12px}
+.cols > .demo{flex:0 0 200px;align-items:center}
+.demo svg{width:200px;max-width:100%;aspect-ratio:9/16;border-radius:14px;display:block;background:var(--screen)}
+.demo figcaption,.cap{font-size:13px;color:var(--muted);text-align:center}
+figure{margin:0;display:flex;flex-direction:column;gap:8px;align-items:center}
+.script{border-left:3px solid var(--line);padding-left:18px;display:flex;flex-direction:column;gap:12px}
+.script q{quotes:none;font-weight:600}
+.meta{display:flex;flex-wrap:wrap;gap:6px 14px;font-size:14px;color:var(--muted)}
+.ask{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:20px 24px}
+.src{font-size:14px;color:var(--muted)}
+.src li{max-width:none}
+@media (max-width:520px){ .shift{grid-template-columns:1fr} .shift .ar{transform:rotate(90deg);justify-self:start} .model{padding:18px} }
+</style>
+
+<main>
+<header style="display:flex;flex-direction:column;gap:14px">
+  <div class="eyebrow">RunnersKneeFix · versio 2 · 11.11.2026</div>
+  <h1>Sisältömalli: mitä juoksija uskoo polvestaan ja mihin me sen päivitämme</h1>
+  <p class="lede">Jokainen animaatio palvelee yhtä uskomusmallia. Samasta mallista tehdään monta versiota, ja data kertoo, mikä versio muuttaa katsojan käsitystä. Tässä ovat mallit, käsikirjoitukset ja visuaalien demot kommentoitavaksi ennen kuin mitään renderöidään.</p>
+  <p><strong>Palaute:</strong> maalaa mikä tahansa kohta ja jätä kommentti. Luen kommentit ja päivitän tämän sivun.</p>
+  <nav><a href="#kartta">Polvikartta</a><a href="#mallit">Uskomusmallit</a><a href="#kasikirjoitukset">Käsikirjoitukset</a><a href="#kieli">Visuaalinen kieli</a><a href="#paatokset">Päätökset sinulle</a><a href="#aukot">Aukot ja lähteet</a></nav>
+</header>
+
+<section>
+  <h2>Miten tätä käytetään</h2>
+  <div class="loop"><span>Uskomusmalli</span><i>→</i><span>Käsikirjoitus</span><i>→</i><span>Animaatio</span><i>→</i><span>Julkaisu</span><i>→</i><span>Data</span><i>→</i><span>Uusi versio samasta mallista</span></div>
+  <p>Uskomusmalli on pari: <span style="color:var(--from);font-weight:600">mitä katsoja uskoo nyt</span> ja <span style="color:var(--to);font-weight:600">mihin haluamme hänen päätyvän</span>. Malli pysyy, toteutus vaihtuu. Kun yksi malli on "murrettu", tiedämme mikä koukku, vertauskuva ja pituus toimivat, ja siirrämme opin seuraavaan.</p>
+  <p>Varmuustasot: <span class="chip k">vahva</span> katsaus tai useita kokeita · <span class="chip k">kohtalainen</span> yksi koe tai kohortti · <span class="chip h">hypoteesi</span> oma päättely · <span class="chip v">varmentamatta</span> en saanut lähdettä luettua tällä kierroksella.</p>
+</section>
+
+<section id="kartta">
+  <h2>Polvikartta: mitä juoksijat tarkoittavat "polvella"</h2>
+  <p>Nimi ei rajaa kipua tiettyyn kohtaan, joten sisällön pitää tunnistaa vähintään nämä viisi. Osuudet ovat yhden urheiluklinikan 2 002 juoksuvammasta (Taunton 2002), eivät väestölukuja.</p>
+  <div class="cols">
+    <div class="tbl"><table>
+      <tr><th>Missä tuntuu</th><th>Tavallisin selitys</th><th>Osuus</th><th>Zeitgeist sanoo</th></tr>
+      <tr><td><strong>Edessä</strong>, lumpion ympärillä</td><td>Patellofemoraalinen kipu</td><td class="t">16,5 %</td><td>Heikot pakarat, lumpio "väärällä raiteella"</td></tr>
+      <tr><td><strong>Ulkosivulla</strong></td><td>IT-jänteen alueen kipu</td><td class="t">8,4 %</td><td>Kireä IT-jänne hankaa, rullaa se auki</td></tr>
+      <tr><td><strong>Sisäsivulla</strong>, nivelraossa</td><td>Kierukkaperäinen kipu</td><td class="t">n. 5 %</td><td>Kierukka on revennyt, tarvitaan tähystys</td></tr>
+      <tr><td><strong>Lumpion alla</strong></td><td>Patellajänteen kipu</td><td class="t">4,8 %</td><td>Tulehdus, lepää kunnes se menee ohi</td></tr>
+      <tr><td><strong>Koko polvi</strong>: rutina, jäykkyys</td><td>Usein ei mitään, joskus nivelrikko</td><td class="t">–</td><td>Polvi on kulunut, juoksu pitää lopettaa</td></tr>
+    </table></div>
+    <figure class="demo"><svg id="d-map" viewBox="0 0 270 480" role="img" aria-label="Polvi edestä, neljä kipualuetta syttyy vuorotellen"></svg><figcaption>Demo: polvikartta. Sama elementti toistuu aina, kun video kohdistuu yhteen alueeseen.</figcaption></figure>
+  </div>
+  <p>Havainto, joka ohjaa koko mallia: viidessä eri kohdassa on viisi eri tarinaa, mutta kaikissa sama rakenne. <em>Kehossa on vika, ja siihen on korjaus.</em> Siksi uskomusmallit eivät ole diagnoosikohtaisia vaan kulkevat kaikkien alueiden läpi.</p>
+</section>
+
+<section id="mallit">
+  <h2>Kuusi uskomusmallia</h2>
+
+  <article class="model" id="m1">
+    <div class="eyebrow">M1 · Kaikki alueet · <span class="chip k">kohtalainen</span></div>
+    <div class="shift"><div class="f">Polvessani on vika: pakarat, raide, asento, kengät.</div><div class="ar">→</div><div class="to">Kuorma ylitti sen, mihin polvi oli sillä hetkellä valmis.</div></div>
+    <div class="cols"><div>
+      <p><strong>Miksi vanha uskomus pitää:</strong> se on konkreettinen, sen voi mitata peilistä, ja siihen voi myydä korjauksen.</p>
+      <p><strong>Näyttö:</strong> Q-kulma, paino ja pituus eivät ennusta etupolven kipua (Neal 2019, n=4818). Lonkan heikkous ei edellä kipua vaan seuraa sitä (Rathleff 2014). Yksittäisen lenkin pituushyppy suhteessa 30 päivän pisimpään ennustaa vammaa, viikkokuorma ei (Frandsen 2025, n=5205, kaikki juoksuvammat).</p>
+      <p><strong>Ydinvisuaali:</strong> kaksi viivaa. Vihreä on "mihin polvi on valmis", valkoinen on "mitä siltä pyydettiin". Kipu syttyy vain siinä, missä valkoinen ylittää vihreän.</p>
+      <p><strong>Lisäideoita samasta mallista:</strong></p>
+      <ul><li>"Tarkista 30 päivän pisin lenkkisi": katsoja tekee havainnon omasta datastaan.</li><li>Kaksi juoksijaa, sama "virheasento", vain toisella kipu. Ero on viime viikon lenkissä.</li><li>Vikalaput (pakarat, kengät, raide) putoavat hahmosta yksi kerrallaan.</li></ul>
+    </div>
+    <figure class="demo"><svg id="d-lines" viewBox="0 0 270 480" role="img" aria-label="Kaksi viivaa: kuorma ylittää valmiuden ja kipu syttyy"></svg><figcaption>Demo: kaksi viivaa, kuormapiikki.</figcaption></figure></div>
+  </article>
+
+  <article class="model" id="m2">
+    <div class="eyebrow">M2 · Kaikki alueet, erityisesti sisäsivu ja rutina · <span class="chip k">kohtalainen</span></div>
+    <div class="shift"><div class="f">Kipu ja rutina tarkoittavat, että polvessa on vaurio.</div><div class="ar">→</div><div class="to">Kipu on hälytin, ei vauriomittari. Kuva ja ääni eivät kerro, kumpaa polvea sattuu.</div></div>
+    <div class="cols"><div>
+      <p><strong>Miksi vanha uskomus pitää:</strong> akuutissa vammassa se on totta, ja MRI-lausunnon sanat ("rappeuma", "repeämä") kuulostavat tuomiolta.</p>
+      <p><strong>Näyttö:</strong> 97 %:ssa kivuttomista polvista näkyi MRI:ssä jokin poikkeama (Horga 2020, 230 polvea). Kivuttomissa polvissa rustomuutoksia 24 %:lla ja kierukkarepeämiä 10 %:lla (Culvenor 2019, 63 tutkimusta). Yli 50-vuotiaiden kierukkarepeämistä 55 % on oireettomia (Englund 2008). Rutina ei liity kipuun eikä toimintakykyyn etupolven kivussa (de Oliveira Silva 2018).</p>
+      <p><strong>Varaus:</strong> hälyttimen "herkistyminen" on heikommin osoitettu <span class="chip h">hypoteesi</span>. Terävä kipu, turvotus, lukkiutuminen ja pettäminen ovat aina syy tutkituttaa polvi, ja se sanotaan jokaisessa tämän mallin videossa.</p>
+      <p><strong>Ydinvisuaali:</strong> kaksi identtistä polvea, samat löydökset, vain toisessa hälytys. Alla herkkyyssäädin.</p>
+      <p><strong>Lisäideoita:</strong></p>
+      <ul><li>"Polveni rutisee": ääniaalto ilman kipua vs. hiljainen polvi, jossa hälytys.</li><li>MRI-lausunnon sanat käännetään arkikielelle yksi kerrallaan.</li><li>Palovaroitin, joka soi paahtoleivästä: hälytys on todellinen, tulipalo ei.</li></ul>
+    </div>
+    <figure class="demo"><svg id="d-alarm" viewBox="0 0 270 480" role="img" aria-label="Kaksi samanlaista polvea, vain toisessa hälytys"></svg><figcaption>Demo: sama kuva, eri polvi.</figcaption></figure></div>
+  </article>
+
+  <article class="model" id="m3">
+    <div class="eyebrow">M3 · Koko polvi · <span class="chip k">kohtalainen</span></div>
+    <div class="shift"><div class="f">Juoksu kuluttaa polvet loppuun.</div><div class="ar">→</div><div class="to">Polvi on elävää kudosta, joka mukautuu kuormaan. Se ei ole rengas.</div></div>
+    <p><strong>Miksi vanha uskomus pitää:</strong> konevertaus on intuitiivinen, ja lähes jokainen tuntee entisen juoksijan, jolla on tekonivel. Kanadalaiskyselyssä 13 % piti juoksua polvelle haitallisena ja 26 % oli epävarma (Esculier 2018).</p>
+    <p><strong>Näyttö:</strong> lonkan tai polven nivelrikkoa oli kuntojuoksijoista 3,5 %:lla, liikkumattomista 10,2 %:lla ja kilpajuoksijoista 13,3 %:lla (Alentorn-Geli 2017, n=114 829). Nivelrikkoisilla juoksun jatkaminen ei pahentanut kipua eikä rakennetta neljässä vuodessa (Lo 2018). Molemmat ovat havainnoivia: syy-yhteyttä ei voi väittää, ja se sanotaan videossa.</p>
+    <p><strong>Ydinvisuaali:</strong> rengas, jonka kulutuspinta ohenee kierros kierrokselta, ja sen vieressä kudos, joka paksunee jokaisen kuormapulssin jälkeen. Sitten kolme pylvästä: 3,5 / 10,2 / 13,3.</p>
+    <p><strong>Lisäideoita:</strong></p>
+    <ul><li>"Kuinka paljon on liikaa?": pylväiden U-muoto, kilpataso erottuu.</li><li>Sohva vs. lenkkipolku: kumpi polvi "kuluu"?</li><li>Nivelrikko ja juoksu: Lo 2018 omana videonaan vanhemmalle yleisölle.</li></ul>
+  </article>
+
+  <article class="model" id="m4">
+    <div class="eyebrow">M4 · Etu- ja alapolvi vahvimmin · <span class="chip h">hypoteesi</span></div>
+    <div class="shift"><div class="f">Lepään, kunnes kipu on poissa. Sitten palaan.</div><div class="ar">→</div><div class="to">Lepo hiljentää kivun mutta laskee myös valmiutta. Annostele, älä lopeta.</div></div>
+    <div class="cols"><div>
+      <p><strong>Miksi vanha uskomus pitää:</strong> lepo toimii heti, joten se tuntuu oikealta. Paluun epäonnistuminen tulkitaan todisteeksi viasta (M1) tai vauriosta (M2).</p>
+      <p><strong>Näyttö:</strong> etupolven kivusta 40 % oireilee yhä vuoden päästä (Lankhorst 2016). Juoksijoilla ohjaus kuorman säätämiseen toimi yhtä hyvin kuin ohjaus ja harjoitusohjelma (Esculier 2018). Patellajänteen kivussa liikunnan jatkaminen kipua seuraten ei heikentänyt tuloksia (pilottitutkimus 2021). Itse kehää "lepo → valmius laskee → paluu ylittää sen" ei ole testattu suoraan.</p>
+      <p><strong>Ydinvisuaali:</strong> samat kaksi viivaa kuin M1:ssä, mutta nyt vihreä viiva vajoaa levon aikana ja sama vanha lenkki onkin sen yläpuolella. Kehä toistuu, joka kerta matalammalla.</p>
+      <p><strong>Lisäideoita:</strong></p>
+      <ul><li>Sama kehä kalenterina: kolme "paluuta", kolme takaiskua.</li><li>"Mikä on pienin annos, jonka polvesi sietää tänään?"</li><li>Kivun liikennevalot (tehty jo: video 003) tämän mallin työkaluna.</li></ul>
+    </div>
+    <figure class="demo"><svg id="d-rest" viewBox="0 0 270 480" role="img" aria-label="Levon aikana valmius laskee ja paluu ylittää sen"></svg><figcaption>Demo: lepoansa.</figcaption></figure></div>
+  </article>
+
+  <article class="model" id="m5">
+    <div class="eyebrow">M5 · Kaikki alueet · <span class="chip k">kohtalainen</span></div>
+    <div class="shift"><div class="f">Pitää löytää se oikea liike, rulla, teippi tai kenkä.</div><div class="ar">→</div><div class="to">Keino on toissijainen. Annos ja asteittaisuus ratkaisevat.</div></div>
+    <p><strong>Miksi vanha uskomus pitää:</strong> jokainen sisällöntuottaja myy omaa liikettään, ja jokaiselle keinolle löytyy joku, jota se "auttoi". Ajan kuluminen selittää osan.</p>
+    <p><strong>Näyttö:</strong> lonkkaharjoittelu, polviharjoittelu ja vapaa liikunta tuottivat saman tuloksen 3 ja 12 kuukauden kohdalla, kun kaikki saivat ohjauksen (Hott 2019, n=112). VMO:ta ei voi aktivoida erikseen. Teippi ja pohjalliset auttavat korkeintaan lyhyesti (Collins 2018). IT-jänteen vaivassa lonkan vahvistamisen rooli on epäselvä (katsaus 2024).</p>
+    <p><strong>Ydinvisuaali:</strong> avainnippu (rulla, teippi, kuminauha, kenkä), josta mikään ei käy lukkoon. Lukko vaihtuu säätimeksi, jossa lukee "annos". Vaihtoehtoisesti kolme identtisesti nousevaa käyrää.</p>
+    <p><strong>Lisäideoita:</strong></p>
+    <ul><li>"Kolme ryhmää, sama tulos": Hottin koe sellaisenaan 15 sekunnissa.</li><li>"Miksi kaverin kikka ei toiminut sinulla."</li><li>Askeltiheys kuormanappina, ei parannuskeinona (video 001 uudelleen kehystettynä).</li></ul>
+  </article>
+
+  <article class="model" id="m6">
+    <div class="eyebrow">M6 · Alueet erikseen · <span class="chip v">osin varmentamatta</span></div>
+    <div class="shift"><div class="f">Kivun paikka kertoo, mikä osa on rikki.</div><div class="ar">→</div><div class="to">Kivun paikka kertoo, mikä kudos kuormittuu. Sääntö on sama joka paikassa.</div></div>
+    <p>Tämä on porttimalli: se tunnistaa katsojan oman kivun ja ohjaa hänet muihin malleihin. Jokaisesta alueesta tulee oma sarjansa.</p>
+    <div class="tbl"><table>
+      <tr><th>Alue</th><th>Mistä</th><th>Mihin</th><th>Varmuus</th></tr>
+      <tr><td>Ulkosivu</td><td>Kireä jänne hankaa luuta, rullaa se löysäksi</td><td>Hankausta ei anatomisesti tapahdu; jänteen alla oleva herkkä kudos puristuu</td><td><span class="chip k">kohtalainen</span><br>rullauksen teho <span class="chip v">varmentamatta</span></td></tr>
+      <tr><td>Lumpion alla</td><td>Tulehdus, lepo parantaa</td><td>Jänne mukautuu asteittaiseen, raskaaseen kuormaan</td><td><span class="chip k">kohtalainen</span></td></tr>
+      <tr><td>Sisäsivu</td><td>Repeämä kuvassa = leikkaus</td><td>Yli puolet repeämistä on oireettomia; kuva ei yksin ratkaise</td><td><span class="chip k">kohtalainen</span><br>leikkaus vs. lume <span class="chip v">varmentamatta</span></td></tr>
+      <tr><td>Etupuoli</td><td>Lumpio kulkee väärin</td><td>Katso M1</td><td><span class="chip k">kohtalainen</span></td></tr>
+    </table></div>
+    <p><strong>Ydinvisuaali:</strong> polvikartta (demo ylempänä). Alue syttyy, vanha selitys ilmestyy ja vaihtuu uuteen.</p>
+  </article>
+</section>
+
+<section id="kasikirjoitukset">
+  <h2>Käsikirjoitukset, ensimmäinen aalto</h2>
+  <p>Yksi käsikirjoitus per malli. Ruututekstit ovat englanniksi, koska se on videoiden kieli. Kesto 16–19 s, pysty 9:16, ei puhetta. Jokainen päättyy riviin "Education only, not medical advice."</p>
+
+  <article class="script" id="k1">
+    <h3>K1 · "Not a flaw. A mismatch." <span class="chip k">M1</span></h3>
+    <div class="meta"><span>18 s</span><span>Formaatti: hahmo + kaavio</span><span>Lähteet: Neal 2019, Frandsen 2025</span></div>
+    <p><strong>Tavoite:</strong> katsoja lakkaa etsimästä vikaa kehostaan ja katsoo viime viikkojen kuormaa.</p>
+    <div class="tbl"><table>
+      <tr><th>Aika</th><th>Ruututeksti</th><th>Kuva</th></tr>
+      <tr><td class="t">0–2,5</td><td><q>Told your knee pain is weak glutes?</q></td><td>Juokseva hahmo, polvi sykkii punaisena. Ympärille ponnahtaa neljä lappua: weak glutes, bad tracking, flat feet, wrong shoes.</td></tr>
+      <tr><td class="t">2,5–6</td><td><q>Studies keep looking for the one flaw. They don't find it.</q></td><td>Laput irtoavat ja putoavat yksi kerrallaan. Hahmo jatkaa juoksua.</td></tr>
+      <tr><td class="t">6–11</td><td><q>Pain shows up when load jumps past what your knee is ready for.</q></td><td>Hahmo pienenee ylös. Alle piirtyvät kaksi viivaa. Valkoinen hyppää vihreän yli, väli täyttyy punaisella, polvi sykkii.</td></tr>
+      <tr><td class="t">11–15</td><td><q>And "ready" is trainable. Step by step.</q></td><td>Kaavio alkaa alusta: valkoinen nousee portaittain, vihreä seuraa perässä. Punaista ei synny.</td></tr>
+      <tr><td class="t">15–18</td><td><q>Not a flaw. A mismatch.</q></td><td>Loppukortti, logo, lähderivi.</td></tr>
+    </table></div>
+  </article>
+
+  <article class="script" id="k2">
+    <h3>K2 · "Same scan, different knees" <span class="chip k">M2</span></h3>
+    <div class="meta"><span>18 s</span><span>Formaatti: vertailu</span><span>Lähteet: Horga 2020, Culvenor 2019</span></div>
+    <p><strong>Tavoite:</strong> katsoja erottaa kivun ja vaurion toisistaan, erityisesti kuvauslöydöksen jälkeen.</p>
+    <div class="tbl"><table>
+      <tr><th>Aika</th><th>Ruututeksti</th><th>Kuva</th></tr>
+      <tr><td class="t">0–3</td><td><q>97% of pain-free knees look "abnormal" on MRI.</q></td><td>Luku 97 % täyttää ruudun. Taustalla ruudukko polvia, joista lähes kaikki saavat pisteen.</td></tr>
+      <tr><td class="t">3–8</td><td><q>Same picture. One hurts. One doesn't.</q></td><td>Kaksi identtistä polvea vierekkäin, samat kolme löydöstä. Vain vasemmassa syttyy hälytysrengas.</td></tr>
+      <tr><td class="t">8–13</td><td><q>Pain works like an alarm. It is not a damage report.</q></td><td>Polvien alle ilmestyy säädin. Neula nousee, hälytysrengas kasvaa, löydökset eivät muutu.</td></tr>
+      <tr><td class="t">13–16</td><td><q>Sharp pain, swelling, locking or giving way? Get it checked.</q></td><td>Neljä kuvaketta, keltainen sävy. Tämä rivi on pakollinen.</td></tr>
+      <tr><td class="t">16–18</td><td><q>Hurt is not the same as harm.</q></td><td>Loppukortti.</td></tr>
+    </table></div>
+  </article>
+
+  <article class="script" id="k3">
+    <h3>K3 · "Knees aren't tyres" <span class="chip k">M3</span></h3>
+    <div class="meta"><span>17 s</span><span>Formaatti: vertauskuva + pylväät</span><span>Lähde: Alentorn-Geli 2017</span></div>
+    <p><strong>Tavoite:</strong> katsoja vaihtaa konevertauksen kudosvertaukseen.</p>
+    <div class="tbl"><table>
+      <tr><th>Aika</th><th>Ruututeksti</th><th>Kuva</th></tr>
+      <tr><td class="t">0–2,5</td><td><q>"Running will wear out your knees."</q></td><td>Lainausmerkeissä, kuin joku sanoisi sen. Hahmo juoksee, polven kohdalla pyörii rengas.</td></tr>
+      <tr><td class="t">2,5–6,5</td><td><q>A tyre gets thinner with every mile.</q></td><td>Rengas lähikuvassa, kulutuspinta ohenee ja kilometrimittari juoksee.</td></tr>
+      <tr><td class="t">6,5–10,5</td><td><q>Living tissue does the opposite. It adapts to load.</q></td><td>Rengas vaihtuu kudoskerrokseksi, joka paksunee jokaisen askelpulssin jälkeen.</td></tr>
+      <tr><td class="t">10,5–15</td><td><q>Hip and knee arthritis: recreational runners 3.5%, non-runners 10.2%.</q></td><td>Kaksi pylvästä nousee. Pieni rivi: "Association, not proof. Elite level: 13.3%."</td></tr>
+      <tr><td class="t">15–17</td><td><q>Knees aren't tyres.</q></td><td>Loppukortti.</td></tr>
+    </table></div>
+  </article>
+
+  <article class="script" id="k4">
+    <h3>K4 · "The rest trap" <span class="chip h">M4</span></h3>
+    <div class="meta"><span>19 s</span><span>Formaatti: kaavio</span><span>Lähteet: Lankhorst 2016, Esculier 2018; kehä on oma päättely</span></div>
+    <p><strong>Tavoite:</strong> katsoja tunnistaa oman lepo–paluu–takaisku-kehänsä ja kokeilee pienempää annosta nollan sijaan.</p>
+    <div class="tbl"><table>
+      <tr><th>Aika</th><th>Ruututeksti</th><th>Kuva</th></tr>
+      <tr><td class="t">0–3</td><td><q>Rested 3 weeks. Pain back on the first run. Why?</q></td><td>Kalenteri, jossa kolme tyhjää viikkoa ja yksi punainen päivä.</td></tr>
+      <tr><td class="t">3–8</td><td><q>Rest quiets the pain. It may also lower what your knee is ready for.</q></td><td>Kaksi viivaa. Valkoinen putoaa nollaan, punainen sammuu. Vihreä vajoaa hitaasti kenenkään huomaamatta.</td></tr>
+      <tr><td class="t">8–12</td><td><q>Same old run. Now it's too much.</q></td><td>Valkoinen palaa vanhalle tasolle, joka on nyt selvästi vihreän yläpuolella. Punainen syttyy. Kehä toistuu nopeasti kerran, vielä matalammalla.</td></tr>
+      <tr><td class="t">12–16,5</td><td><q>Instead of zero: drop below the line. Then build.</q></td><td>Uusi yritys. Valkoinen laskee vain vihreän alle ja nousee portaittain, vihreä kääntyy nousuun.</td></tr>
+      <tr><td class="t">16,5–19</td><td><q>Don't stop. Dose.</q></td><td>Loppukortti.</td></tr>
+    </table></div>
+    <p class="cap" style="text-align:left">Huom: sana "may" on tarkoituksella mukana, koska kehää ei ole testattu suoraan.</p>
+  </article>
+
+  <article class="script" id="k5">
+    <h3>K5 · "Three groups, one result" <span class="chip k">M5</span></h3>
+    <div class="meta"><span>17 s</span><span>Formaatti: koe kerrottuna</span><span>Lähde: Hott 2019</span></div>
+    <p><strong>Tavoite:</strong> katsoja lakkaa etsimästä täydellistä liikettä ja kysyy sen sijaan, kuinka paljon ja kuinka nopeasti.</p>
+    <div class="tbl"><table>
+      <tr><th>Aika</th><th>Ruututeksti</th><th>Kuva</th></tr>
+      <tr><td class="t">0–2,5</td><td><q>Hip exercises or knee exercises for runner's knee?</q></td><td>Kaksi hahmoa: toinen tekee lantionnostoa, toinen kyykkyä. Kysymysmerkki välissä.</td></tr>
+      <tr><td class="t">2,5–6</td><td><q>A trial tested it. 112 people, three groups.</q></td><td>Kolmas hahmo kävelee mukaan: "just stay active". Kolme saraketta: HIPS, KNEES, FREE.</td></tr>
+      <tr><td class="t">6–11</td><td><q>After one year: no difference.</q></td><td>Kolme käyrää nousee täsmälleen samaa tahtia. Maaliviiva, kaikki samassa kohdassa.</td></tr>
+      <tr><td class="t">11–15</td><td><q>All three got the same coaching on how much to load.</q></td><td>Sarakkeiden yläpuolelle syttyy yksi yhteinen säädin: "dose".</td></tr>
+      <tr><td class="t">15–17</td><td><q>The exercise matters less than the dose.</q></td><td>Loppukortti. Alarivi: "Front-of-knee pain. Hott et al. 2019."</td></tr>
+    </table></div>
+  </article>
+
+  <article class="script" id="k6">
+    <h3>K6 · "Where does it hurt?" <span class="chip v">M6</span></h3>
+    <div class="meta"><span>19 s</span><span>Formaatti: kartta</span><span>Lähteet: Taunton 2002, Englund 2008</span></div>
+    <p><strong>Tavoite:</strong> katsoja tunnistaa oman alueensa ja seuraa tiliä saadakseen juuri sitä koskevan sarjan. Tämä video mittaa myös, mikä alue kerää eniten kommentteja.</p>
+    <div class="tbl"><table>
+      <tr><th>Aika</th><th>Ruututeksti</th><th>Kuva</th></tr>
+      <tr><td class="t">0–2,5</td><td><q>Where exactly does your knee hurt?</q></td><td>Polvi edestä, neljä aluetta vilkkuu vuorotellen.</td></tr>
+      <tr><td class="t">2,5–6,5</td><td><q>Front, around the kneecap. The most common one in runners.</q></td><td>Etualue syttyy. Pieni rivi: "Usually a load problem, not a tracking problem."</td></tr>
+      <tr><td class="t">6,5–10</td><td><q>Outside. Not a tight band rubbing on bone.</q></td><td>Ulkosivu syttyy. Jänne piirtyy, sen alle pieni puristuva tyyny.</td></tr>
+      <tr><td class="t">10–13,5</td><td><q>Below the kneecap. A tendon that responds to steady loading.</q></td><td>Ala-alue syttyy, jänne paksunee kuormapulsseilla.</td></tr>
+      <tr><td class="t">13,5–16,5</td><td><q>Inside. Over 50, most meniscus tears on MRI cause no symptoms.</q></td><td>Sisäsivu syttyy, vieressä kivuton polvi samalla löydöksellä.</td></tr>
+      <tr><td class="t">16,5–19</td><td><q>Comment your spot. We'll make that one next.</q></td><td>Loppukortti, neljä aluetta numeroituna 1–4.</td></tr>
+    </table></div>
+  </article>
+</section>
+
+<section id="kieli">
+  <h2>Visuaalinen kieli</h2>
+  <p>Samat neljä elementtiä toistuvat videosta toiseen, jotta katsoja oppii lukemaan ne ja data on vertailukelpoista.</p>
+  <ul>
+    <li><strong>Kaksi viivaa:</strong> vihreä "valmius" ja valkoinen "kuorma". Punainen syntyy vain niiden välistä. Tämä on tilin tunnistettavin elementti (M1, M4, M5).</li>
+    <li><strong>Hälytysrengas:</strong> sykkivä rengas tarkoittaa aina kipua, ei koskaan vauriota. Vauriolle ei ole omaa symbolia (M2).</li>
+    <li><strong>Polvikartta:</strong> sama edestä kuvattu polvi neljällä alueella (M6 ja jokaisen aluesarjan avaus).</li>
+    <li><strong>Hahmo:</strong> jo rakennettu viivahahmo. Se näyttää tilanteen, kaavio selittää sen.</li>
+  </ul>
+  <p>Värit: vihreä on aina valmius tai uusi malli, punainen kipu tai vanha uskomus, keltainen varoitus. Teksti pysyy Reelsin turva-alueella. Demot yllä ovat suuntaa antavia luonnoksia, eivät lopullista jälkeä.</p>
+</section>
+
+<section id="paatokset">
+  <h2>Päätökset sinulle</h2>
+  <div class="ask"><ol>
+    <li><strong>Mallit:</strong> ovatko nämä kuusi oikeat? Puuttuuko jokin uskomus, jonka kohtaat itse juoksijoiden puheessa?</li>
+    <li><strong>Järjestys:</strong> ehdotan aloitusta K1:llä ja K4:llä, koska ne jakavat saman kaksi viivaa -visuaalin ja opettavat tilin peruskielen.</li>
+    <li><strong>Sävy:</strong> käsikirjoitukset ovat nyt suoria mutta eivät hyökkääviä. Haluatko terävämmän ("You've been lied to") vai tämän?</li>
+    <li><strong>Varmuusraja:</strong> julkaistaanko hypoteesitason malli (M4), kun sanamuoto on varovainen, vai vasta kun lähde löytyy?</li>
+    <li><strong>Vanhat videot:</strong> 001 ja 002 ovat vikamallin mukaisia. Ehdotan, ettei niitä julkaista sellaisinaan.</li>
+  </ol></div>
+</section>
+
+<section id="aukot">
+  <h2>Aukot</h2>
+  <ul>
+    <li><strong>Anekdootit puuttuvat yhä.</strong> Reddit on haulta estetty. Uskomusten "miksi se pitää" -rivit ovat siksi osin omaa päättelyäni.</li>
+    <li><strong>Kokotekstejä ei luettu.</strong> Luvut ovat tiivistelmistä ja toissijaisista yhteenvedoista.</li>
+    <li><strong>Varmentamatta:</strong> rullauksen vaikutus IT-jänteeseen, tähystys vs. lumeleikkaus kierukassa (FIDELITY), jänteen "lepo heikentää" -väite.</li>
+    <li><strong>Osuudet</strong> ovat yhdeltä klinikalta vuodelta 2002. Kierukan 5 % on oma laskuni tapausmäärästä.</li>
+    <li><strong>Takapolven kipu</strong> puuttuu kartasta kokonaan, koska en hakenut siitä näyttöä.</li>
+  </ul>
+  <h3>Lähteet</h3>
+  <ul class="src">
+    <li><a href="https://pubmed.ncbi.nlm.nih.gov/11916889/">Taunton 2002</a> · <a href="https://pubmed.ncbi.nlm.nih.gov/30242107/">Neal 2019</a> · <a href="https://pubmed.ncbi.nlm.nih.gov/24687010/">Rathleff 2014</a> · <a href="https://pubmed.ncbi.nlm.nih.gov/30958707/">Hott 2019</a> · <a href="https://bjsm.bmj.com/content/early/2017/09/22/bjsports-2017-098296.full.pdf">Esculier 2018 (RCT)</a> · <a href="https://blogs.bmj.com/bjsm/?p=11751">Frandsen 2025</a> · <a href="https://www.pubmed.gov/26463119/">Lankhorst 2016</a></li>
+    <li><a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC7237395/">Horga 2020</a> · <a href="https://www.pubmed.gov/29886437/">Culvenor 2019</a> · <a href="https://www.aafp.org/afp/2011/0515/p1160">Englund 2008 (AAFP-yhteenveto)</a> · <a href="https://repositorio.unesp.br/items/8880ec00-6fca-4d8f-8147-79d20132de73/full">de Oliveira Silva 2018</a></li>
+    <li><a href="https://read.qxmd.com/read/28504066/the-association-of-recreational-and-competitive-running-with-hip-and-knee-osteoarthritis-a-systematic-review-and-meta-analysis">Alentorn-Geli 2017</a> · <a href="https://pubmed.ncbi.nlm.nih.gov/29728929/">Lo 2018</a> · <a href="https://doaj.org/article/e84fd4cf26274dc3b82160c9b2d03278">Esculier 2018 (kysely)</a></li>
+    <li><a href="https://now.aapmr.org/iliotibial-band-syndrome/">IT-jänne, AAPMR</a> · <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4647699/">Aderem &amp; Louw 2015</a> · <a href="https://frontiersin.org/articles/10.3389/fspor.2024.1386456/full">IT-jänteen hoito, katsaus 2024</a> · <a href="https://link.springer.com/article/10.1186/s40814-021-00792-5">Patellajänne, pilottitutkimus 2021</a> · <a href="https://bjsm.bmj.com/content/52/18/1170.abstract">Collins 2018</a> · <a href="https://repository.essex.ac.uk/39411/">Neal 2024</a></li>
+  </ul>
+</section>
+</main>
+
+<script>
+(() => {
+  const NS = 'http://www.w3.org/2000/svg';
+  const css = n => getComputedStyle(document.documentElement).getPropertyValue(n).trim();
+  const C = { ink: css('--screen-ink'), dim: css('--screen-dim'), lime: css('--lime'), coral: css('--coral'), amber: css('--amber'), line: css('--screen-line') };
+  const el = (p, tag, a = {}, txt) => { const e = document.createElementNS(NS, tag); for (const k in a) e.setAttribute(k, a[k]); if (txt != null) e.textContent = txt; p.appendChild(e); return e; };
+  const text = (p, x, y, s, a = {}) => el(p, 'text', Object.assign({ x, y, 'text-anchor': 'middle', 'font-family': 'Inter, sans-serif', 'font-weight': 800, 'font-size': 17, fill: C.ink }, a), s);
+  const clamp = (x, a = 0, b = 1) => Math.min(b, Math.max(a, x));
+  const demos = [];
+
+  // Two lines: readiness (lime) vs load (white); red only where load is above readiness.
+  function lines(id, title, cap, load, period) {
+    const s = document.getElementById(id); if (!s) return;
+    const X0 = 28, X1 = 242, Y0 = 370, H = 200, N = 120;
+    const t1 = text(s, 135, 92, title[0]), t2 = text(s, 135, 116, title[1], { fill: C.coral });
+    el(s, 'line', { x1: X0, x2: X1, y1: Y0, y2: Y0, stroke: C.line, 'stroke-width': 2 });
+    const over = el(s, 'path', { fill: C.coral, opacity: .55 });
+    const pc = el(s, 'path', { fill: 'none', stroke: C.lime, 'stroke-width': 4, 'stroke-linecap': 'round', 'stroke-linejoin': 'round' });
+    const pl = el(s, 'path', { fill: 'none', stroke: C.ink, 'stroke-width': 4, 'stroke-linecap': 'round', 'stroke-linejoin': 'round' });
+    const dot = el(s, 'circle', { r: 7, fill: C.coral });
+    text(s, 62, 410, 'ready for', { fill: C.lime, 'font-size': 13, 'font-weight': 700 });
+    text(s, 200, 410, 'asked of it', { 'font-size': 13, 'font-weight': 700 });
+    const px = u => X0 + (X1 - X0) * u, py = v => Y0 - H * v;
+    demos.push(t => {
+      const p = clamp(((t % period) / period) * 1.25);
+      let dc = '', dl = '', dov = '', hot = false;
+      const n = Math.max(1, Math.round(N * p));
+      for (let i = 0; i <= n; i++) {
+        const u = i / N, c = cap(u), l = load(u);
+        dc += `${i ? 'L' : 'M'}${px(u).toFixed(1)} ${py(c).toFixed(1)}`;
+        dl += `${i ? 'L' : 'M'}${px(u).toFixed(1)} ${py(l).toFixed(1)}`;
+        if (l > c) dov += `M${px(u).toFixed(1)} ${py(l).toFixed(1)}V${py(c).toFixed(1)}h1.9V${py(l).toFixed(1)}Z`;
+        if (i === n) { hot = l > c; dot.setAttribute('cx', px(u)); dot.setAttribute('cy', py(l)); }
+      }
+      pc.setAttribute('d', dc); pl.setAttribute('d', dl); over.setAttribute('d', dov);
+      dot.setAttribute('fill', hot ? C.coral : C.ink); dot.setAttribute('r', hot ? 7 + 3 * Math.sin(t * 9) : 6);
+      t2.setAttribute('opacity', hot ? 1 : .25);
+    });
+  }
+  const sm = (u, a, b) => { const x = clamp((u - a) / (b - a)); return x * x * (3 - 2 * x); };
+  lines('d-lines', ['Load jumps past ready:', 'pain'], u => .46 + .1 * u, u => .3 + .08 * u + .5 * (sm(u, .5, .58) - sm(u, .72, .8)), 7);
+  lines('d-rest', ['Rest lowers ready too:', 'pain on return'],
+    u => .5 - .2 * sm(u, .18, .5) + .03 * sm(u, .5, .62) - .16 * sm(u, .66, .9),
+    u => .56 * (1 - sm(u, .14, .18)) + .56 * (sm(u, .5, .53) - sm(u, .62, .65)) + .56 * sm(u, .9, .93), 9);
+
+  // Alarm: identical findings in two knees, only one alarms; sensitivity dial below.
+  (() => {
+    const s = document.getElementById('d-alarm'); if (!s) return;
+    text(s, 135, 92, 'Same picture.'); text(s, 135, 116, 'One hurts.', { fill: C.coral });
+    const ring = el(s, 'circle', { cx: 80, cy: 215, fill: 'none', stroke: C.coral, 'stroke-width': 4 });
+    [80, 190].forEach(x => {
+      el(s, 'rect', { x: x - 34, y: 160, width: 68, height: 110, rx: 30, fill: 'none', stroke: C.dim, 'stroke-width': 4 });
+      [[-10, 195], [12, 222], [-4, 246]].forEach(([dx, y]) => el(s, 'circle', { cx: x + dx, cy: y, r: 5, fill: C.amber }));
+    });
+    text(s, 80, 296, 'hurts', { fill: C.coral, 'font-size': 13 }); text(s, 190, 296, 'fine', { fill: C.lime, 'font-size': 13 });
+    el(s, 'path', { d: 'M75 400 A60 60 0 0 1 195 400', fill: 'none', stroke: C.line, 'stroke-width': 12, 'stroke-linecap': 'round' });
+    const needle = el(s, 'line', { x1: 135, y1: 400, x2: 135, y2: 350, stroke: C.ink, 'stroke-width': 5, 'stroke-linecap': 'round' });
+    el(s, 'circle', { cx: 135, cy: 400, r: 8, fill: C.ink });
+    text(s, 135, 432, 'alarm sensitivity', { fill: C.dim, 'font-size': 12, 'font-weight': 700 });
+    demos.push(t => {
+      const k = .5 + .5 * Math.sin(t * .9), q = (t * 1.3) % 1;
+      needle.setAttribute('transform', `rotate(${-55 + 110 * k} 135 400)`);
+      ring.setAttribute('r', 40 + (14 + 26 * k) * q); ring.setAttribute('opacity', (1 - q) * (.35 + .65 * k));
+    });
+  })();
+
+  // Knee map: front view, four zones light up in turn.
+  (() => {
+    const s = document.getElementById('d-map'); if (!s) return;
+    text(s, 135, 80, 'Where does it hurt?');
+    el(s, 'path', { d: 'M95 110 L95 215 Q80 235 88 262 L182 262 Q190 235 175 215 L175 110 Z', fill: 'none', stroke: C.dim, 'stroke-width': 4, 'stroke-linejoin': 'round' });
+    el(s, 'path', { d: 'M90 276 L180 276 Q186 300 170 318 L170 420 L100 420 L100 318 Q84 300 90 276 Z', fill: 'none', stroke: C.dim, 'stroke-width': 4, 'stroke-linejoin': 'round' });
+    const z = [
+      { n: 'Front', sub: 'around the kneecap', e: el(s, 'ellipse', { cx: 135, cy: 240, rx: 30, ry: 34 }) },
+      { n: 'Outside', sub: 'IT band region', e: el(s, 'rect', { x: 58, y: 205, width: 26, height: 96, rx: 13 }) },
+      { n: 'Below', sub: 'patellar tendon', e: el(s, 'rect', { x: 121, y: 280, width: 28, height: 52, rx: 12 }) },
+      { n: 'Inside', sub: 'joint line', e: el(s, 'rect', { x: 186, y: 254, width: 28, height: 32, rx: 12 }) },
+    ];
+    const l1 = text(s, 135, 452, '', { fill: C.coral }), l2 = text(s, 135, 470, '', { fill: C.dim, 'font-size': 12, 'font-weight': 600 });
+    demos.push(t => {
+      const i = Math.floor(t / 1.6) % 4, q = (t / 1.6) % 1;
+      z.forEach((o, j) => { o.e.setAttribute('fill', j === i ? C.coral : C.line); o.e.setAttribute('opacity', j === i ? .65 + .35 * Math.sin(q * Math.PI) : .8); });
+      l1.textContent = z[i].n; l2.textContent = z[i].sub;
+    });
+  })();
+
+  const still = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const frame = ms => { const t = still ? 4.4 : ms / 1000; demos.forEach(d => d(t)); if (!still) requestAnimationFrame(frame); };
+  frame(4400); if (!still) requestAnimationFrame(frame);
+})();
+</script>
