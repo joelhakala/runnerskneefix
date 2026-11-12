@@ -33,6 +33,8 @@ button:focus-visible,textarea:focus-visible{outline:2px solid var(--accent);outl
 button[data-v="publish"][aria-pressed="true"]{background:var(--ok);border-color:var(--ok);color:var(--on)}
 button[data-v="fix"][aria-pressed="true"]{background:var(--fix);border-color:var(--fix);color:var(--on)}
 button[data-v="reject"][aria-pressed="true"]{background:var(--no);border-color:var(--no);color:var(--on)}
+button.mic{align-self:flex-start;padding:8px 16px;font-size:14px;border-color:var(--accent);color:var(--accent)}
+button.mic[aria-pressed="true"]{background:var(--no);border-color:var(--no);color:var(--on)}
 label{font-size:13px;font-weight:700;color:var(--muted)}
 textarea{font:inherit;width:100%;box-sizing:border-box;border:1px solid var(--line);border-radius:10px;padding:10px 12px;background:var(--bg);color:var(--ink);resize:vertical}
 .state{font-size:13px;color:var(--muted);min-height:1.2em}
@@ -42,7 +44,7 @@ textarea{font:inherit;width:100%;box-sizing:border-box;border:1px solid var(--li
   <header style="display:flex;flex-direction:column;gap:12px">
     <div class="eyebrow">RunnersKneeFix · sarja 1 · 12 videota</div>
     <h1>Videoarvio</h1>
-    <p class="lede">Katso video, valitse päätös ja kirjoita palaute. Kaikki tallentuu itsestään. Kun olet valmis, sano keskustelussa "lue palaute", niin Claude hakee merkinnät ja tekee korjaukset.</p>
+    <p class="lede">Katso video, valitse päätös ja kirjoita tai sanele palaute. Kaikki tallentuu itsestään. Kun olet valmis, sano keskustelussa "lue palaute", niin Claude hakee merkinnät ja tekee korjaukset.</p>
     <div class="summary" id="summary"><span class="p">Julkaise 0</span><span class="f">Korjaa 0</span><span class="r">Hylkää 0</span><span class="o">Arvioimatta 12</span></div>
     <div class="banner" id="banner">Yhdistetään tallennukseen…</div>
   </header>
@@ -59,6 +61,7 @@ textarea{font:inherit;width:100%;box-sizing:border-box;border:1px solid var(--li
         <button type="button" data-v="reject" id="b-101-r">Hylkää</button>
       </div>
       <label for="n-101">Palaute</label>
+      <button type="button" class="mic" id="m-n-101" aria-pressed="false" hidden>Sanele palaute</button>
       <textarea id="n-101" rows="4" placeholder="Mikä toimii, mikä ei, mitä muuttaisit?"></textarea>
       <div class="state" aria-live="polite"></div>
     </div>
@@ -75,6 +78,7 @@ textarea{font:inherit;width:100%;box-sizing:border-box;border:1px solid var(--li
         <button type="button" data-v="reject" id="b-102-r">Hylkää</button>
       </div>
       <label for="n-102">Palaute</label>
+      <button type="button" class="mic" id="m-n-102" aria-pressed="false" hidden>Sanele palaute</button>
       <textarea id="n-102" rows="4" placeholder="Mikä toimii, mikä ei, mitä muuttaisit?"></textarea>
       <div class="state" aria-live="polite"></div>
     </div>
@@ -91,6 +95,7 @@ textarea{font:inherit;width:100%;box-sizing:border-box;border:1px solid var(--li
         <button type="button" data-v="reject" id="b-103-r">Hylkää</button>
       </div>
       <label for="n-103">Palaute</label>
+      <button type="button" class="mic" id="m-n-103" aria-pressed="false" hidden>Sanele palaute</button>
       <textarea id="n-103" rows="4" placeholder="Mikä toimii, mikä ei, mitä muuttaisit?"></textarea>
       <div class="state" aria-live="polite"></div>
     </div>
@@ -107,6 +112,7 @@ textarea{font:inherit;width:100%;box-sizing:border-box;border:1px solid var(--li
         <button type="button" data-v="reject" id="b-104-r">Hylkää</button>
       </div>
       <label for="n-104">Palaute</label>
+      <button type="button" class="mic" id="m-n-104" aria-pressed="false" hidden>Sanele palaute</button>
       <textarea id="n-104" rows="4" placeholder="Mikä toimii, mikä ei, mitä muuttaisit?"></textarea>
       <div class="state" aria-live="polite"></div>
     </div>
@@ -123,6 +129,7 @@ textarea{font:inherit;width:100%;box-sizing:border-box;border:1px solid var(--li
         <button type="button" data-v="reject" id="b-105-r">Hylkää</button>
       </div>
       <label for="n-105">Palaute</label>
+      <button type="button" class="mic" id="m-n-105" aria-pressed="false" hidden>Sanele palaute</button>
       <textarea id="n-105" rows="4" placeholder="Mikä toimii, mikä ei, mitä muuttaisit?"></textarea>
       <div class="state" aria-live="polite"></div>
     </div>
@@ -139,6 +146,7 @@ textarea{font:inherit;width:100%;box-sizing:border-box;border:1px solid var(--li
         <button type="button" data-v="reject" id="b-106-r">Hylkää</button>
       </div>
       <label for="n-106">Palaute</label>
+      <button type="button" class="mic" id="m-n-106" aria-pressed="false" hidden>Sanele palaute</button>
       <textarea id="n-106" rows="4" placeholder="Mikä toimii, mikä ei, mitä muuttaisit?"></textarea>
       <div class="state" aria-live="polite"></div>
     </div>
@@ -155,6 +163,7 @@ textarea{font:inherit;width:100%;box-sizing:border-box;border:1px solid var(--li
         <button type="button" data-v="reject" id="b-107-r">Hylkää</button>
       </div>
       <label for="n-107">Palaute</label>
+      <button type="button" class="mic" id="m-n-107" aria-pressed="false" hidden>Sanele palaute</button>
       <textarea id="n-107" rows="4" placeholder="Mikä toimii, mikä ei, mitä muuttaisit?"></textarea>
       <div class="state" aria-live="polite"></div>
     </div>
@@ -171,6 +180,7 @@ textarea{font:inherit;width:100%;box-sizing:border-box;border:1px solid var(--li
         <button type="button" data-v="reject" id="b-108-r">Hylkää</button>
       </div>
       <label for="n-108">Palaute</label>
+      <button type="button" class="mic" id="m-n-108" aria-pressed="false" hidden>Sanele palaute</button>
       <textarea id="n-108" rows="4" placeholder="Mikä toimii, mikä ei, mitä muuttaisit?"></textarea>
       <div class="state" aria-live="polite"></div>
     </div>
@@ -187,6 +197,7 @@ textarea{font:inherit;width:100%;box-sizing:border-box;border:1px solid var(--li
         <button type="button" data-v="reject" id="b-109-r">Hylkää</button>
       </div>
       <label for="n-109">Palaute</label>
+      <button type="button" class="mic" id="m-n-109" aria-pressed="false" hidden>Sanele palaute</button>
       <textarea id="n-109" rows="4" placeholder="Mikä toimii, mikä ei, mitä muuttaisit?"></textarea>
       <div class="state" aria-live="polite"></div>
     </div>
@@ -203,6 +214,7 @@ textarea{font:inherit;width:100%;box-sizing:border-box;border:1px solid var(--li
         <button type="button" data-v="reject" id="b-110-r">Hylkää</button>
       </div>
       <label for="n-110">Palaute</label>
+      <button type="button" class="mic" id="m-n-110" aria-pressed="false" hidden>Sanele palaute</button>
       <textarea id="n-110" rows="4" placeholder="Mikä toimii, mikä ei, mitä muuttaisit?"></textarea>
       <div class="state" aria-live="polite"></div>
     </div>
@@ -219,6 +231,7 @@ textarea{font:inherit;width:100%;box-sizing:border-box;border:1px solid var(--li
         <button type="button" data-v="reject" id="b-111-r">Hylkää</button>
       </div>
       <label for="n-111">Palaute</label>
+      <button type="button" class="mic" id="m-n-111" aria-pressed="false" hidden>Sanele palaute</button>
       <textarea id="n-111" rows="4" placeholder="Mikä toimii, mikä ei, mitä muuttaisit?"></textarea>
       <div class="state" aria-live="polite"></div>
     </div>
@@ -235,6 +248,7 @@ textarea{font:inherit;width:100%;box-sizing:border-box;border:1px solid var(--li
         <button type="button" data-v="reject" id="b-112-r">Hylkää</button>
       </div>
       <label for="n-112">Palaute</label>
+      <button type="button" class="mic" id="m-n-112" aria-pressed="false" hidden>Sanele palaute</button>
       <textarea id="n-112" rows="4" placeholder="Mikä toimii, mikä ei, mitä muuttaisit?"></textarea>
       <div class="state" aria-live="polite"></div>
     </div>
@@ -244,6 +258,7 @@ textarea{font:inherit;width:100%;box-sizing:border-box;border:1px solid var(--li
     <div class="body">
       <h2>Yleinen palaute sarjasta</h2>
       <label for="n-general">Tyyli, tahti, värit, tekstin määrä, kieli, mitä tahansa</label>
+      <button type="button" class="mic" id="m-n-general" aria-pressed="false" hidden>Sanele palaute</button>
       <textarea id="n-general" rows="5" placeholder="Mikä toistuu kaikissa videoissa?"></textarea>
       <div class="state" aria-live="polite"></div>
     </div>
@@ -294,5 +309,40 @@ textarea{font:inherit;width:100%;box-sizing:border-box;border:1px solid var(--li
       keep(); paint();
     }, e => { clearTimeout(t); col = null; offline(); });
   }).catch(offline);
+  // Dictation: the platform holds the microphone and hands the page text only.
+  const useD = window.claude && window.claude.use ? window.claude.use('dictation') : Promise.resolve(null);
+  useD.then(d => {
+    if (!d) return;
+    let target = null, lang = 'fi';
+    const mics = cards.map(c => c.querySelector('.mic')), msg = (c, t) => { c.querySelector('.state').textContent = t; };
+    const draw = on => mics.forEach(m => { const mine = on && target && m === target.querySelector('.mic'); m.setAttribute('aria-pressed', String(!!mine)); m.textContent = mine ? 'Lopeta sanelu' : 'Sanele palaute'; });
+    mics.forEach((m, i) => {
+      m.hidden = false;
+      m.addEventListener('click', () => {
+        const c = cards[i];
+        if (d.active() && target === c) { d.stop().catch(() => {}); return; }
+        target = c; msg(c, 'Avataan mikrofonia…');
+        d.start(lang ? { language: lang } : undefined).catch(e => {
+          const code = e && e.code;
+          if (code === 'unavailable' && lang) { lang = null; msg(c, 'Suomenkielinen sanelu ei ole saatavilla. Paina uudelleen, niin kokeillaan selaimesi kielellä.'); }
+          else if (code === 'unavailable') { mics.forEach(x => { x.hidden = true; }); msg(c, 'Sanelu ei ole käytettävissä tässä näkymässä. Kirjoita palaute.'); }
+          else if (code === 'not_granted') { mics.forEach(x => { x.hidden = true; }); msg(c, 'Mikrofonilupaa ei annettu. Kirjoita palaute.'); }
+          else if (code === 'dismissed' || code === 'stopped') msg(c, '');
+          else if (code === 'rate_limited') msg(c, 'Liian monta sanelua kerralla. Yritä hetken päästä.');
+          else msg(c, 'Sanelu ei käynnistynyt. Yritä uudelleen tai kirjoita.');
+        });
+      });
+    });
+    d.onState(({ state: st }) => {
+      draw(st === 'listening' || st === 'starting');
+      if (target && st === 'listening') msg(target, 'Kuuntelen…');
+      if (target && st === 'idle') target.querySelector('textarea').dispatchEvent(new Event('blur'));
+    });
+    d.onPartial(({ text }) => { if (target && text) msg(target, 'Kuuntelen: ' + text); });
+    d.onFinal(({ text }) => {
+      if (!target) return; const ta = target.querySelector('textarea');
+      ta.value += ta.value ? text : text.replace(/^\s+/, ''); ta.dispatchEvent(new Event('input'));
+    });
+  }).catch(() => {});
 })();
 </script>
