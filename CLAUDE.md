@@ -25,6 +25,8 @@ videos helping runners get rid of knee pain) and collect data on what works.
   Extend it with `tools/forum/` scripts; never commit raw forum posts or rows from private groups, only aggregated counts.
   Logged-in sources (Facebook groups, Juoksufoorumi) come from the owner via Claude in Chrome; the extraction prompt is in `tools/forum/chrome-prompt.md`. Series format "Does X fix runner's knee?":
   what runners report -> what studies say -> which dial it turns (load, readiness, sensitivity, distribution) -> when it is worth it.
+- `research/animation-principles.md`: the twelve stop/hold/learn rules and their evidence strength; every new video follows them.
+  Series 1xx (`src/videos/101..112`, components in `src/lib/kit2.js`) is the reference implementation; captions in `content/captions.md`.
 - Humility rule: show the confidence level, present explanations as models, correct publicly when the model changes.
 
 ## Rules
