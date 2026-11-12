@@ -44,10 +44,19 @@ textarea{font:inherit;width:100%;box-sizing:border-box;border:1px solid var(--li
   <header style="display:flex;flex-direction:column;gap:12px">
     <div class="eyebrow">RunnersKneeFix · sarja 1 · 12 videota</div>
     <h1>Videoarvio</h1>
-    <p class="lede">Katso video, valitse päätös ja kirjoita tai sanele palaute. Kaikki tallentuu itsestään. Kun olet valmis, sano keskustelussa "lue palaute", niin Claude hakee merkinnät ja tekee korjaukset.</p>
+    <p class="lede">Katso video, valitse päätös ja kirjoita tai sanele palaute. Koko sarjaa koskeva palaute menee heti alla olevaan laatikkoon. Kaikki tallentuu itsestään. Kun olet valmis, sano keskustelussa "lue palaute", niin Claude hakee merkinnät ja tekee korjaukset.</p>
     <div class="summary" id="summary"><span class="p">Julkaise 0</span><span class="f">Korjaa 0</span><span class="r">Hylkää 0</span><span class="o">Arvioimatta 12</span></div>
     <div class="banner" id="banner">Yhdistetään tallennukseen…</div>
   </header>
+  <section class="card" data-id="_general" id="yleinen" style="flex-direction:column;border-width:2px;border-color:var(--accent)">
+    <div class="body">
+      <h2>Yleinen palaute kaikista videoista</h2>
+      <label for="n-general">Tyyli, tahti, värit, tekstin määrä, kieli, mitä tahansa</label>
+      <button type="button" class="mic" id="m-n-general" aria-pressed="false" hidden>Sanele palaute</button>
+      <textarea id="n-general" rows="5" placeholder="Mikä toistuu kaikissa videoissa?"></textarea>
+      <div class="state" aria-live="polite"></div>
+    </div>
+  </section>
   <section class="cards">
   <article class="card" id="v101" data-id="101-no-holy-grail">
     <video controls playsinline loop muted preload="metadata" src="v/101-no-holy-grail.mp4"></video>
@@ -253,15 +262,6 @@ textarea{font:inherit;width:100%;box-sizing:border-box;border:1px solid var(--li
       <div class="state" aria-live="polite"></div>
     </div>
   </article>
-  </section>
-  <section class="card" data-id="_general" style="flex-direction:column">
-    <div class="body">
-      <h2>Yleinen palaute sarjasta</h2>
-      <label for="n-general">Tyyli, tahti, värit, tekstin määrä, kieli, mitä tahansa</label>
-      <button type="button" class="mic" id="m-n-general" aria-pressed="false" hidden>Sanele palaute</button>
-      <textarea id="n-general" rows="5" placeholder="Mikä toistuu kaikissa videoissa?"></textarea>
-      <div class="state" aria-live="polite"></div>
-    </div>
   </section>
 </main>
 <script>
