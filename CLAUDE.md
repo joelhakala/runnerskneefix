@@ -27,6 +27,9 @@ videos helping runners get rid of knee pain) and collect data on what works.
   what runners report -> what studies say -> which dial it turns (load, readiness, sensitivity, distribution) -> when it is worth it.
 - `research/animation-principles.md`: the twelve stop/hold/learn rules and their evidence strength; every new video follows them.
   Series 1xx (`src/videos/101..112`, components in `src/lib/kit2.js`) is the reference implementation; captions in `content/captions.md`.
+- `docs/videoarvio.html` is the review page (artifact https://claude.ai/artifact/XUhZPf4hbVm21NJ4nXkjHq, videos published as
+  files under `v/`): the owner sets a verdict (publish / fix / reject) and a note per video. Read them with ArtifactData,
+  collection `feedback` (doc id = video id, plus `_general`), when the owner says the feedback is ready.
 - Humility rule: show the confidence level, present explanations as models, correct publicly when the model changes.
 
 ## Rules

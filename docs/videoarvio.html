@@ -1,0 +1,298 @@
+<title>RunnersKneeFix Videoarvio</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;700&display=swap">
+<style>
+/* Layout: one card per video, player beside its verdict and note; cards stack to one column on a phone. */
+:root{--bg:#F5F7FA;--surface:#FFFFFF;--ink:#101B2E;--muted:#56647C;--line:#D8DFEA;--chip:#E9EEF6;
+  --ok:#1C7443;--fix:#9A5B00;--no:#B93A28;--accent:#2749C4;--on:#FFFFFF;--screen:#0B1220;
+  --display:'Space Grotesk','Inter',system-ui,sans-serif;--body:'Inter',system-ui,-apple-system,'Segoe UI',sans-serif}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--bg:#0D1422;--surface:#151F33;--ink:#EDF1F8;--muted:#9AA8BF;--line:#293650;--chip:#1F2B44;
+  --ok:#7BD691;--fix:#F2B552;--no:#FF8672;--accent:#93AAFF;--on:#0D1422;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#0D1422;--surface:#151F33;--ink:#EDF1F8;--muted:#9AA8BF;--line:#293650;--chip:#1F2B44;
+  --ok:#7BD691;--fix:#F2B552;--no:#FF8672;--accent:#93AAFF;--on:#0D1422;color-scheme:dark}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.5;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:28px 80px}
+main{max-width:880px;margin:0 auto;display:flex;flex-direction:column;gap:28px}
+h1,h2{font-family:var(--display);margin:0;line-height:1.15;text-wrap:balance}
+h1{font-size:clamp(28px,6vw,40px)} h2{font-size:21px}
+p{margin:0;max-width:68ch}
+.lede{color:var(--muted);font-size:17px}
+.eyebrow{font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.chip{background:var(--chip);padding:2px 8px;border-radius:999px;text-transform:none;letter-spacing:0}
+.summary{display:flex;flex-wrap:wrap;gap:8px 18px;font-weight:600;font-variant-numeric:tabular-nums}
+.summary .p{color:var(--ok)} .summary .f{color:var(--fix)} .summary .r{color:var(--no)} .summary .o{color:var(--muted)}
+.banner{border:1px solid var(--line);background:var(--surface);border-radius:12px;padding:14px 18px}
+.cards{display:flex;flex-direction:column;gap:20px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:18px;display:flex;gap:22px;flex-wrap:wrap}
+.card video{flex:0 0 250px;width:250px;max-width:100%;aspect-ratio:9/16;border-radius:12px;background:var(--screen)}
+.body{flex:1 1 300px;min-width:0;display:flex;flex-direction:column;gap:12px}
+.claim{color:var(--muted)} .warn{color:var(--fix);font-weight:600;font-size:14px}
+.verdict{display:flex;gap:8px;flex-wrap:wrap}
+button{font:inherit;font-weight:700;padding:10px 18px;border-radius:999px;border:2px solid var(--line);background:transparent;color:var(--ink);cursor:pointer}
+button:focus-visible,textarea:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+button[data-v="publish"][aria-pressed="true"]{background:var(--ok);border-color:var(--ok);color:var(--on)}
+button[data-v="fix"][aria-pressed="true"]{background:var(--fix);border-color:var(--fix);color:var(--on)}
+button[data-v="reject"][aria-pressed="true"]{background:var(--no);border-color:var(--no);color:var(--on)}
+label{font-size:13px;font-weight:700;color:var(--muted)}
+textarea{font:inherit;width:100%;box-sizing:border-box;border:1px solid var(--line);border-radius:10px;padding:10px 12px;background:var(--bg);color:var(--ink);resize:vertical}
+.state{font-size:13px;color:var(--muted);min-height:1.2em}
+@media (max-width:560px){.card video{flex-basis:100%;width:100%;max-width:320px;margin:0 auto}}
+</style>
+<main>
+  <header style="display:flex;flex-direction:column;gap:12px">
+    <div class="eyebrow">RunnersKneeFix · sarja 1 · 12 videota</div>
+    <h1>Videoarvio</h1>
+    <p class="lede">Katso video, valitse päätös ja kirjoita palaute. Kaikki tallentuu itsestään. Kun olet valmis, sano keskustelussa "lue palaute", niin Claude hakee merkinnät ja tekee korjaukset.</p>
+    <div class="summary" id="summary"><span class="p">Julkaise 0</span><span class="f">Korjaa 0</span><span class="r">Hylkää 0</span><span class="o">Arvioimatta 12</span></div>
+    <div class="banner" id="banner">Yhdistetään tallennukseen…</div>
+  </header>
+  <section class="cards">
+  <article class="card" id="v101" data-id="101-no-holy-grail">
+    <video controls playsinline loop muted preload="metadata" src="v/101-no-holy-grail.mp4"></video>
+    <div class="body">
+      <div class="eyebrow">101 · M9 · <span class="chip">kehys</span></div>
+      <h2>Tried everything for your knee?</h2>
+      <p class="claim">Usean tekijän summa: ei yhtä syytä, ei yhtä korjausta.</p>
+      <div class="verdict" role="group" aria-label="Päätös videolle 101">
+        <button type="button" data-v="publish" id="b-101-p">Julkaise</button>
+        <button type="button" data-v="fix" id="b-101-f">Korjaa</button>
+        <button type="button" data-v="reject" id="b-101-r">Hylkää</button>
+      </div>
+      <label for="n-101">Palaute</label>
+      <textarea id="n-101" rows="4" placeholder="Mikä toimii, mikä ei, mitä muuttaisit?"></textarea>
+      <div class="state" aria-live="polite"></div>
+    </div>
+  </article>
+  <article class="card" id="v102" data-id="102-rest-trap">
+    <video controls playsinline loop muted preload="metadata" src="v/102-rest-trap.mp4"></video>
+    <div class="body">
+      <div class="eyebrow">102 · M4 · <span class="chip">hypoteesi</span></div>
+      <h2>Rested for weeks. Pain back on run one?</h2>
+      <p class="claim">Lepo hiljentää kivun mutta voi laskea valmiutta.</p>
+      <div class="verdict" role="group" aria-label="Päätös videolle 102">
+        <button type="button" data-v="publish" id="b-102-p">Julkaise</button>
+        <button type="button" data-v="fix" id="b-102-f">Korjaa</button>
+        <button type="button" data-v="reject" id="b-102-r">Hylkää</button>
+      </div>
+      <label for="n-102">Palaute</label>
+      <textarea id="n-102" rows="4" placeholder="Mikä toimii, mikä ei, mitä muuttaisit?"></textarea>
+      <div class="state" aria-live="polite"></div>
+    </div>
+  </article>
+  <article class="card" id="v103" data-id="103-mismatch">
+    <video controls playsinline loop muted preload="metadata" src="v/103-mismatch.mp4"></video>
+    <div class="body">
+      <div class="eyebrow">103 · M1 · <span class="chip">kohtalainen</span></div>
+      <h2>Told your knee pain is weak glutes?</h2>
+      <p class="claim">Ei vika vaan epäsuhta kuorman ja valmiuden välillä.</p>
+      <div class="verdict" role="group" aria-label="Päätös videolle 103">
+        <button type="button" data-v="publish" id="b-103-p">Julkaise</button>
+        <button type="button" data-v="fix" id="b-103-f">Korjaa</button>
+        <button type="button" data-v="reject" id="b-103-r">Hylkää</button>
+      </div>
+      <label for="n-103">Palaute</label>
+      <textarea id="n-103" rows="4" placeholder="Mikä toimii, mikä ei, mitä muuttaisit?"></textarea>
+      <div class="state" aria-live="polite"></div>
+    </div>
+  </article>
+  <article class="card" id="v104" data-id="104-same-scan">
+    <video controls playsinline loop muted preload="metadata" src="v/104-same-scan.mp4"></video>
+    <div class="body">
+      <div class="eyebrow">104 · M2 · <span class="chip">kohtalainen</span></div>
+      <h2>97% of pain-free knees show "abnormal" findings on MRI</h2>
+      <p class="claim">Kipu on hälytin, ei vaurioraportti.</p>
+      <div class="verdict" role="group" aria-label="Päätös videolle 104">
+        <button type="button" data-v="publish" id="b-104-p">Julkaise</button>
+        <button type="button" data-v="fix" id="b-104-f">Korjaa</button>
+        <button type="button" data-v="reject" id="b-104-r">Hylkää</button>
+      </div>
+      <label for="n-104">Palaute</label>
+      <textarea id="n-104" rows="4" placeholder="Mikä toimii, mikä ei, mitä muuttaisit?"></textarea>
+      <div class="state" aria-live="polite"></div>
+    </div>
+  </article>
+  <article class="card" id="v105" data-id="105-not-tyres">
+    <video controls playsinline loop muted preload="metadata" src="v/105-not-tyres.mp4"></video>
+    <div class="body">
+      <div class="eyebrow">105 · M3 · <span class="chip">kohtalainen</span></div>
+      <h2>"Running will wear out your knees."</h2>
+      <p class="claim">Kudos mukautuu kuormaan; polvi ei ole rengas.</p>
+      <div class="verdict" role="group" aria-label="Päätös videolle 105">
+        <button type="button" data-v="publish" id="b-105-p">Julkaise</button>
+        <button type="button" data-v="fix" id="b-105-f">Korjaa</button>
+        <button type="button" data-v="reject" id="b-105-r">Hylkää</button>
+      </div>
+      <label for="n-105">Palaute</label>
+      <textarea id="n-105" rows="4" placeholder="Mikä toimii, mikä ei, mitä muuttaisit?"></textarea>
+      <div class="state" aria-live="polite"></div>
+    </div>
+  </article>
+  <article class="card" id="v106" data-id="106-three-groups">
+    <video controls playsinline loop muted preload="metadata" src="v/106-three-groups.mp4"></video>
+    <div class="body">
+      <div class="eyebrow">106 · M5 · <span class="chip">kohtalainen</span></div>
+      <h2>Hip exercises or knee exercises for runner's knee?</h2>
+      <p class="claim">Harjoitteen tyyppi merkitsi vähemmän kuin annos.</p>
+      <div class="verdict" role="group" aria-label="Päätös videolle 106">
+        <button type="button" data-v="publish" id="b-106-p">Julkaise</button>
+        <button type="button" data-v="fix" id="b-106-f">Korjaa</button>
+        <button type="button" data-v="reject" id="b-106-r">Hylkää</button>
+      </div>
+      <label for="n-106">Palaute</label>
+      <textarea id="n-106" rows="4" placeholder="Mikä toimii, mikä ei, mitä muuttaisit?"></textarea>
+      <div class="state" aria-live="polite"></div>
+    </div>
+  </article>
+  <article class="card" id="v107" data-id="107-where-it-hurts">
+    <video controls playsinline loop muted preload="metadata" src="v/107-where-it-hurts.mp4"></video>
+    <div class="body">
+      <div class="eyebrow">107 · M6 · <span class="chip">vaihteleva</span></div>
+      <h2>Where exactly does your knee hurt?</h2>
+      <p class="claim">Paikka kertoo, mikä kudos kuormittuu.</p>
+      <div class="verdict" role="group" aria-label="Päätös videolle 107">
+        <button type="button" data-v="publish" id="b-107-p">Julkaise</button>
+        <button type="button" data-v="fix" id="b-107-f">Korjaa</button>
+        <button type="button" data-v="reject" id="b-107-r">Hylkää</button>
+      </div>
+      <label for="n-107">Palaute</label>
+      <textarea id="n-107" rows="4" placeholder="Mikä toimii, mikä ei, mitä muuttaisit?"></textarea>
+      <div class="state" aria-live="polite"></div>
+    </div>
+  </article>
+  <article class="card" id="v108" data-id="108-load-lands">
+    <video controls playsinline loop muted preload="metadata" src="v/108-load-lands.mp4"></video>
+    <div class="body">
+      <div class="eyebrow">108 · M7 · <span class="chip">kohtalainen</span></div>
+      <h2>Why your knee, and not your ankle or hip?</h2>
+      <p class="claim">Juoksutapa jakaa kuorman; kuorma siirtyy, ei katoa.</p>
+      <div class="verdict" role="group" aria-label="Päätös videolle 108">
+        <button type="button" data-v="publish" id="b-108-p">Julkaise</button>
+        <button type="button" data-v="fix" id="b-108-f">Korjaa</button>
+        <button type="button" data-v="reject" id="b-108-r">Hylkää</button>
+      </div>
+      <label for="n-108">Palaute</label>
+      <textarea id="n-108" rows="4" placeholder="Mikä toimii, mikä ei, mitä muuttaisit?"></textarea>
+      <div class="state" aria-live="polite"></div>
+    </div>
+  </article>
+  <article class="card" id="v109" data-id="109-massage">
+    <video controls playsinline loop muted preload="metadata" src="v/109-massage.mp4"></video>
+    <div class="body">
+      <div class="eyebrow">109 · M8 · <span class="chip">foorumidata</span></div>
+      <h2>Does massage fix runner's knee?</h2>
+      <p class="claim">Helpotus on ikkuna, ei korjaus.</p>
+      <div class="verdict" role="group" aria-label="Päätös videolle 109">
+        <button type="button" data-v="publish" id="b-109-p">Julkaise</button>
+        <button type="button" data-v="fix" id="b-109-f">Korjaa</button>
+        <button type="button" data-v="reject" id="b-109-r">Hylkää</button>
+      </div>
+      <label for="n-109">Palaute</label>
+      <textarea id="n-109" rows="4" placeholder="Mikä toimii, mikä ei, mitä muuttaisit?"></textarea>
+      <div class="state" aria-live="polite"></div>
+    </div>
+  </article>
+  <article class="card" id="v110" data-id="110-longest-run">
+    <video controls playsinline loop muted preload="metadata" src="v/110-longest-run.mp4"></video>
+    <div class="body">
+      <div class="eyebrow">110 · M1 · <span class="chip">kohtalainen</span></div>
+      <h2>Counting weekly miles? Maybe the wrong number.</h2>
+      <p class="claim">Katso 30 päivän pisintä lenkkiä, ei viikkokilometrejä.</p><p class="warn">Käsikirjoitusta et nähnyt etukäteen.</p>
+      <div class="verdict" role="group" aria-label="Päätös videolle 110">
+        <button type="button" data-v="publish" id="b-110-p">Julkaise</button>
+        <button type="button" data-v="fix" id="b-110-f">Korjaa</button>
+        <button type="button" data-v="reject" id="b-110-r">Hylkää</button>
+      </div>
+      <label for="n-110">Palaute</label>
+      <textarea id="n-110" rows="4" placeholder="Mikä toimii, mikä ei, mitä muuttaisit?"></textarea>
+      <div class="state" aria-live="polite"></div>
+    </div>
+  </article>
+  <article class="card" id="v111" data-id="111-stretching">
+    <video controls playsinline loop muted preload="metadata" src="v/111-stretching.mp4"></video>
+    <div class="body">
+      <div class="eyebrow">111 · M8 · <span class="chip">kohtalainen</span></div>
+      <h2>Does stretching make a muscle longer?</h2>
+      <p class="claim">Venyttely siirtää hälytysrajaa, ei juuri pituutta.</p><p class="warn">Käsikirjoitusta et nähnyt etukäteen.</p>
+      <div class="verdict" role="group" aria-label="Päätös videolle 111">
+        <button type="button" data-v="publish" id="b-111-p">Julkaise</button>
+        <button type="button" data-v="fix" id="b-111-f">Korjaa</button>
+        <button type="button" data-v="reject" id="b-111-r">Hylkää</button>
+      </div>
+      <label for="n-111">Palaute</label>
+      <textarea id="n-111" rows="4" placeholder="Mikä toimii, mikä ei, mitä muuttaisit?"></textarea>
+      <div class="state" aria-live="polite"></div>
+    </div>
+  </article>
+  <article class="card" id="v112" data-id="112-arthritis">
+    <video controls playsinline loop muted preload="metadata" src="v/112-arthritis.mp4"></video>
+    <div class="body">
+      <div class="eyebrow">112 · M3 · <span class="chip">kohtalainen</span></div>
+      <h2>Knee arthritis. Told to stop running?</h2>
+      <p class="claim">Nivelrikko ei automaattisesti ole stop-merkki.</p><p class="warn">Käsikirjoitusta et nähnyt etukäteen.</p>
+      <div class="verdict" role="group" aria-label="Päätös videolle 112">
+        <button type="button" data-v="publish" id="b-112-p">Julkaise</button>
+        <button type="button" data-v="fix" id="b-112-f">Korjaa</button>
+        <button type="button" data-v="reject" id="b-112-r">Hylkää</button>
+      </div>
+      <label for="n-112">Palaute</label>
+      <textarea id="n-112" rows="4" placeholder="Mikä toimii, mikä ei, mitä muuttaisit?"></textarea>
+      <div class="state" aria-live="polite"></div>
+    </div>
+  </article>
+  </section>
+  <section class="card" data-id="_general" style="flex-direction:column">
+    <div class="body">
+      <h2>Yleinen palaute sarjasta</h2>
+      <label for="n-general">Tyyli, tahti, värit, tekstin määrä, kieli, mitä tahansa</label>
+      <textarea id="n-general" rows="5" placeholder="Mikä toistuu kaikissa videoissa?"></textarea>
+      <div class="state" aria-live="polite"></div>
+    </div>
+  </section>
+</main>
+<script>
+(() => {
+  const cards = [...document.querySelectorAll('[data-id]')], state = {}, banner = document.getElementById('banner');
+  const LS = 'rkf-review-v1';
+  const local = () => { try { return JSON.parse(localStorage.getItem(LS) || '{}'); } catch (e) { return {}; } };
+  const keep = () => { try { localStorage.setItem(LS, JSON.stringify(state)); } catch (e) {} };
+  let col = null;
+  const paint = () => {
+    let p = 0, f = 0, r = 0;
+    cards.forEach(c => {
+      const s = state[c.dataset.id] || {};
+      c.querySelectorAll('button[data-v]').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.v === s.verdict)));
+      const ta = c.querySelector('textarea'); if (document.activeElement !== ta && !ta.dataset.dirty) ta.value = s.note || '';
+      if (c.dataset.id !== '_general') { if (s.verdict === 'publish') p++; else if (s.verdict === 'fix') f++; else if (s.verdict === 'reject') r++; }
+    });
+    document.getElementById('summary').innerHTML = `<span class="p">Julkaise ${p}</span><span class="f">Korjaa ${f}</span><span class="r">Hylkää ${r}</span><span class="o">Arvioimatta ${12 - p - f - r}</span>`;
+  };
+  const save = async (c) => {
+    const id = c.dataset.id, st = c.querySelector('.state'), s = state[id] = Object.assign({}, state[id], { updatedAt: new Date().toISOString() });
+    keep(); paint();
+    if (!col) { st.textContent = 'Tallennettu vain tähän selaimeen.'; return; }
+    st.textContent = 'Tallennetaan…';
+    try { await col.doc(id).set({ verdict: s.verdict || '', note: s.note || '', updatedAt: s.updatedAt }); st.textContent = 'Tallennettu.'; }
+    catch (e) { st.textContent = 'Tallennus ei onnistunut (' + (e && e.code || 'virhe') + '). Teksti on tallessa tässä selaimessa.'; }
+  };
+  cards.forEach(c => {
+    const id = c.dataset.id, ta = c.querySelector('textarea');
+    c.querySelectorAll('button[data-v]').forEach(b => b.addEventListener('click', () => { const s = state[id] = state[id] || {}; s.verdict = s.verdict === b.dataset.v ? '' : b.dataset.v; save(c); }));
+    let timer; const commit = () => { clearTimeout(timer); if (!ta.dataset.dirty) return; delete ta.dataset.dirty; (state[id] = state[id] || {}).note = ta.value; save(c); };
+    ta.addEventListener('input', () => { ta.dataset.dirty = '1'; c.querySelector('.state').textContent = 'Muutoksia tallentamatta…'; clearTimeout(timer); timer = setTimeout(commit, 1500); });
+    ta.addEventListener('blur', commit);
+  });
+  Object.assign(state, local()); paint();
+  const offline = () => { banner.textContent = 'Jaettu tallennus ei ole käytössä tässä näkymässä. Merkinnät säilyvät tässä selaimessa; kopioi ne keskusteluun, jos haluat Clauden näkevän ne.'; };
+  const use = window.claude && window.claude.use ? window.claude.use('db') : Promise.resolve(null);
+  use.then(db => {
+    if (!db) return offline();
+    col = db.collection('feedback');
+    const t = setTimeout(() => { banner.textContent = 'Tallennus vastaa hitaasti. Voit jatkaa; merkinnät säilyvät selaimessa.'; }, 10000);
+    col.onSnapshot(snap => {
+      clearTimeout(t); banner.textContent = 'Tallennus on käytössä. Claude voi lukea merkintäsi.';
+      snap.docs.forEach(d => { const v = d.data() || {}; state[d.id] = { verdict: v.verdict || '', note: v.note || '', updatedAt: v.updatedAt }; });
+      keep(); paint();
+    }, e => { clearTimeout(t); col = null; offline(); });
+  }).catch(offline);
+})();
+</script>
