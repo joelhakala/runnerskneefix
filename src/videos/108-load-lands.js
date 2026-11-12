@@ -1,35 +1,21 @@
-// M7 · running style redistributes load between joints (Kulmala 2013). The message is the trade-off, not "run forefoot".
-window.VIDEO = {
-  duration: 19,
-  build(stage) {
-    const { svg, prog, lerp, ease, stext, beats, Figure, runPose, finish, progress, fade, C } = K;
-    const s = svg('svg', { viewBox: '0 0 1080 1920' }, stage), scene = svg('g', {}, s);
-    svg('line', { x1: 0, x2: 1080, y1: 1290, y2: 1290, stroke: '#2A3650', 'stroke-width': 6 }, scene);
-    const fig = new Figure(scene, { s: 0.82 });
-    const mk = () => svg('circle', { fill: 'none', 'stroke-width': 12 }, scene), rh = mk(), rk = mk(), ra = mk();
-    const lk = stext(scene, 0, 0, 'knee', { size: 40, anchor: 'start' }), la = stext(scene, 0, 0, 'ankle', { size: 40, anchor: 'start' }), lh = stext(scene, 0, 0, 'hip', { size: 40, anchor: 'start', fill: '#8A97AD' });
-    svg('line', { x1: 200, x2: 880, y1: 1385, y2: 1385, stroke: '#2A3650', 'stroke-width': 16, 'stroke-linecap': 'round' }, scene);
-    const knob = svg('circle', { cy: 1385, r: 26, fill: '#F4F7FB' }, scene);
-    stext(scene, 200, 1450, 'heel-first, long stride', { size: 32, fill: '#8A97AD', weight: 700, anchor: 'start' }); stext(scene, 880, 1450, 'forefoot, quick steps', { size: 32, fill: '#8A97AD', weight: 700, anchor: 'end' });
-    const mAt = t => 0.4 - 0.4 * ease.inOut(prog(t, 7.4, 8.4)) + ease.inOut(prog(t, 11.9, 13.1));
-    let cache = { t: 0, p: 0 };
-    const phase = t => { if (t < cache.t) cache = { t: 0, p: 0 }; let { t: x, p } = cache; for (; x < t; x += 1 / 120) p += lerp(158, 180, mAt(x)) / 120 / 120; cache = { t: x, p }; return p; };
-    const txt = beats(stage, [
-      { a: 0, b: 2.8, cls: 'hook', html: 'Why your <span class="bad">knee</span>, and not your ankle or hip?', style: { fontSize: '92px' } },
-      { a: 3.1, b: 7.2, cls: 'mid', html: 'Every step, load is shared between joints. <span class="hl">How you run sets the split.</span>' },
-      { a: 7.5, b: 11.7, html: 'Heel-first, long stride:<br><span class="bad">more to the knee.</span>' },
-      { a: 12, b: 15.7, html: 'Forefoot, quick steps:<br>less knee, <span class="warn">more Achilles.</span>' },
-    ]);
-    const end = finish(stage, { at: 16, line: 'Load doesn’t vanish.<br><span class="hl">It moves.</span>', cta: 'Save before you change your stride', src: 'Kulmala et al. 2013. Change technique slowly.' });
-    const bar = progress(stage, 19);
-    return t => {
-      const m = mAt(t), P = fig.set(runPose(phase(t), { x: 500, ground: 1290, A: lerp(40, 26, m), stanceKnee: lerp(52, 34, m), lean: lerp(4, 9, m) }));
-      const put = (c, p, r, col) => { c.setAttribute('cx', p.x); c.setAttribute('cy', p.y); c.setAttribute('r', r); c.setAttribute('stroke', col); };
-      const pk = 1 + 0.06 * Math.sin(t * 9);
-      put(rh, P.pelvis, 52, '#7C8AA3'); put(rk, P.kneeN, lerp(96, 50, m) * pk, m < 0.6 ? C.coral : C.lime); put(ra, P.ankleN, lerp(46, 92, m), m < 0.6 ? '#7C8AA3' : C.amber);
-      const lab = (e, p, r) => { e.setAttribute('x', p.x + r + 22); e.setAttribute('y', p.y + 14); };
-      lab(lk, P.kneeN, lerp(96, 50, m)); lab(la, P.ankleN, lerp(46, 92, m)); lab(lh, P.pelvis, 52);
-      knob.setAttribute('cx', 200 + 680 * m); fade(scene, t, null, 16); txt(t); end(t); bar(t);
-    };
-  },
-};
+// M7 v2 · one glow at a time: knee first, then calf. Message is the trade-off, not "run forefoot".
+window.VIDEO = { duration: 20, build(stage) {
+  const { svg, film, Runner, road, track, prog, C } = K;
+  const f = film(stage, { dur: 20, beats: [
+    [0, 2.8, 'Why does running hurt your <span class="bad">knee</span>, not your ankle?'],
+    [3.0, 6.2, 'Every step, your leg absorbs your body weight.'],
+    [6.4, 9.8, 'Long, heavy strides:<br>the <span class="bad">knee</span> takes more.'],
+    [10.0, 13.2, 'Shorter, quicker steps:<br>the knee takes <span class="hl">less</span>.'],
+    [13.4, 16.6, 'But your calf and Achilles take <span class="warn">more</span>.'],
+  ], end: { at: 16.9, line: 'Load doesn’t vanish.<br><span class="hl">It moves.</span>', cta: 'Save before you change your stride', src: 'Kulmala et al. 2013. Change technique slowly.' } });
+  const rd = road(f.scene, 1300), glowK = svg('circle', { 'stroke-width': 10 }, f.scene), glowC = svg('circle', { 'stroke-width': 10, fill: C.amber, stroke: C.amber, 'fill-opacity': 0.3 }, f.scene), r = new Runner(f.scene, { s: 0.92 });
+  const ST = [[6.9, 7.9, 1.3], [10.5, 11.5, 0.72]]; let cache = { t: 0, p: 0, d: 0 };
+  const phase = t => { if (t < cache.t) cache = { t: 0, p: 0, d: 0 }; let { t: x, p, d } = cache; for (; x < t; x += 1 / 120) { const s = track(x, 1, ST), hz = 1.42 - 0.66 * (s - 1); p += hz / 120; d += hz * s * 300 / 120; } cache = { t: x, p, d }; return cache; };
+  return t => {
+    const st = track(t, 1, ST), ph = phase(t), P = r.run(ph.p, { x: 520, ground: 1300, stride: st, bend: 0.75 + 0.35 * st, mood: st > 1.1 ? 0.9 : t > 10.5 ? 0.1 : 0.5 }); rd(ph.d);
+    const rk = track(t, 78, [[6.9, 7.9, 130], [10.5, 11.5, 52], [13.6, 14.4, 40]]) * (1 + 0.05 * Math.sin(t * 9)), col = t > 11 ? C.lime : C.coral;
+    glowK.setAttribute('cx', P.kneeN.x); glowK.setAttribute('cy', P.kneeN.y); glowK.setAttribute('r', rk); glowK.setAttribute('stroke', col); glowK.setAttribute('fill', col); glowK.setAttribute('fill-opacity', 0.28); glowK.setAttribute('opacity', 1 - 0.6 * prog(t, 13.6, 14.2));
+    glowC.setAttribute('cx', P.calfN.x); glowC.setAttribute('cy', P.calfN.y + 40); glowC.setAttribute('r', track(t, 0, [[13.9, 14.9, 112]]) * (1 + 0.05 * Math.sin(t * 9)));
+    f.tick(t);
+  };
+} };

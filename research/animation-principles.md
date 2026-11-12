@@ -64,3 +64,29 @@ Full notes: `research/feedback/2026-11-12-series1.md`. Where these conflict with
 - Storyboard before render: one still per beat with the focus point marked, reviewed by the owner. A full render comes after.
 - Automatic check in the renderer: fail when more than one caption block is visible in the same frame.
 - The running figure is rebuilt before it is used again.
+
+## Research round 2 and series v2 (2026-11-12)
+
+| Finding | Source | Strength |
+|---|---|---|
+| Friendly faces and pleasant colours in learning material help retention (d = 0.39) and comprehension (d = 0.32) | Brom et al. 2018, 33 samples; replicated by Wong & Adesope 2021 | moderate |
+| Cues that direct attention help viewers select the right part of an animation, but do not by themselves produce learning | de Koning et al. 2009 | moderate |
+| Titles that state the message, and recognisable pictograms, improve recall of charts | Borkin et al. 2015 | moderate |
+| Subtitle practice: about 17-20 characters per second for adults | Netflix style guides; third-party summary for the English figure | convention |
+| The overflowing cup is an established pain-education metaphor: lower what is in the cup, or build a bigger cup | G. Lehman, Recovery Strategies guidebook | practice, not a trial |
+| Run cycles read through contact, down, passing, up and a flight phase; contact and flight matter most | Animation teaching sources | craft convention |
+| Engagement on musculoskeletal TikTok does not track quality; no study isolates hooks, on-screen text or humour | Content analyses 2023-2025 | gap |
+
+Rules added:
+
+22. Standalone: every video works for someone who has never seen the channel. No concept, symbol or term carries over
+    from another video. A new channel is discovered one video at a time.
+23. Read, then watch: the caption settles first; the scene starts moving about 0.6 s later; text never changes while
+    the key motion plays.
+24. Reading budget: a caption stays at least chars/20 + 0.3 s. `K.film` warns at render time when one does not.
+25. Physical metaphors first. The cup replaces the two-line chart and the stack: the cup is what the knee can take,
+    water is what is asked of it, overflow is pain; the cup shrinks with rest and grows with gradual loading.
+26. The runner has a face. A frown or a smile carries pain or relief without a word.
+
+Implementation: `src/lib/kit3.js` (`film`, `Runner`, `cup`, `bell`, `legsFront`, `opener`). `K.film` allows exactly one
+caption at a time and checks overlap and reading time.

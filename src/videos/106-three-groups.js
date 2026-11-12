@@ -1,37 +1,23 @@
-// M5 · the type of exercise mattered less than the dose (Hott 2019).
-window.VIDEO = {
-  duration: 17.5,
-  build(stage) {
-    const { svg, prog, ease, stext, beats, finish, progress, fade, C } = K;
-    const s = svg('svg', { viewBox: '0 0 1080 1920' }, stage), scene = svg('g', {}, s);
-    const X = [240, 540, 840], names = ['HIPS', 'KNEES', 'JUST ACTIVE'];
-    const cols = X.map((x, i) => {
-      const g = svg('g', {}, scene);
-      svg('rect', { x: x - 118, y: 690, width: 236, height: 92, rx: 46, fill: '#1B2740', stroke: '#7C8AA3', 'stroke-width': 4 }, g); stext(g, x, 752, names[i], { size: i === 2 ? 36 : 44 });
-      return { g, bar: svg('rect', { x: x - 80, width: 160, rx: 14, fill: '#F4F7FB' }, g) };
+// M5 v2 · three groups, told as three runners in lanes reaching the same finish line.
+window.VIDEO = { duration: 21.5, build(stage) {
+  const { svg, film, opener, Runner, fade, prog, lerp, ease, C } = K;
+  const f = film(stage, { dur: 21.5, beats: [
+    [0, 2.6, 'Runner’s knee: train the <span class="bad">hips</span> or the <span class="bad">knees?</span>'],
+    [2.8, 5.6, 'A trial split 112 people<br>into three groups.'],
+    [5.8, 10.6, 'One trained hips. One trained knees. One just stayed active.'],
+    [10.8, 14.4, 'A year later, all three had improved <span class="hl">the same</span>.'],
+    [14.6, 18.2, 'What they shared: coaching on <span class="hl">how much to do</span>.'],
+  ], end: { at: 18.5, line: 'The exercise matters less than the <span class="hl">dose</span>.', cta: 'Send to a runner hunting the perfect exercise', src: 'Hott et al. 2019, front-of-knee pain. Exercise still helps; the type mattered less.' } });
+  const o = opener(f.scene), lanes = svg('g', {}, f.scene), G = [860, 1100, 1340];
+  G.forEach(y => svg('line', { x1: 80, x2: 1000, y1: y, y2: y, stroke: '#2A3650', 'stroke-width': 6 }, lanes));
+  const fin = svg('line', { x1: 900, x2: 900, y1: 640, y2: 1350, stroke: C.lime, 'stroke-width': 14, 'stroke-dasharray': '26 20' }, lanes);
+  const rs = G.map(() => new Runner(lanes, { s: 0.38 }));
+  return t => {
+    o.draw(t); const go = ease.inOut(prog(t, 11.5, 13.8)), x = lerp(210, 830, go), moving = t > 11.5 && t < 13.8;
+    rs.forEach((r, i) => {
+      if (moving) r.run(t * 1.6 + i * 0.13, { x, ground: G[i], mood: 0.3 }); else r.stand({ x, ground: G[i], mood: t > 13.8 ? 0 : 0.7 });
+      const a = 6.5 + i * 1.3, on = t > a && t < a + 1.25, intro = t > 5.8 && t < 10.6; r.g.setAttribute('opacity', (intro && !on ? 0.3 : 1) * prog(t, 3.4 + i * 0.4, 3.7 + i * 0.4));
     });
-    const vs = stext(scene, 390, 756, 'vs', { size: 54, fill: C.coral });
-    const goal = svg('g', {}, scene); svg('line', { x1: 90, x2: 990, y1: 900, y2: 900, stroke: C.lime, 'stroke-width': 8, 'stroke-dasharray': '26 18', 'stroke-linecap': 'round' }, goal);
-    stext(goal, 540, 880, 'same improvement', { size: 40, fill: C.lime });
-    const axis = stext(scene, 540, 1390, 'pain and function, 1 year later', { size: 36, fill: '#8A97AD', weight: 600 });
-    const q = stext(scene, 540, 1160, '?', { size: 380, fill: C.coral });
-    const coach = svg('g', {}, scene); svg('rect', { x: 105, y: 570, width: 870, height: 92, rx: 46, fill: C.lime }, coach); stext(coach, 540, 632, 'SAME COACHING ON LOAD', { size: 42, fill: C.ink });
-    X.forEach(x => svg('line', { x1: x, x2: x, y1: 662, y2: 690, stroke: C.lime, 'stroke-width': 8 }, coach));
-    const txt = beats(stage, [
-      { a: 0, b: 2.5, cls: 'hook', html: 'Hip exercises or knee exercises for runner’s knee?', style: { fontSize: '88px' } },
-      { a: 2.8, b: 5.9, html: 'A trial tested it.<br>112 people, 3 groups.' },
-      { a: 6.2, b: 10.6, html: 'After one year:<br><span class="hl">no difference.</span>' },
-      { a: 10.9, b: 14.7, cls: 'mid', html: 'All three got the same coaching on <span class="hl">how much to load</span>.', top: 250 },
-    ]);
-    const end = finish(stage, { at: 15, line: 'The exercise matters less than the <span class="hl">dose</span>.', cta: 'Send to a runner hunting the perfect exercise', src: 'Hott et al. 2019, front-of-knee pain. Exercise still helps; the type mattered less.' });
-    const bar = progress(stage, 17.5);
-    return t => {
-      cols[2].g.setAttribute('opacity', prog(t, 2.9, 3.3)); cols[2].g.setAttribute('transform', `translate(${260 * (1 - ease.out(prog(t, 2.9, 3.5)))} 0)`);
-      vs.setAttribute('opacity', (0.6 + 0.4 * Math.sin(t * 8)) * (1 - prog(t, 2.5, 2.8)));
-      const h = 400 * ease.inOut(prog(t, 6.4, 9.4));
-      cols.forEach((c, i) => { const hh = h * (1 + 0.03 * Math.sin(t * 5 + i * 2) * (1 - prog(t, 9, 9.4))); c.bar.setAttribute('y', 1300 - hh); c.bar.setAttribute('height', hh); });
-      goal.setAttribute('opacity', prog(t, 9.3, 9.7)); axis.setAttribute('opacity', prog(t, 6.2, 6.6)); q.setAttribute('opacity', (0.75 + 0.25 * Math.sin(t * 7)) * (1 - prog(t, 2.4, 2.8))); coach.setAttribute('opacity', prog(t, 11.1, 11.6));
-      fade(scene, t, null, 15); txt(t); end(t); bar(t);
-    };
-  },
-};
+    fin.setAttribute('opacity', prog(t, 10.8, 11.2)); fade(lanes, t, 2.8); f.tick(t);
+  };
+} };

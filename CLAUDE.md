@@ -25,10 +25,11 @@ videos helping runners get rid of knee pain) and collect data on what works.
   Extend it with `tools/forum/` scripts; never commit raw forum posts or rows from private groups, only aggregated counts.
   Logged-in sources (Facebook groups, Juoksufoorumi) come from the owner via Claude in Chrome; the extraction prompt is in `tools/forum/chrome-prompt.md`. Series format "Does X fix runner's knee?":
   what runners report -> what studies say -> which dial it turns (load, readiness, sensitivity, distribution) -> when it is worth it.
-- `research/animation-principles.md`: stop/hold/learn rules 1-21 and their evidence strength; rules 13-21 come from owner feedback
+- `research/animation-principles.md`: stop/hold/learn rules 1-26 and their evidence strength; rules 13-21 come from owner feedback
   and win on conflict (one reading position, one focus per beat, teach the visual first, runner context on frame 0).
   Feedback rounds are logged in `research/feedback/`; add a file per round and fold new rules into the principles.
-  Series 1xx (`src/videos/101..112`, components in `src/lib/kit2.js`) is the reference implementation; captions in `content/captions.md`.
+  Series 1xx v2 (`src/videos/101..112`, built on `src/lib/kit3.js`: `film`, `Runner`, `cup`, `bell`, `opener`) is the reference
+  implementation; captions in `content/captions.md`. Every video must stand alone for a first-time viewer (rule 22).
 - `docs/videoarvio.html` is the review page (artifact https://claude.ai/artifact/XUhZPf4hbVm21NJ4nXkjHq, videos published as
   files under `v/`): the owner sets a verdict (publish / fix / reject) and a note per video. Read them with ArtifactData,
   collection `feedback` (doc id = video id, plus `_general`), when the owner says the feedback is ready.

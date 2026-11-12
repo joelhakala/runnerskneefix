@@ -9,6 +9,7 @@ const FPS = 30;
   const browser = await chromium.launch();
   for (const id of ids) {
     const page = await browser.newPage({ viewport: { width: 1080, height: 1920 }, deviceScaleFactor: 1 });
+    page.on('console', m => { if (m.type() === 'warning') console.log(`[${id}] ${m.text()}`); });
     page.on('pageerror', e => { console.error(`[${id}]`, e.message); process.exitCode = 1; });
     await page.goto('file://' + path.join(__dirname, 'player.html') + '?v=' + id);
     await page.waitForFunction('window.__ready === true', null, { timeout: 15000 });

@@ -6,9 +6,9 @@ One caption per video. Not published; status in `content/videos.json`.
 
 Tried everything and nothing was THE fix? Maybe there was never one cause.
 
-A long-run jump, a few weeks off, an old sprain, tight quads, new shoes. None of them crosses the line alone. Together they do. That is also why no single fix removes it, and why two or three small changes often do.
+A long-run jump, a few weeks off, an old sprain, tight quads, new shoes. None of them overflows the cup alone. Together they do. That is also why no single fix removes it, and why two or three small changes often do.
 
-This is a model, not a diagnosis. Which blocks are in your stack?
+This is a model, not a diagnosis. What is in your cup?
 
 Education only, not medical advice.
 Source: Peterson 2022
