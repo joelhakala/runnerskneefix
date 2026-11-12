@@ -47,7 +47,9 @@ textarea{font:inherit;width:100%;box-sizing:border-box;border:1px solid var(--li
     <p class="lede">Katso video, valitse päätös ja kirjoita tai sanele palaute. Koko sarjaa koskeva palaute menee heti alla olevaan laatikkoon. Kaikki tallentuu itsestään. Kun olet valmis, sano keskustelussa "lue palaute", niin Claude hakee merkinnät ja tekee korjaukset.</p>
     <div class="summary" id="summary"><span class="p">Julkaise 0</span><span class="f">Korjaa 0</span><span class="r">Hylkää 0</span><span class="o">Arvioimatta 12</span></div>
     <div class="banner" id="micnote" hidden><strong>Sanelunappi ei ole käytettävissä tässä näkymässä.</strong> Se toimii vain Chromessa tai Edgessä tietokoneella sekä Clauden työpöytäsovelluksen pääikkunassa. Voit silti sanella käyttöjärjestelmän omalla sanelulla: napsauta palautekenttää ja paina Macissa Fn-näppäintä kahdesti tai Windowsissa Win + H.</div>
+    <div class="banner" id="toplevel" hidden><strong>Tämä näkymä on avattu ilman Clauden kehystä, joten tallennus ja sanelu eivät toimi tässä.</strong> Avaa sivu osoitteesta <span style="user-select:all">https://claude.ai/artifact/XUhZPf4hbVm21NJ4nXkjHq</span> Chromessa.</div>
     <div class="banner" id="banner">Yhdistetään tallennukseen…</div>
+    <div class="state" id="diag"></div>
   </header>
   <section class="card" data-id="_general" id="yleinen" style="flex-direction:column;border-width:2px;border-color:var(--accent)">
     <div class="body">
@@ -312,6 +314,13 @@ textarea{font:inherit;width:100%;box-sizing:border-box;border:1px solid var(--li
   }).catch(offline);
   // Dictation: the platform holds the microphone and hands the page text only.
   const useD = window.claude && window.claude.use ? window.claude.use('dictation') : Promise.resolve(null);
+  // Diagnostics: say plainly which capabilities this view was given.
+  let top = false; try { top = window.self === window.top; } catch (e) {}
+  if (top) document.getElementById('toplevel').hidden = false;
+  const diag = document.getElementById('diag');
+  (window.claude && window.claude.use ? window.claude.use('permissions') : Promise.resolve(null)).then(pm => pm ? pm.state() : null).then(m => {
+    diag.textContent = 'Näkymän tila: ' + (top ? 'ilman kehystä' : 'Clauden kehyksessä') + (m ? ' · tallennus: ' + (m.db || '?') + ' · sanelu: ' + (m.dictation || '?') : ' · oikeustietoja ei saatu');
+  }).catch(() => { diag.textContent = 'Näkymän tila: oikeustietoja ei saatu.'; });
   const noMic = () => { const el = document.getElementById('micnote'); if (el) el.hidden = false; };
   useD.then(d => {
     if (!d) return noMic();
