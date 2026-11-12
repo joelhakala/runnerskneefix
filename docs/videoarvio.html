@@ -46,6 +46,7 @@ textarea{font:inherit;width:100%;box-sizing:border-box;border:1px solid var(--li
     <h1>Videoarvio</h1>
     <p class="lede">Katso video, valitse päätös ja kirjoita tai sanele palaute. Koko sarjaa koskeva palaute menee heti alla olevaan laatikkoon. Kaikki tallentuu itsestään. Kun olet valmis, sano keskustelussa "lue palaute", niin Claude hakee merkinnät ja tekee korjaukset.</p>
     <div class="summary" id="summary"><span class="p">Julkaise 0</span><span class="f">Korjaa 0</span><span class="r">Hylkää 0</span><span class="o">Arvioimatta 12</span></div>
+    <div class="banner" id="micnote" hidden><strong>Sanelunappi ei ole käytettävissä tässä näkymässä.</strong> Se toimii vain Chromessa tai Edgessä tietokoneella sekä Clauden työpöytäsovelluksen pääikkunassa. Voit silti sanella käyttöjärjestelmän omalla sanelulla: napsauta palautekenttää ja paina Macissa Fn-näppäintä kahdesti tai Windowsissa Win + H.</div>
     <div class="banner" id="banner">Yhdistetään tallennukseen…</div>
   </header>
   <section class="card" data-id="_general" id="yleinen" style="flex-direction:column;border-width:2px;border-color:var(--accent)">
@@ -311,8 +312,9 @@ textarea{font:inherit;width:100%;box-sizing:border-box;border:1px solid var(--li
   }).catch(offline);
   // Dictation: the platform holds the microphone and hands the page text only.
   const useD = window.claude && window.claude.use ? window.claude.use('dictation') : Promise.resolve(null);
+  const noMic = () => { const el = document.getElementById('micnote'); if (el) el.hidden = false; };
   useD.then(d => {
-    if (!d) return;
+    if (!d) return noMic();
     let target = null, lang = 'fi';
     const mics = cards.map(c => c.querySelector('.mic')), msg = (c, t) => { c.querySelector('.state').textContent = t; };
     const draw = on => mics.forEach(m => { const mine = on && target && m === target.querySelector('.mic'); m.setAttribute('aria-pressed', String(!!mine)); m.textContent = mine ? 'Lopeta sanelu' : 'Sanele palaute'; });
@@ -343,6 +345,6 @@ textarea{font:inherit;width:100%;box-sizing:border-box;border:1px solid var(--li
       if (!target) return; const ta = target.querySelector('textarea');
       ta.value += ta.value ? text : text.replace(/^\s+/, ''); ta.dispatchEvent(new Event('input'));
     });
-  }).catch(() => {});
+  }).catch(noMic);
 })();
 </script>
