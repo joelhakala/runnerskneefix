@@ -17,9 +17,7 @@ videos helping runners get rid of knee pain) and collect data on what works.
 - `docs/sisaltomalli.html` is the owner-facing page (published artifact https://claude.ai/artifact/V5CiMbL2aCRb7WQ7FRadoE):
   knee map, when/where layers, forum anecdotes, remedy map, ten belief models (M1-M10; M9 "sum of factors, no holy grail"
   is the umbrella model and product promise; M10 "explanations are models, not truth" applies to our own model too),
-  scripts (K1-K7, K9, K10) and visual demos. Workflow: belief model -> script ->
-  owner comments -> animation -> publish -> data -> next version of the same model. Never render an animation
-  whose script the owner has not seen. Scope is the whole knee (front, outside, below, inside, noise/wear).
+  scripts (K1-K7, K9, K10) and visual demos. See Workflow below. Scope is the whole knee (front, outside, below, inside, noise/wear).
 
 - `research/remedies.json`: coded forum data points per remedy (helped / in combination / not helped / worse).
   Extend it with `tools/forum/` scripts; never commit raw forum posts or rows from private groups, only aggregated counts.
@@ -34,6 +32,12 @@ videos helping runners get rid of knee pain) and collect data on what works.
   files under `v/`): the owner sets a verdict (publish / fix / reject) and a note per video. Read them with ArtifactData,
   collection `feedback` (doc id = video id, plus `_general`), when the owner says the feedback is ready.
 - Humility rule: show the confidence level, present explanations as models, correct publicly when the model changes.
+
+## Workflow
+- `docs/workflow.md` is binding for every video and for rounds Claude runs alone: brief -> storyboard
+  (`node tools/storyboard.cjs <id>`, owner approves) -> 3 s test -> full render with automatic checks -> owner review ->
+  lessons -> publish. Do not render a full video whose storyboard the owner has not approved.
+- Character styles the owner chose: B chunky (default), D rubber-hose, E legs close-up, F X-ray (`K.skin` in `src/lib/kit4.js`).
 
 ## Rules
 - Health content: every factual claim needs a source recorded in `content/videos.json`. Unverified = soften or drop.

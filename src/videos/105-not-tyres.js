@@ -14,7 +14,7 @@ window.VIDEO = { duration: 18, build(stage) {
   const band = svg('rect', { x: 200, width: 680, rx: 34, fill: C.lime }, tis), ball = svg('circle', { r: 54, fill: '#F4F7FB' }, tis);
   const b1 = svg('rect', { x: 200, width: 260, rx: 16, fill: C.lime }, bars), b2 = svg('rect', { x: 620, width: 260, rx: 16, fill: '#7C8AA3' }, bars);
   const v1 = stext(bars, 330, 0, '3.5%', { size: 80, fill: C.ink }), v2 = stext(bars, 750, 0, '10.2%', { size: 80, fill: C.ink });
-  const r1 = new Runner(bars, { s: 0.34 }), r2 = new Runner(bars, { s: 0.34, body: '#C9D3E3', shoe: '#5A6880' });
+  const r1 = K.skin(bars, 'chunky', 0.34), g2 = svg('g', { opacity: 0.75 }, bars), r2 = K.skin(g2, 'chunky', 0.34);
   return t => {
     const th = lerp(110, 20, ease.inOut(prog(t, 3.4, 5.8)));
     rubber.setAttribute('r', 190 + th / 2); rubber.setAttribute('stroke-width', th); tread.setAttribute('r', 190 + th); tread.setAttribute('stroke-dashoffset', -t * 460); spokes.setAttribute('transform', `rotate(${t * 200} 540 980)`); fade(tyre, t, null, 6.2);
@@ -23,6 +23,6 @@ window.VIDEO = { duration: 18, build(stage) {
     const g = ease.out(prog(t, 10.9, 12.2)), h1 = 150 * g, h2 = 437 * g;
     b1.setAttribute('y', 1320 - h1); b1.setAttribute('height', h1); b2.setAttribute('y', 1320 - h2); b2.setAttribute('height', h2);
     v1.setAttribute('y', 1320 - h1 / 2 + 28); v2.setAttribute('y', 1320 - h2 + 110); v1.setAttribute('opacity', prog(t, 12.0, 12.3)); v2.setAttribute('opacity', prog(t, 12.0, 12.3));
-    r1.run(t * 1.5, { x: 330, ground: 1320 - h1 - 6, mood: 0 }); r2.stand({ x: 750, ground: 1320 - h2 - 6, mood: 0.5 }); fade(bars, t, 9.8); f.tick(t);
+    r1(t * 1.5, { x: 330, ground: 1320 - h1 - 6, mood: 0 }); r2(0, { x: 750, ground: 1320 - h2 - 6, mood: 0.5, pose: K.standing(0) }); fade(bars, t, 9.8); f.tick(t);
   };
 } };

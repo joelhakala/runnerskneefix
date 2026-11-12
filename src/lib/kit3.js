@@ -98,14 +98,15 @@
       if (b[1] - b[0] < need) console.warn(`[lint] beat ${i} shows ${(b[1] - b[0]).toFixed(1)}s but needs ${need.toFixed(1)}s for ${chars} chars`);
       if (i && b[0] < beats[i - 1][1]) console.warn(`[lint] beat ${i} overlaps the previous caption`);
     });
+    window.__beats = { beats, end, dur };
     const els = beats.map((b, i) => div(i ? 'cap2' : 'hook2', b[2], stage, { top: '290px' })), fin = K.finish(stage, end), bar = K.progress(stage, dur);
     return { s, scene, tick(t) { beats.forEach((b, i) => K.show(els[i], t, b[0], b[1], { dy: 30, d: 0.3 })); K.fade(scene, t, null, end.at); fin(t); bar(t); } };
   };
   K.road = (parent, y) => { svg('line', { x1: 0, x2: 1080, y1: y, y2: y, stroke: '#2A3650', 'stroke-width': 6 }, parent); const d = svg('line', { x1: -300, x2: 1380, y1: y + 36, y2: y + 36, stroke: '#2A3650', 'stroke-width': 10, 'stroke-linecap': 'round', 'stroke-dasharray': '70 150' }, parent); return px => d.setAttribute('stroke-dashoffset', px % 220); };
   // Opening shot shared by most videos: a runner on a road with a sore knee.
-  K.opener = (scene, { ground = 1300, x = 520, s = 0.92, color = C.coral } = {}) => {
-    const g = svg('g', {}, scene), road = K.road(g, ground), r = new Runner(g, { s }), pain = K.ring(g, color);
-    return { g, r, draw(t, { until = 2.8, mood = 1, stride = 1 } = {}) { const P = r.run(t * 1.42, { x, ground, mood, stride }); pain.set(P.kneeN.x, P.kneeN.y, 74 * s, t); road(t * 430); K.fade(g, t, null, until); return P; } };
+  K.opener = (scene, { ground = 1300, x = 520, s = 0.92, color = C.coral, skin = 'chunky' } = {}) => {
+    const g = svg('g', {}, scene), road = K.road(g, ground), dr = K.skin(g, skin, skin === 'legs' ? 1.9 : s), pain = K.ring(g, color);
+    return { g, draw(t, { until = 2.8, mood = 1, stride = 1 } = {}) { const P = dr(t * 1.42, { x, ground, mood, stride }); pain.set(P.kneeN.x, P.kneeN.y, 74 * s, t); road(t * 430); K.fade(g, t, null, until); return P; } };
   };
   // Value that eases to each target in turn: segs = [[start, end, target, pour?], ...]
   K.track = (t, v0, segs) => { let v = v0; for (const [a, b, to] of segs) { if (t >= b) v = to; else { if (t > a) v = lerp(v, to, ease.inOut(prog(t, a, b))); break; } } return v; };

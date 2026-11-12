@@ -56,7 +56,7 @@
     "script_seen_by_owner": false,
     "language": "en",
     "caption": "Tried everything and nothing was THE fix? Maybe there was never one cause.\n\nA long-run jump, a few weeks off, an old sprain, tight quads, new shoes. None of them overflows the cup alone. Together they do. That is also why no single fix removes it, and why two or three small changes often do.\n\nThis is a model, not a diagnosis. What is in your cup?\n\nEducation only, not medical advice.\nSource: Peterson 2022\n\n#runnersknee #kneepain #runninginjury #runningtips #runners",
-    "status": "awaiting_review",
+    "status": "storyboard_review",
     "feedback": [
       {
         "date": "2026-11-12",
@@ -66,7 +66,8 @@
       }
     ],
     "metrics": null,
-    "version": 2
+    "version": 2,
+    "style": "B chunky"
   },
   {
     "id": "102-rest-trap",
@@ -79,7 +80,7 @@
     "script_seen_by_owner": false,
     "language": "en",
     "caption": "Rested for weeks and the pain came back on the first run?\n\nRest quiets the pain. It may also lower what your knee is ready for, so the same old run is suddenly too much. An alternative to zero: drop just under the line, then build.\n\nThis loop is a hypothesis built on load-management research, not a proven mechanism.\n\nEducation only, not medical advice.\nSource: Esculier 2018\n\n#runnersknee #kneepain #runninginjury #runningtips #runners",
-    "status": "awaiting_review",
+    "status": "storyboard_review",
     "feedback": [
       {
         "date": "2026-11-12",
@@ -89,7 +90,8 @@
       }
     ],
     "metrics": null,
-    "version": 2
+    "version": 2,
+    "style": "B chunky"
   },
   {
     "id": "103-mismatch",
@@ -102,7 +104,7 @@
     "script_seen_by_owner": false,
     "language": "en",
     "caption": "Weak glutes. Bad tracking. Flat feet. Wrong shoes.\n\nStudies keep hunting for the one flaw, and it rarely predicts who gets hurt. What shows up more often: load jumped past what the knee was ready for. And ready is trainable, step by step.\n\nEducation only, not medical advice.\nSource: Neal 2019\n\n#runnersknee #kneepain #runninginjury #runningtips #runners",
-    "status": "awaiting_review",
+    "status": "storyboard_review",
     "feedback": [
       {
         "date": "2026-11-12",
@@ -112,7 +114,8 @@
       }
     ],
     "metrics": null,
-    "version": 2
+    "version": 2,
+    "style": "B chunky"
   },
   {
     "id": "104-same-scan",
@@ -125,7 +128,7 @@
     "script_seen_by_owner": false,
     "language": "en",
     "caption": "In one study, 97% of knees in adults WITHOUT symptoms showed at least one finding on MRI.\n\nSame picture, one knee hurts, one doesn't. Pain works more like an alarm than a damage report.\n\nSharp pain, swelling, locking or giving way are different: get those checked.\n\nEducation only, not medical advice.\nSource: Horga 2020\n\n#runnersknee #kneepain #runninginjury #runningtips #runners",
-    "status": "awaiting_review",
+    "status": "storyboard_review",
     "feedback": [
       {
         "date": "2026-11-12",
@@ -135,7 +138,8 @@
       }
     ],
     "metrics": null,
-    "version": 2
+    "version": 2,
+    "style": "B chunky"
   },
   {
     "id": "105-not-tyres",
@@ -148,7 +152,7 @@
     "script_seen_by_owner": false,
     "language": "en",
     "caption": "\"Running will wear out your knees.\" True for tyres.\n\nLiving tissue adapts to load. In a review of 114,829 people, hip and knee arthritis was found in 3.5% of recreational runners and 10.2% of non-runners. Elite level: 13.3%.\n\nAssociation, not proof.\n\nEducation only, not medical advice.\nSource: Alentorn-Geli 2017\n\n#runnersknee #kneepain #runninginjury #runningtips #runners",
-    "status": "awaiting_review",
+    "status": "storyboard_review",
     "feedback": [
       {
         "date": "2026-11-12",
@@ -158,7 +162,8 @@
       }
     ],
     "metrics": null,
-    "version": 2
+    "version": 2,
+    "style": "B chunky"
   },
   {
     "id": "106-three-groups",
@@ -171,7 +176,7 @@
     "script_seen_by_owner": false,
     "language": "en",
     "caption": "Hip exercises or knee exercises?\n\nA trial put 112 people into three groups: hips, knees, or just staying active. After one year: no difference. All three got the same coaching on how much to load.\n\nExercise still helps. The type mattered less than the dose.\n\nEducation only, not medical advice.\nSource: Hott 2019\n\n#runnersknee #kneepain #runninginjury #runningtips #runners",
-    "status": "awaiting_review",
+    "status": "storyboard_review",
     "feedback": [
       {
         "date": "2026-11-12",
@@ -181,7 +186,8 @@
       }
     ],
     "metrics": null,
-    "version": 2
+    "version": 2,
+    "style": "B chunky"
   },
   {
     "id": "107-where-it-hurts",
@@ -194,7 +200,7 @@
     "script_seen_by_owner": false,
     "language": "en",
     "caption": "Where exactly does it hurt?\n\nFront, outside, below the kneecap, inside. Different tissues, same rule: match the load to what the tissue is ready for.\n\nComment your spot and we'll cover it next.\n\nEducation only, not medical advice.\nSource: Taunton 2002\n\n#runnersknee #kneepain #runninginjury #runningtips #runners",
-    "status": "awaiting_review",
+    "status": "storyboard_review",
     "feedback": [
       {
         "date": "2026-11-12",
@@ -204,7 +210,8 @@
       }
     ],
     "metrics": null,
-    "version": 2
+    "version": 2,
+    "style": "B chunky"
   },
   {
     "id": "108-load-lands",
@@ -217,7 +224,7 @@
     "script_seen_by_owner": false,
     "language": "en",
     "caption": "Why the knee and not the ankle?\n\nHow you run sets how load is shared. Heel-first with a long stride sends more to the knee. Forefoot with quick steps sends less to the knee and more to the Achilles.\n\nLoad doesn't vanish, it moves. If you change technique, change it slowly.\n\nEducation only, not medical advice.\nSource: Kulmala 2013\n\n#runnersknee #kneepain #runninginjury #runningtips #runners",
-    "status": "awaiting_review",
+    "status": "storyboard_review",
     "feedback": [
       {
         "date": "2026-11-12",
@@ -227,7 +234,8 @@
       }
     ],
     "metrics": null,
-    "version": 2
+    "version": 2,
+    "style": "B chunky"
   },
   {
     "id": "109-massage",
@@ -240,7 +248,7 @@
     "script_seen_by_owner": false,
     "language": "en",
     "caption": "Does massage fix runner's knee?\n\nIn a forum sample we coded, 7 runners said it saved them and 7 said it did nothing. Look closer: 5 of the 7 were also doing something else.\n\nMassage seems to turn the alarm down for a while. That's a window. Use it to load.\n\nForum reports, not a study.\n\nEducation only, not medical advice.\nSource: Forum sample\n\n#runnersknee #kneepain #runninginjury #runningtips #runners",
-    "status": "awaiting_review",
+    "status": "storyboard_review",
     "feedback": [
       {
         "date": "2026-11-12",
@@ -250,7 +258,8 @@
       }
     ],
     "metrics": null,
-    "version": 2
+    "version": 2,
+    "style": "B chunky"
   },
   {
     "id": "110-longest-run",
@@ -263,7 +272,7 @@
     "script_seen_by_owner": false,
     "language": "en",
     "caption": "Counting weekly miles?\n\nIn a study of 5,200 runners and 588,000 runs, injury rate tracked one thing: how far a single run went past your longest run of the last 30 days. 10-30% past it: 64% higher. Double: 128% higher.\n\nBefore your next long run, check your longest in the last 30 days.\n\nEducation only, not medical advice.\nSource: Frandsen 2025\n\n#runnersknee #kneepain #runninginjury #runningtips #runners",
-    "status": "awaiting_review",
+    "status": "storyboard_review",
     "feedback": [
       {
         "date": "2026-11-12",
@@ -273,7 +282,8 @@
       }
     ],
     "metrics": null,
-    "version": 2
+    "version": 2,
+    "style": "B chunky"
   },
   {
     "id": "111-stretching",
@@ -286,7 +296,7 @@
     "script_seen_by_owner": false,
     "language": "en",
     "caption": "Does stretching make a muscle longer?\n\nAfter weeks of stretching you reach further. But the muscle is barely longer: what moved is the point where your alarm goes off.\n\nThat's why it feels good, and why tightness can come back. Pair it with loading.\n\nEducation only, not medical advice.\nSource: Weppler & Magnusson 2010\n\n#runnersknee #kneepain #runninginjury #runningtips #runners",
-    "status": "awaiting_review",
+    "status": "storyboard_review",
     "feedback": [
       {
         "date": "2026-11-12",
@@ -296,7 +306,8 @@
       }
     ],
     "metrics": null,
-    "version": 2
+    "version": 2,
+    "style": "B chunky"
   },
   {
     "id": "112-arthritis",
@@ -309,7 +320,7 @@
     "script_seen_by_owner": false,
     "language": "en",
     "caption": "Told to stop running because of knee arthritis?\n\nA 4-year study followed 1,203 people over 50 with knee arthritis. About 1 in 9 ran. Their knees did not get worse faster, and their pain eased more often.\n\nThey chose to run, so this is not proof. Ask your own clinician.\n\nEducation only, not medical advice.\nSource: Lo 2018\n\n#runnersknee #kneepain #runninginjury #runningtips #runners",
-    "status": "awaiting_review",
+    "status": "storyboard_review",
     "feedback": [
       {
         "date": "2026-11-12",
@@ -319,6 +330,7 @@
       }
     ],
     "metrics": null,
-    "version": 2
+    "version": 2,
+    "style": "B chunky"
   }
 ]

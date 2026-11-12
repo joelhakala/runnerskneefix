@@ -1,24 +1,24 @@
 // Ten ways to draw a run. One gait (K.gait) drives every skin, so the comparison is about the drawing, not the motion.
 (() => {
   const K = window.K, { svg, div, lerp, clamp, C } = K, rad = d => d * Math.PI / 180, { HIP, KNEE, FOOT, cyc } = K._gait;
-  K.gait = (f, { x = 540, ground = 1300, s = 1, stride = 1, lean = 9, L0 = {} } = {}) => {
+  K.gait = (f, { x = 540, ground = 1300, s = 1, stride = 1, lean = 9, L0 = {}, pose = null } = {}) => {
     const L = Object.assign({ torso: 205, neck: 16, head: 50, ua: 108, fa: 100, thigh: 178, shin: 172, foot: 66, limb: 44 }, L0); for (const k in L) L[k] *= s;
-    const add = (p, a, l) => ({ x: p.x + Math.sin(a) * l, y: p.y + Math.cos(a) * l }), ln = rad(lean + 2 * Math.sin(4 * Math.PI * f)), up = (p, l) => ({ x: p.x + Math.sin(ln) * l, y: p.y - Math.cos(ln) * l });
+    const add = (p, a, l) => ({ x: p.x + Math.sin(a) * l, y: p.y + Math.cos(a) * l }), ln = rad(pose ? (pose.lean || 0) : lean + 2 * Math.sin(4 * Math.PI * f)), up = (p, l) => ({ x: p.x + Math.sin(ln) * l, y: p.y - Math.cos(ln) * l });
     const pelvis = { x, y: 0 }, shoulder = up(pelvis, L.torso), head = up(shoulder, L.neck + L.head);
-    const leg = ph => { const q = ((ph % 1) + 1) % 1, hip = 9 + (cyc(HIP, q) - 9) * stride, knee = cyc(KNEE, q), ft = rad(cyc(FOOT, q)), k = add(pelvis, rad(hip), L.thigh), an = add(k, rad(hip - knee), L.shin), d = { x: Math.cos(ft), y: -Math.sin(ft) };
+    const leg = (ph, near) => { const q = ((ph % 1) + 1) % 1, po = pose && (near ? [pose.hipN, pose.kneeN, pose.footN || 0] : [pose.hipF, pose.kneeF, pose.footF || 0]), hip = po ? po[0] : 9 + (cyc(HIP, q) - 9) * stride, knee = po ? po[1] : cyc(KNEE, q), ft = rad(po ? po[2] : cyc(FOOT, q)), k = add(pelvis, rad(hip), L.thigh), an = add(k, rad(hip - knee), L.shin), d = { x: Math.cos(ft), y: -Math.sin(ft) };
       return { k, an, heel: { x: an.x - d.x * L.foot * 0.25, y: an.y - d.y * L.foot * 0.25 + L.limb * 0.1 }, toe: { x: an.x + d.x * L.foot * 0.8, y: an.y + d.y * L.foot * 0.8 + L.limb * 0.1 }, down: q < 0.38 }; };
     const sw = 36 * stride * Math.cos(2 * Math.PI * f), arm = (sh, el) => { const e = add(shoulder, rad(sh), L.ua); return [e, add(e, rad(sh + el), L.fa)]; };
-    const N = leg(f), F = leg(f + 0.5), aN = arm(-sw + 6, 86 - 0.25 * sw), aF = arm(sw + 6, 86 + 0.25 * sw), h = ((f % 0.5) + 0.5) % 0.5;
-    const lift = h > 0.38 ? 34 * s * stride * Math.sin(Math.PI * (h - 0.38) / 0.12) : 0, low = Math.max(N.heel.y, N.toe.y, F.heel.y, F.toe.y) + L.limb * 0.43, dy = ground - low - lift;
+    const N = leg(f, 1), F = leg(f + 0.5, 0), aN = pose ? arm(pose.shN, pose.elN) : arm(-sw + 6, 86 - 0.25 * sw), aF = pose ? arm(pose.shF, pose.elF) : arm(sw + 6, 86 + 0.25 * sw), h = ((f % 0.5) + 0.5) % 0.5;
+    const lift = pose ? 0 : h > 0.38 ? 34 * s * stride * Math.sin(Math.PI * (h - 0.38) / 0.12) : 0, low = Math.max(N.heel.y, N.toe.y, F.heel.y, F.toe.y) + L.limb * 0.43, dy = ground - low - lift;
     const mv = p => { p.y += dy; return p; };
     [pelvis, shoulder, head, N.k, N.an, N.heel, N.toe, F.k, F.an, F.heel, F.toe, aN[0], aN[1], aF[0], aF[1]].forEach(mv);
-    return { pelvis, shoulder, head, N, F, aN, aF, L, s, ground };
+    return { pelvis, shoulder, head, N, F, aN, aF, L, s, ground, kneeN: N.k, ankleN: N.an, calfN: { x: lerp(N.k.x, N.an.x, 0.55), y: lerp(N.k.y, N.an.y, 0.55) } };
   };
   const pl = (...p) => p.map((q, i) => `${i ? 'L' : 'M'}${q.x.toFixed(1)} ${q.y.toFixed(1)}`).join(' ');
   const mk = (g, c, w, extra = {}) => svg('path', Object.assign({ fill: 'none', stroke: c, 'stroke-width': w, 'stroke-linecap': 'round', 'stroke-linejoin': 'round' }, extra), g);
   const at = (a, b, u) => ({ x: lerp(a.x, b.x, u), y: lerp(a.y, b.y, u) });
   const taper = (a, b, w1, w2) => { const dx = b.x - a.x, dy = b.y - a.y, l = Math.hypot(dx, dy) || 1, nx = -dy / l, ny = dx / l; return `M${a.x + nx * w1 / 2} ${a.y + ny * w1 / 2} L${b.x + nx * w2 / 2} ${b.y + ny * w2 / 2} L${b.x - nx * w2 / 2} ${b.y - ny * w2 / 2} L${a.x - nx * w1 / 2} ${a.y - ny * w1 / 2} Z`; };
-  const face = (g, s) => { const e = svg('circle', { r: 7 * s, fill: C.ink }, g), m = mk(g, C.ink, 6 * s); return h => { e.setAttribute('cx', h.x + 20 * s); e.setAttribute('cy', h.y - 8 * s); m.setAttribute('d', `M${h.x + 6 * s} ${h.y + 20 * s} Q${h.x + 20 * s} ${h.y + 32 * s} ${h.x + 34 * s} ${h.y + 20 * s}`); }; };
+  const face = (g, s) => { const e = svg('circle', { r: 7 * s, fill: C.ink }, g), m = mk(g, C.ink, 6 * s); return (h, mood = 0) => { e.setAttribute('cx', h.x + 20 * s); e.setAttribute('cy', h.y - 8 * s); m.setAttribute('d', `M${h.x + 6 * s} ${h.y + 20 * s} Q${h.x + 20 * s} ${h.y + (20 + 12 * (1 - 2 * mood)) * s} ${h.x + 34 * s} ${h.y + 20 * s}`); }; };
 
   const SKIN = {
     // A: the current keyframed stick figure, as the baseline
@@ -31,7 +31,7 @@
       return (f, o) => { const P = K.gait(f, Object.assign({ s }, o)), hp = at(P.pelvis, P.shoulder, 0.08);
         aF.setAttribute('d', pl(P.shoulder, P.aF[0], P.aF[1])); lF.setAttribute('d', pl(P.pelvis, P.F.k, P.F.an)); shF.setAttribute('d', pl(P.pelvis, at(P.pelvis, P.F.k, 0.42))); soF.setAttribute('d', pl(P.F.heel, P.F.toe));
         tr.setAttribute('d', pl(hp, at(P.pelvis, P.shoulder, 0.92))); lN.setAttribute('d', pl(P.pelvis, P.N.k, P.N.an)); shN.setAttribute('d', pl(P.pelvis, at(P.pelvis, P.N.k, 0.42))); soN.setAttribute('d', pl(P.N.heel, P.N.toe));
-        hd.setAttribute('cx', P.head.x); hd.setAttribute('cy', P.head.y); const r = 58 * s; hair.setAttribute('d', `M${P.head.x - r} ${P.head.y + 6 * s} A${r} ${r} 0 0 1 ${P.head.x + r * 0.7} ${P.head.y - r * 0.72} Q${P.head.x} ${P.head.y - r * 0.2} ${P.head.x - r} ${P.head.y + 6 * s} Z`); fc(P.head);
+        hd.setAttribute('cx', P.head.x); hd.setAttribute('cy', P.head.y); const r = 58 * s; hair.setAttribute('d', `M${P.head.x - r} ${P.head.y + 6 * s} A${r} ${r} 0 0 1 ${P.head.x + r * 0.7} ${P.head.y - r * 0.72} Q${P.head.x} ${P.head.y - r * 0.2} ${P.head.x - r} ${P.head.y + 6 * s} Z`); fc(P.head, o && o.mood);
         sl.setAttribute('d', pl(P.shoulder, at(P.shoulder, P.aN[0], 0.45))); aN.setAttribute('d', pl(at(P.shoulder, P.aN[0], 0.4), P.aN[0], P.aN[1])); return P; };
     },
     // C: single-colour athletic silhouette with tapered limbs and a ponytail
@@ -49,7 +49,7 @@
       const bend = (a, k, b) => { const m = at(a, b, 0.5), c = { x: k.x + (k.x - m.x) * 0.9, y: k.y + (k.y - m.y) * 0.9 }; return `M${a.x} ${a.y} Q${c.x} ${c.y} ${b.x} ${b.y}`; };
       return (f, o) => { const P = K.gait(f, Object.assign({ s, L0: { head: 72, neck: 6 } }, o)), b = { x: P.pelvis.x - 26 * s, y: lerp(P.pelvis.y, P.shoulder.y, 0.5) };
         aF.setAttribute('d', bend(P.shoulder, P.aF[0], P.aF[1])); lF.setAttribute('d', bend(P.pelvis, P.F.k, P.F.an)); soF.setAttribute('d', pl(P.F.heel, P.F.toe)); tr.setAttribute('d', `M${P.pelvis.x} ${P.pelvis.y} Q${b.x} ${b.y} ${P.shoulder.x} ${P.shoulder.y}`);
-        hd.setAttribute('cx', P.head.x); hd.setAttribute('cy', P.head.y); fc(P.head); lN.setAttribute('d', bend(P.pelvis, P.N.k, P.N.an)); soN.setAttribute('d', pl(P.N.heel, P.N.toe)); aN.setAttribute('d', bend(P.shoulder, P.aN[0], P.aN[1])); return P; };
+        hd.setAttribute('cx', P.head.x); hd.setAttribute('cy', P.head.y); fc(P.head, o && o.mood); lN.setAttribute('d', bend(P.pelvis, P.N.k, P.N.an)); soN.setAttribute('d', pl(P.N.heel, P.N.toe)); aN.setAttribute('d', bend(P.shoulder, P.aN[0], P.aN[1])); return P; };
     },
     // E: close-up, hips down. The knee is the subject.
     legs(g, s = 1.9) {
@@ -96,6 +96,9 @@
         rip.forEach((r, i) => { const q = ((f * 2 - i * 0.5) % 2 + 2) % 2, u = clamp(q / 0.9), x = (i % 2 ? P.pelvis.x + 60 * s : P.pelvis.x + 40 * s) - 520 * (q / 2); r.setAttribute('cx', x); r.setAttribute('cy', P.ground + 6); r.setAttribute('rx', 30 + 150 * u); r.setAttribute('ry', 8 + 26 * u); r.setAttribute('opacity', q < 0.9 ? 1 - u : 0); }); return P; };
     },
   };
+  K.skin = (g, kind, s) => SKIN[kind](g, s);
+  // Standing or squatting pose for any gait-driven skin: K.standing(q) -> pose angles (q = 0 standing, 1 deep squat)
+  K.standing = (q = 0) => ({ lean: 26 * q, hipN: 7 + 53 * q, kneeN: 5 + 102 * q, footN: 0, hipF: -7 + 65 * q, kneeF: 5 + 102 * q, footF: 0, shN: 14 + 50 * q, elN: 14, shF: -14 + 78 * q, elF: 14 });
   const STYLES = { A: ['stick', 'Stick figure (current)'], B: ['chunky', 'Chunky character'], C: ['silhouette', 'Athletic silhouette'], D: ['noodle', 'Rubber-hose'], E: ['legs', 'Legs close-up'], F: ['xray', 'X-ray leg'], G: ['front', 'Front view'], H: ['mascot', 'Mascot'], I: ['trail', 'Motion trail'], J: ['shoes', 'Shoes only'] };
   K.runDemo = (stage, key) => {
     const [kind, name] = STYLES[key], s = svg('svg', { viewBox: '0 0 1080 1920' }, stage), g = svg('g', {}, s), ground = kind === 'legs' || kind === 'xray' || kind === 'shoes' ? 1400 : 1300, road = K.road(g, ground);

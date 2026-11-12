@@ -11,11 +11,11 @@ window.VIDEO = { duration: 21.5, build(stage) {
   const o = opener(f.scene), lanes = svg('g', {}, f.scene), G = [860, 1100, 1340];
   G.forEach(y => svg('line', { x1: 80, x2: 1000, y1: y, y2: y, stroke: '#2A3650', 'stroke-width': 6 }, lanes));
   const fin = svg('line', { x1: 900, x2: 900, y1: 640, y2: 1350, stroke: C.lime, 'stroke-width': 14, 'stroke-dasharray': '26 20' }, lanes);
-  const rs = G.map(() => new Runner(lanes, { s: 0.38 }));
+  const rs = G.map(() => { const g = svg('g', {}, lanes); return { g, dr: K.skin(g, 'chunky', 0.38) }; });
   return t => {
     o.draw(t); const go = ease.inOut(prog(t, 11.5, 13.8)), x = lerp(210, 830, go), moving = t > 11.5 && t < 13.8;
     rs.forEach((r, i) => {
-      if (moving) r.run(t * 1.6 + i * 0.13, { x, ground: G[i], mood: 0.3 }); else r.stand({ x, ground: G[i], mood: t > 13.8 ? 0 : 0.7 });
+      if (moving) r.dr(t * 1.6 + i * 0.13, { x, ground: G[i], mood: 0.3 }); else r.dr(0, { x, ground: G[i], mood: t > 13.8 ? 0 : 0.7, pose: K.standing(0) });
       const a = 6.5 + i * 1.3, on = t > a && t < a + 1.25, intro = t > 5.8 && t < 10.6; r.g.setAttribute('opacity', (intro && !on ? 0.3 : 1) * prog(t, 3.4 + i * 0.4, 3.7 + i * 0.4));
     });
     fin.setAttribute('opacity', prog(t, 10.8, 11.2)); fade(lanes, t, 2.8); f.tick(t);

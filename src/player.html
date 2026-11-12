@@ -27,6 +27,19 @@
 <script src="lib/kit3.js"></script>
 <script src="lib/kit4.js"></script>
 <script>
+  // Deterministic layout checks (research/ai-animation-workflow.md): run on any frame, return a list of problems.
+  window.__check = () => {
+    const st = document.getElementById('stage'), out = [];
+    const vis = el => { for (let e = el; e && e !== st; e = e.parentElement) if (parseFloat(getComputedStyle(e).opacity) < 0.08) return false; return true; };
+    const caps = [...st.querySelectorAll('.hook2,.cap2,.end')].filter(vis); let capBottom = 0;
+    if (caps.length > 1) out.push('two text blocks visible at once');
+    caps.forEach(c => { const r = c.getBoundingClientRect(); capBottom = Math.max(capBottom, c.classList.contains('end') ? 0 : r.bottom); if (r.top < 248 || r.bottom > 1502) out.push(`text outside safe zone (y ${Math.round(r.top)}-${Math.round(r.bottom)})`); if (!c.classList.contains('end') && r.height > 330) out.push(`caption too tall (${Math.round(r.height)} px)`); });
+    let top = 1e9, bot = -1e9;
+    st.querySelectorAll('svg path, svg circle, svg rect, svg ellipse, svg line, svg text, svg polygon').forEach(e => { if (!vis(e)) return; const b = e.getBoundingClientRect(); if (b.width < 3 && b.height < 3) return; if (b.width > 1000 && b.height < 60) return; top = Math.min(top, b.top); bot = Math.max(bot, b.bottom); });
+    if (capBottom && top < capBottom - 6) out.push(`scene overlaps the caption by ${Math.round(capBottom - top)} px`);
+    if (bot > 1502) out.push(`scene below safe zone (y ${Math.round(bot)})`);
+    return out;
+  };
   const id = new URLSearchParams(location.search).get('v');
   const s = document.createElement('script');
   s.src = `videos/${id}.js`;

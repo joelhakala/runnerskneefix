@@ -19,15 +19,17 @@ const FPS = 30;
       '-f', 'lavfi', '-i', 'anullsrc=r=44100:cl=stereo', '-shortest',
       '-c:v', 'libx264', '-pix_fmt', 'yuv420p', '-crf', '20', '-preset', 'medium', '-c:a', 'aac', '-b:a', '96k',
       '-movflags', '+faststart', out], { stdio: ['pipe', 'inherit', 'inherit'] });
-    const n = Math.round(duration * FPS);
+    const n = Math.round(duration * FPS), problems = new Map();
     for (let i = 0; i < n; i++) {
       await page.evaluate(t => window.__render(t), i / FPS);
+      if (i % 10 === 0) for (const p of await page.evaluate(() => window.__check())) if (!problems.has(p.replace(/\d+/g, '#'))) problems.set(p.replace(/\d+/g, '#'), `${p} at ${(i / FPS).toFixed(1)}s`);
       const buf = await page.screenshot({ type: 'jpeg', quality: 93 });
       if (!ff.stdin.write(buf)) await new Promise(r => ff.stdin.once('drain', r));
     }
     ff.stdin.end();
     await new Promise(r => ff.on('close', r));
     await page.close();
+    for (const v of problems.values()) console.log(`[${id}] [check] ${v}`);
     console.log(`${id}: ${n} frames -> ${out}`);
   }
   await browser.close();
