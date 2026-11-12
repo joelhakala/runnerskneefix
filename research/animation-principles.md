@@ -42,3 +42,25 @@ Learn
 - Prediction prompts ("guess first") are only implicit in question hooks; an explicit A/B guess is untested.
 - No audio. Music or voice would be a separate test.
 - None of this is validated on our own audience; the first posts are the experiment.
+
+## Rules added after owner feedback, round 1 (2026-11-12)
+
+Full notes: `research/feedback/2026-11-12-series1.md`. Where these conflict with rules 1-12, these win.
+
+13. Runner context on frame 0: the hook names running or the runner and the knee, and a running figure or road is visible.
+14. One reading position. All captions appear in the same place; never two text blocks to read at once.
+    Replaces "labels next to what they name" (rule 9): point with motion or colour, label at most one thing per beat.
+15. One focus per beat. For every beat, name the single point the eye should be on; nothing else moves.
+16. Teach the visual before using it: introduce each element alone, with its name, before the point is made.
+    Prefer physical metaphors that need no teaching (tyre) over abstract charts.
+17. No undefined terms. "Alarm", "ready", "load" get one plain sentence the first time they appear in a video.
+18. Every chart has a title that states the takeaway.
+19. Finish the thought: the hook's question gets a complete answer and one thing to do.
+20. Hook sentences are plain and complete; test by reading them aloud once.
+21. Safe zones are checked on a rendered frame with the Reels overlay, not assumed.
+
+## Process changes
+
+- Storyboard before render: one still per beat with the focus point marked, reviewed by the owner. A full render comes after.
+- Automatic check in the renderer: fail when more than one caption block is visible in the same frame.
+- The running figure is rebuilt before it is used again.
