@@ -55,7 +55,7 @@
       const q = squat; return this.set({ x, ground, mood, lean: 26 * q, hipN: 7 + 53 * q, kneeN: 5 + 102 * q, footN: 0, hipF: -7 + 65 * q, kneeF: 5 + 102 * q, footF: 0, shN: 14 + 50 * q, elN: 14, shF: -14 + 78 * q, elF: 14 });
     }
   }
-  K.Runner = Runner;
+  K.Runner = Runner; K._gait = { HIP, KNEE, FOOT, cyc };
 
   // Cup: what the knee can take. Water: what is asked of it. Overflow (coral) reads as pain.
   K.cup = (parent, { cx = 540, base = 1320, w = 400, h = 470 } = {}) => {

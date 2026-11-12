@@ -1,0 +1,325 @@
+<title>RunnersKneeFix Juoksutyylit</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;700&display=swap">
+<style>
+/* Layout: one card per video, player beside its verdict and note; cards stack to one column on a phone. */
+:root{--bg:#F5F7FA;--surface:#FFFFFF;--ink:#101B2E;--muted:#56647C;--line:#D8DFEA;--chip:#E9EEF6;
+  --ok:#1C7443;--fix:#9A5B00;--no:#B93A28;--accent:#2749C4;--on:#FFFFFF;--screen:#0B1220;
+  --display:'Space Grotesk','Inter',system-ui,sans-serif;--body:'Inter',system-ui,-apple-system,'Segoe UI',sans-serif}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--bg:#0D1422;--surface:#151F33;--ink:#EDF1F8;--muted:#9AA8BF;--line:#293650;--chip:#1F2B44;
+  --ok:#7BD691;--fix:#F2B552;--no:#FF8672;--accent:#93AAFF;--on:#0D1422;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#0D1422;--surface:#151F33;--ink:#EDF1F8;--muted:#9AA8BF;--line:#293650;--chip:#1F2B44;
+  --ok:#7BD691;--fix:#F2B552;--no:#FF8672;--accent:#93AAFF;--on:#0D1422;color-scheme:dark}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.5;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:28px 80px}
+main{max-width:880px;margin:0 auto;display:flex;flex-direction:column;gap:28px}
+h1,h2{font-family:var(--display);margin:0;line-height:1.15;text-wrap:balance}
+h1{font-size:clamp(28px,6vw,40px)} h2{font-size:21px}
+p{margin:0;max-width:68ch}
+.lede{color:var(--muted);font-size:17px}
+.eyebrow{font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.chip{background:var(--chip);padding:2px 8px;border-radius:999px;text-transform:none;letter-spacing:0}
+.summary{display:flex;flex-wrap:wrap;gap:8px 18px;font-weight:600;font-variant-numeric:tabular-nums}
+.summary .p{color:var(--ok)} .summary .f{color:var(--fix)} .summary .r{color:var(--no)} .summary .o{color:var(--muted)}
+.banner{border:1px solid var(--line);background:var(--surface);border-radius:12px;padding:14px 18px}
+.cards{display:flex;flex-direction:column;gap:20px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:18px;display:flex;gap:22px;flex-wrap:wrap}
+.card video{flex:0 0 250px;width:250px;max-width:100%;aspect-ratio:9/16;border-radius:12px;background:var(--screen)}
+.body{flex:1 1 300px;min-width:0;display:flex;flex-direction:column;gap:12px}
+.claim{color:var(--muted)} .warn{color:var(--fix);font-weight:600;font-size:14px}
+.verdict{display:flex;gap:8px;flex-wrap:wrap}
+button{font:inherit;font-weight:700;padding:10px 18px;border-radius:999px;border:2px solid var(--line);background:transparent;color:var(--ink);cursor:pointer}
+button:focus-visible,textarea:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+button[data-v="publish"][aria-pressed="true"]{background:var(--ok);border-color:var(--ok);color:var(--on)}
+button[data-v="fix"][aria-pressed="true"]{background:var(--fix);border-color:var(--fix);color:var(--on)}
+button[data-v="reject"][aria-pressed="true"]{background:var(--no);border-color:var(--no);color:var(--on)}
+button.mic{align-self:flex-start;padding:8px 16px;font-size:14px;border-color:var(--accent);color:var(--accent)}
+button.mic[aria-pressed="true"]{background:var(--no);border-color:var(--no);color:var(--on)}
+label{font-size:13px;font-weight:700;color:var(--muted)}
+textarea{font:inherit;width:100%;box-sizing:border-box;border:1px solid var(--line);border-radius:10px;padding:10px 12px;background:var(--bg);color:var(--ink);resize:vertical}
+.state{font-size:13px;color:var(--muted);min-height:1.2em}
+@media (max-width:560px){.card video{flex-basis:100%;width:100%;max-width:320px;margin:0 auto}}
+</style>
+<main>
+  <header style="display:flex;flex-direction:column;gap:12px">
+    <div class="eyebrow">RunnersKneeFix · hahmotesti · 10 tyyliä</div>
+    <h1>Kymmenen tapaa piirtää juoksu</h1>
+    <p class="lede">Kaikissa on sama askelliike, vain piirrostapa ja kuvakulma vaihtuvat. Merkitse, mistä pidät, ja kerro miksi. Voit valita useamman: eri tyyli voi sopia eri videoon. Kun olet valmis, sano keskustelussa "lue palaute".</p>
+    <div class="summary" id="summary"><span class="p">Tykkään 0</span><span class="f">Ehkä 0</span><span class="r">Ei 0</span><span class="o">Arvioimatta 10</span></div>
+    <div class="banner" id="micnote" hidden><strong>Sanelunappi ei ole käytettävissä tässä näkymässä.</strong> Se toimii vain Chromessa tai Edgessä tietokoneella sekä Clauden työpöytäsovelluksen pääikkunassa. Voit silti sanella käyttöjärjestelmän omalla sanelulla: napsauta palautekenttää ja paina Macissa Fn-näppäintä kahdesti tai Windowsissa Win + H.</div>
+    <div class="banner" id="toplevel" hidden><strong>Tämä näkymä on avattu ilman Clauden kehystä, joten tallennus ja sanelu eivät toimi tässä.</strong> Avaa sivu osoitteesta <span style="user-select:all">tämän sivun claude.ai-linkistä</span> Chromessa.</div>
+    <div class="banner" id="banner">Yhdistetään tallennukseen…</div>
+    <div class="state" id="diag"></div>
+  </header>
+  <section class="card" data-id="_general" id="yleinen" style="flex-direction:column;border-width:2px;border-color:var(--accent)">
+    <div class="body">
+      <h2>Yleinen palaute tyyleistä</h2>
+      <label for="n-general">Mikä kaikissa on yhä pielessä? Millaista hahmoa oikeasti haet?</label>
+      <button type="button" class="mic" id="m-n-general" aria-pressed="false" hidden>Sanele palaute</button>
+      <textarea id="n-general" rows="5" placeholder="Esimerkiksi: liike, mittasuhteet, värit, kasvot."></textarea>
+      <div class="state" aria-live="polite"></div>
+    </div>
+  </section>
+  <section class="cards">
+  <article class="card" id="vA" data-id="run-A">
+    <video controls playsinline loop muted autoplay preload="auto" src="v/run-A.mp4"></video>
+    <div class="body">
+      <div class="eyebrow">Tyyli A</div>
+      <h2>Tikku-ukko (nykyinen)</h2>
+      <p class="claim">Vertailukohta. Sama uusi askelliike kuin muissa, mutta viivahahmona.</p>
+      <div class="verdict" role="group" aria-label="Arvio tyylille A">
+        <button type="button" data-v="publish" id="b-A-p">Tykkään</button>
+        <button type="button" data-v="fix" id="b-A-f">Ehkä</button>
+        <button type="button" data-v="reject" id="b-A-r">Ei</button>
+      </div>
+      <label for="n-A">Palaute</label>
+      <button type="button" class="mic" id="m-n-A" aria-pressed="false" hidden>Sanele palaute</button>
+      <textarea id="n-A" rows="3" placeholder="Mikä tässä toimii tai ei toimi?"></textarea>
+      <div class="state" aria-live="polite"></div>
+    </div>
+  </article>
+  <article class="card" id="vB" data-id="run-B">
+    <video controls playsinline loop muted autoplay preload="auto" src="v/run-B.mp4"></video>
+    <div class="body">
+      <div class="eyebrow">Tyyli B</div>
+      <h2>Täyteläinen hahmo</h2>
+      <p class="claim">Paita, shortsit, iho ja hiukset. Lähimpänä tavallista selitysanimaation hahmoa.</p>
+      <div class="verdict" role="group" aria-label="Arvio tyylille B">
+        <button type="button" data-v="publish" id="b-B-p">Tykkään</button>
+        <button type="button" data-v="fix" id="b-B-f">Ehkä</button>
+        <button type="button" data-v="reject" id="b-B-r">Ei</button>
+      </div>
+      <label for="n-B">Palaute</label>
+      <button type="button" class="mic" id="m-n-B" aria-pressed="false" hidden>Sanele palaute</button>
+      <textarea id="n-B" rows="3" placeholder="Mikä tässä toimii tai ei toimi?"></textarea>
+      <div class="state" aria-live="polite"></div>
+    </div>
+  </article>
+  <article class="card" id="vC" data-id="run-C">
+    <video controls playsinline loop muted autoplay preload="auto" src="v/run-C.mp4"></video>
+    <div class="body">
+      <div class="eyebrow">Tyyli C</div>
+      <h2>Urheilijasiluetti</h2>
+      <p class="claim">Yksivärinen, kapenevat raajat, poninhäntä. Tyylikäs mutta kasvoton.</p>
+      <div class="verdict" role="group" aria-label="Arvio tyylille C">
+        <button type="button" data-v="publish" id="b-C-p">Tykkään</button>
+        <button type="button" data-v="fix" id="b-C-f">Ehkä</button>
+        <button type="button" data-v="reject" id="b-C-r">Ei</button>
+      </div>
+      <label for="n-C">Palaute</label>
+      <button type="button" class="mic" id="m-n-C" aria-pressed="false" hidden>Sanele palaute</button>
+      <textarea id="n-C" rows="3" placeholder="Mikä tässä toimii tai ei toimi?"></textarea>
+      <div class="state" aria-live="polite"></div>
+    </div>
+  </article>
+  <article class="card" id="vD" data-id="run-D">
+    <video controls playsinline loop muted autoplay preload="auto" src="v/run-D.mp4"></video>
+    <div class="body">
+      <div class="eyebrow">Tyyli D</div>
+      <h2>Kumiletkuhahmo</h2>
+      <p class="claim">Kaarevat raajat ja iso pää. Pehmeä ja leikkisä, ei kulmikkaita niveliä.</p>
+      <div class="verdict" role="group" aria-label="Arvio tyylille D">
+        <button type="button" data-v="publish" id="b-D-p">Tykkään</button>
+        <button type="button" data-v="fix" id="b-D-f">Ehkä</button>
+        <button type="button" data-v="reject" id="b-D-r">Ei</button>
+      </div>
+      <label for="n-D">Palaute</label>
+      <button type="button" class="mic" id="m-n-D" aria-pressed="false" hidden>Sanele palaute</button>
+      <textarea id="n-D" rows="3" placeholder="Mikä tässä toimii tai ei toimi?"></textarea>
+      <div class="state" aria-live="polite"></div>
+    </div>
+  </article>
+  <article class="card" id="vE" data-id="run-E">
+    <video controls playsinline loop muted autoplay preload="auto" src="v/run-E.mp4"></video>
+    <div class="body">
+      <div class="eyebrow">Tyyli E</div>
+      <h2>Jalat lähikuvassa</h2>
+      <p class="claim">Lantiosta alaspäin. Polvi on kuvan pääosassa, yläkroppaa ei tarvitse animoida.</p>
+      <div class="verdict" role="group" aria-label="Arvio tyylille E">
+        <button type="button" data-v="publish" id="b-E-p">Tykkään</button>
+        <button type="button" data-v="fix" id="b-E-f">Ehkä</button>
+        <button type="button" data-v="reject" id="b-E-r">Ei</button>
+      </div>
+      <label for="n-E">Palaute</label>
+      <button type="button" class="mic" id="m-n-E" aria-pressed="false" hidden>Sanele palaute</button>
+      <textarea id="n-E" rows="3" placeholder="Mikä tässä toimii tai ei toimi?"></textarea>
+      <div class="state" aria-live="polite"></div>
+    </div>
+  </article>
+  <article class="card" id="vF" data-id="run-F">
+    <video controls playsinline loop muted autoplay preload="auto" src="v/run-F.mp4"></video>
+    <div class="body">
+      <div class="eyebrow">Tyyli F</div>
+      <h2>Röntgenjalka</h2>
+      <p class="claim">Luut ja polvilumpio läpikuultavan jalan sisällä. Sopii anatomiaa selittäviin videoihin.</p>
+      <div class="verdict" role="group" aria-label="Arvio tyylille F">
+        <button type="button" data-v="publish" id="b-F-p">Tykkään</button>
+        <button type="button" data-v="fix" id="b-F-f">Ehkä</button>
+        <button type="button" data-v="reject" id="b-F-r">Ei</button>
+      </div>
+      <label for="n-F">Palaute</label>
+      <button type="button" class="mic" id="m-n-F" aria-pressed="false" hidden>Sanele palaute</button>
+      <textarea id="n-F" rows="3" placeholder="Mikä tässä toimii tai ei toimi?"></textarea>
+      <div class="state" aria-live="polite"></div>
+    </div>
+  </article>
+  <article class="card" id="vG" data-id="run-G">
+    <video controls playsinline loop muted autoplay preload="auto" src="v/run-G.mp4"></video>
+    <div class="body">
+      <div class="eyebrow">Tyyli G</div>
+      <h2>Edestä</h2>
+      <p class="claim">Juoksija tulee kohti kameraa. Ulko- ja sisäsivu näkyvät luonnostaan.</p>
+      <div class="verdict" role="group" aria-label="Arvio tyylille G">
+        <button type="button" data-v="publish" id="b-G-p">Tykkään</button>
+        <button type="button" data-v="fix" id="b-G-f">Ehkä</button>
+        <button type="button" data-v="reject" id="b-G-r">Ei</button>
+      </div>
+      <label for="n-G">Palaute</label>
+      <button type="button" class="mic" id="m-n-G" aria-pressed="false" hidden>Sanele palaute</button>
+      <textarea id="n-G" rows="3" placeholder="Mikä tässä toimii tai ei toimi?"></textarea>
+      <div class="state" aria-live="polite"></div>
+    </div>
+  </article>
+  <article class="card" id="vH" data-id="run-H">
+    <video controls playsinline loop muted autoplay preload="auto" src="v/run-H.mp4"></video>
+    <div class="body">
+      <div class="eyebrow">Tyyli H</div>
+      <h2>Maskotti</h2>
+      <p class="claim">Pyöreä hahmo, kasvot ja lyhyet jalat. Tunnistettava brändihahmo.</p>
+      <div class="verdict" role="group" aria-label="Arvio tyylille H">
+        <button type="button" data-v="publish" id="b-H-p">Tykkään</button>
+        <button type="button" data-v="fix" id="b-H-f">Ehkä</button>
+        <button type="button" data-v="reject" id="b-H-r">Ei</button>
+      </div>
+      <label for="n-H">Palaute</label>
+      <button type="button" class="mic" id="m-n-H" aria-pressed="false" hidden>Sanele palaute</button>
+      <textarea id="n-H" rows="3" placeholder="Mikä tässä toimii tai ei toimi?"></textarea>
+      <div class="state" aria-live="polite"></div>
+    </div>
+  </article>
+  <article class="card" id="vI" data-id="run-I">
+    <video controls playsinline loop muted autoplay preload="auto" src="v/run-I.mp4"></video>
+    <div class="body">
+      <div class="eyebrow">Tyyli I</div>
+      <h2>Liikejälki</h2>
+      <p class="claim">Siluetti juoksee ruudun poikki ja jättää haamukuvat. Vauhdin tuntu.</p>
+      <div class="verdict" role="group" aria-label="Arvio tyylille I">
+        <button type="button" data-v="publish" id="b-I-p">Tykkään</button>
+        <button type="button" data-v="fix" id="b-I-f">Ehkä</button>
+        <button type="button" data-v="reject" id="b-I-r">Ei</button>
+      </div>
+      <label for="n-I">Palaute</label>
+      <button type="button" class="mic" id="m-n-I" aria-pressed="false" hidden>Sanele palaute</button>
+      <textarea id="n-I" rows="3" placeholder="Mikä tässä toimii tai ei toimi?"></textarea>
+      <div class="state" aria-live="polite"></div>
+    </div>
+  </article>
+  <article class="card" id="vJ" data-id="run-J">
+    <video controls playsinline loop muted autoplay preload="auto" src="v/run-J.mp4"></video>
+    <div class="body">
+      <div class="eyebrow">Tyyli J</div>
+      <h2>Pelkät kengät</h2>
+      <p class="claim">Vain kengät ja askelkontaktin aalto. Abstraktein, korostaa iskua.</p>
+      <div class="verdict" role="group" aria-label="Arvio tyylille J">
+        <button type="button" data-v="publish" id="b-J-p">Tykkään</button>
+        <button type="button" data-v="fix" id="b-J-f">Ehkä</button>
+        <button type="button" data-v="reject" id="b-J-r">Ei</button>
+      </div>
+      <label for="n-J">Palaute</label>
+      <button type="button" class="mic" id="m-n-J" aria-pressed="false" hidden>Sanele palaute</button>
+      <textarea id="n-J" rows="3" placeholder="Mikä tässä toimii tai ei toimi?"></textarea>
+      <div class="state" aria-live="polite"></div>
+    </div>
+  </article>
+  </section>
+</main>
+<script>
+(() => {
+  const cards = [...document.querySelectorAll('[data-id]')], state = {}, banner = document.getElementById('banner');
+  const LS = 'rkf-runstyles-v1';
+  const local = () => { try { return JSON.parse(localStorage.getItem(LS) || '{}'); } catch (e) { return {}; } };
+  const keep = () => { try { localStorage.setItem(LS, JSON.stringify(state)); } catch (e) {} };
+  let col = null;
+  const paint = () => {
+    let p = 0, f = 0, r = 0;
+    cards.forEach(c => {
+      const s = state[c.dataset.id] || {};
+      c.querySelectorAll('button[data-v]').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.v === s.verdict)));
+      const ta = c.querySelector('textarea'); if (document.activeElement !== ta && !ta.dataset.dirty) ta.value = s.note || '';
+      if (c.dataset.id !== '_general') { if (s.verdict === 'publish') p++; else if (s.verdict === 'fix') f++; else if (s.verdict === 'reject') r++; }
+    });
+    document.getElementById('summary').innerHTML = `<span class="p">Tykkään ${p}</span><span class="f">Ehkä ${f}</span><span class="r">Ei ${r}</span><span class="o">Arvioimatta ${10 - p - f - r}</span>`;
+  };
+  const save = async (c) => {
+    const id = c.dataset.id, st = c.querySelector('.state'), s = state[id] = Object.assign({}, state[id], { updatedAt: new Date().toISOString() });
+    keep(); paint();
+    if (!col) { st.textContent = 'Tallennettu vain tähän selaimeen.'; return; }
+    st.textContent = 'Tallennetaan…';
+    try { await col.doc(id).set({ verdict: s.verdict || '', note: s.note || '', updatedAt: s.updatedAt }); st.textContent = 'Tallennettu.'; }
+    catch (e) { st.textContent = 'Tallennus ei onnistunut (' + (e && e.code || 'virhe') + '). Teksti on tallessa tässä selaimessa.'; }
+  };
+  cards.forEach(c => {
+    const id = c.dataset.id, ta = c.querySelector('textarea');
+    c.querySelectorAll('button[data-v]').forEach(b => b.addEventListener('click', () => { const s = state[id] = state[id] || {}; s.verdict = s.verdict === b.dataset.v ? '' : b.dataset.v; save(c); }));
+    let timer; const commit = () => { clearTimeout(timer); if (!ta.dataset.dirty) return; delete ta.dataset.dirty; (state[id] = state[id] || {}).note = ta.value; save(c); };
+    ta.addEventListener('input', () => { ta.dataset.dirty = '1'; c.querySelector('.state').textContent = 'Muutoksia tallentamatta…'; clearTimeout(timer); timer = setTimeout(commit, 1500); });
+    ta.addEventListener('blur', commit);
+  });
+  Object.assign(state, local()); paint();
+  const offline = () => { banner.textContent = 'Jaettu tallennus ei ole käytössä tässä näkymässä. Merkinnät säilyvät tässä selaimessa; kopioi ne keskusteluun, jos haluat Clauden näkevän ne.'; };
+  const use = window.claude && window.claude.use ? window.claude.use('db') : Promise.resolve(null);
+  use.then(db => {
+    if (!db) return offline();
+    col = db.collection('runstyles');
+    const t = setTimeout(() => { banner.textContent = 'Tallennus vastaa hitaasti. Voit jatkaa; merkinnät säilyvät selaimessa.'; }, 10000);
+    col.onSnapshot(snap => {
+      clearTimeout(t); banner.textContent = 'Tallennus on käytössä. Claude voi lukea merkintäsi.';
+      snap.docs.forEach(d => { const v = d.data() || {}; state[d.id] = { verdict: v.verdict || '', note: v.note || '', updatedAt: v.updatedAt }; });
+      keep(); paint();
+    }, e => { clearTimeout(t); col = null; offline(); });
+  }).catch(offline);
+  // Dictation: the platform holds the microphone and hands the page text only.
+  const useD = window.claude && window.claude.use ? window.claude.use('dictation') : Promise.resolve(null);
+  // Diagnostics: say plainly which capabilities this view was given.
+  let top = false; try { top = window.self === window.top; } catch (e) {}
+  if (top) document.getElementById('toplevel').hidden = false;
+  const diag = document.getElementById('diag');
+  (window.claude && window.claude.use ? window.claude.use('permissions') : Promise.resolve(null)).then(pm => pm ? pm.state() : null).then(m => {
+    diag.textContent = 'Näkymän tila: ' + (top ? 'ilman kehystä' : 'Clauden kehyksessä') + (m ? ' · tallennus: ' + (m.db || '?') + ' · sanelu: ' + (m.dictation || '?') : ' · oikeustietoja ei saatu');
+  }).catch(() => { diag.textContent = 'Näkymän tila: oikeustietoja ei saatu.'; });
+  const noMic = () => { const el = document.getElementById('micnote'); if (el) el.hidden = false; };
+  useD.then(d => {
+    if (!d) return noMic();
+    let target = null, lang = 'fi';
+    const mics = cards.map(c => c.querySelector('.mic')), msg = (c, t) => { c.querySelector('.state').textContent = t; };
+    const draw = on => mics.forEach(m => { const mine = on && target && m === target.querySelector('.mic'); m.setAttribute('aria-pressed', String(!!mine)); m.textContent = mine ? 'Lopeta sanelu' : 'Sanele palaute'; });
+    mics.forEach((m, i) => {
+      m.hidden = false;
+      m.addEventListener('click', () => {
+        const c = cards[i];
+        if (d.active() && target === c) { d.stop().catch(() => {}); return; }
+        target = c; msg(c, 'Avataan mikrofonia…');
+        d.start(lang ? { language: lang } : undefined).catch(e => {
+          const code = e && e.code;
+          if (code === 'unavailable' && lang) { lang = null; msg(c, 'Suomenkielinen sanelu ei ole saatavilla. Paina uudelleen, niin kokeillaan selaimesi kielellä.'); }
+          else if (code === 'unavailable') { mics.forEach(x => { x.hidden = true; }); msg(c, 'Sanelu ei ole käytettävissä tässä näkymässä. Kirjoita palaute.'); }
+          else if (code === 'not_granted') { mics.forEach(x => { x.hidden = true; }); msg(c, 'Mikrofonilupaa ei annettu. Kirjoita palaute.'); }
+          else if (code === 'dismissed' || code === 'stopped') msg(c, '');
+          else if (code === 'rate_limited') msg(c, 'Liian monta sanelua kerralla. Yritä hetken päästä.');
+          else msg(c, 'Sanelu ei käynnistynyt. Yritä uudelleen tai kirjoita.');
+        });
+      });
+    });
+    d.onState(({ state: st }) => {
+      draw(st === 'listening' || st === 'starting');
+      if (target && st === 'listening') msg(target, 'Kuuntelen…');
+      if (target && st === 'idle') target.querySelector('textarea').dispatchEvent(new Event('blur'));
+    });
+    d.onPartial(({ text }) => { if (target && text) msg(target, 'Kuuntelen: ' + text); });
+    d.onFinal(({ text }) => {
+      if (!target) return; const ta = target.querySelector('textarea');
+      ta.value += ta.value ? text : text.replace(/^\s+/, ''); ta.dispatchEvent(new Event('input'));
+    });
+  }).catch(noMic);
+})();
+</script>
